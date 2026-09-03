@@ -11,6 +11,7 @@ export default function Register() {
         email: '',
         password: '',
         password_confirmation: '',
+        negocio_name: '',
     });
 
     const submit = (e) => {
@@ -27,7 +28,24 @@ export default function Register() {
 
             <form onSubmit={submit}>
                 <div>
-                    <InputLabel htmlFor="name" value="Name" />
+                    <InputLabel htmlFor="negocio_name" value="Nombre del Negocio" />
+
+                    <TextInput
+                        id="negocio_name"
+                        name="negocio_name"
+                        value={data.negocio_name}
+                        className="mt-1 block w-full"
+                        autoComplete="organization"
+                        isFocused={true}
+                        onChange={(e) => setData('negocio_name', e.target.value)}
+                        required
+                    />
+
+                    <InputError message={errors.negocio_name} className="mt-2" />
+                </div>
+
+                <div className="mt-4">
+                    <InputLabel htmlFor="name" value="Nombre del Propietario" />
 
                     <TextInput
                         id="name"
@@ -35,7 +53,6 @@ export default function Register() {
                         value={data.name}
                         className="mt-1 block w-full"
                         autoComplete="name"
-                        isFocused={true}
                         onChange={(e) => setData('name', e.target.value)}
                         required
                     />
