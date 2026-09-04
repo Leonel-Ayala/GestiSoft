@@ -152,6 +152,8 @@ export default function Index({ auth }) {
         router.post(route('pos.checkout'), {
             items: cart,
             total: totalCart,
+            neto: neto,
+            iva: iva,
             payment_method: paymentMethod,
             amount_received: paymentMethod === 'Efectivo' ? amountReceived : null,
             change: paymentMethod === 'Efectivo' ? change : null

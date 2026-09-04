@@ -44,6 +44,8 @@ class POSController extends Controller
             'items.*.quantity' => 'required|integer|min:1',
             'items.*.price' => 'required|integer|min:0',
             'total' => 'required|integer|min:0',
+            'neto' => 'required|integer|min:0',
+            'iva' => 'required|integer|min:0',
             'payment_method' => 'required|string',
             'amount_received' => 'nullable|integer|min:0',
             'change' => 'nullable|integer|min:0',
@@ -55,6 +57,8 @@ class POSController extends Controller
             $venta = Venta::create([
                 'user_id' => auth()->id(),
                 'total' => $validated['total'],
+                'neto' => $validated['neto'],
+                'iva' => $validated['iva'],
                 'payment_method' => $validated['payment_method'],
                 'amount_received' => $validated['amount_received'] ?? null,
                 'change' => $validated['change'] ?? null,

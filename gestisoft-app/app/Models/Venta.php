@@ -13,6 +13,8 @@ class Venta extends Model
     protected $fillable = [
         'user_id',
         'total',
+        'neto',
+        'iva',
         'payment_method',
         'amount_received',
         'change',
