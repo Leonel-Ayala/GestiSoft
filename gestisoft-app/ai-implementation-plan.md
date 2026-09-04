@@ -40,8 +40,8 @@ El desarrollo debe seguir **estrictamente** este orden. No avanzar a la siguient
 **Objetivo:** Interfaz de venta ágil, reactiva y operable por teclado.
 **Instrucciones para la IA:**
 1.  Crear vista en React/Inertia (`Pages/POS/Index.jsx`).
-2.  La UI debe consistir en un `input` con `autofocus` para leer SKUs y una tabla que actúe como carro de compras.
-3.  **Lógica Reactiva Front:** Al teclear un SKU y presionar `Enter`, buscar el producto. Si existe, sumarlo al carro. Si se ingresa un SKU que ya está en el carro, incrementar cantidad (`+1`) sin recargar la página. Mostrar total.
+2.  La UI debe consistir en un `input` con `autofocus` para leer SKUs y una tabla que actúe como carro de compras, debe ser bien visible cada producto listado en el carro, con su cantidad, precio y subtotal.
+3.  **Lógica Reactiva Front:** Al teclear un SKU y presionar `Enter`, buscar el producto. Si existe, sumarlo al carro. Si se ingresa un SKU que ya está en el carro, incrementar cantidad (`+1`) sin recargar la página. Mostrar total, tambien debe contener un buscador de producto que pueda ser por nombre o por el sku, cualquiera de las dos formas puede ser, con la intencion de que muestre el precio de dicho producto a manera de consulta.
 4.  **Lógica Back:** Endpoint para procesar la venta. Debe recibir un array de items. 
 5.  **Restricción Crítica de Negocio:** El backend y el frontend deben validar el stock. Si un producto tiene stock 0, bloquear adición al carro (Devolver HTTP 422). Al confirmar venta, descontar stock en BD.
 
