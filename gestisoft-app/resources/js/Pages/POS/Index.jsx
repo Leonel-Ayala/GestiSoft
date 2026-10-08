@@ -37,6 +37,33 @@ export default function Index({ auth }) {
         }
     }, [showPaymentModal, cart]);
 
+    // Atajos de teclado globales (Accesibilidad)
+    useEffect(() => {
+        const handleKeyDown = (e) => {
+            // F8: Abrir modal de pago
+            if (e.key === 'F8') {
+                e.preventDefault();
+                if (cart.length > 0 && !showPaymentModal) {
+                    openPaymentModal();
+                }
+            }
+            // F4: Enfocar buscador
+            if (e.key === 'F4') {
+                e.preventDefault();
+                if (searchInputRef.current && !showPaymentModal) {
+                    searchInputRef.current.focus();
+                }
+            }
+            // Escape: Cerrar modal
+            if (e.key === 'Escape' && showPaymentModal) {
+                closePaymentModal();
+            }
+        };
+
+        window.addEventListener('keydown', handleKeyDown);
+        return () => window.removeEventListener('keydown', handleKeyDown);
+    }, [cart, showPaymentModal]);
+
     // Ocultar resultados de búsqueda al hacer clic fuera
     useEffect(() => {
         const handleClickOutside = (event) => {
@@ -176,15 +203,15 @@ export default function Index({ auth }) {
             <div className="py-8 bg-gray-50 min-h-screen">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     
-                    {/* Alertas */}
+                    {/* Alertas Accesibles (Screen Readers) */}
                     {errorMsg && (
-                        <div className="mb-4 bg-red-100 border-l-4 border-red-500 text-red-700 p-4 rounded shadow-sm animate-pulse" role="alert">
+                        <div aria-live="assertive" className="mb-4 bg-red-100 border-l-4 border-red-500 text-red-700 p-4 rounded shadow-sm animate-pulse" role="alert">
                             <p className="font-bold">Error</p>
                             <p>{errorMsg}</p>
                         </div>
                     )}
                     {successMsg && (
-                        <div className="mb-4 bg-green-100 border-l-4 border-green-500 text-green-700 p-4 rounded shadow-sm" role="alert">
+                        <div aria-live="polite" className="mb-4 bg-green-100 border-l-4 border-green-500 text-green-700 p-4 rounded shadow-sm" role="alert">
                             <p className="font-bold">¡Éxito!</p>
                             <p>{successMsg}</p>
                         </div>
@@ -341,11 +368,12 @@ export default function Index({ auth }) {
                                         }`}
                                     >
                                         <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
-                                        Procesar Pago
+                                        Procesar Pago [F8]
                                     </button>
                                 </div>
-                                <div className="bg-gray-50 p-4 text-center border-t border-gray-100">
-                                    <p className="text-xs text-gray-500">Operable por teclado. Presiona Enter en el buscador.</p>
+                                <div className="bg-gray-50 p-4 text-center border-t border-gray-100 space-y-1">
+                                    <p className="text-xs text-gray-500 font-medium">Accesibilidad de Teclado:</p>
+                                    <p className="text-xs text-gray-400"><strong>[F4]</strong> Buscar | <strong>[F8]</strong> Cobrar | <strong>[Esc]</strong> Cerrar</p>
                                 </div>
                             </div>
                         </div>
