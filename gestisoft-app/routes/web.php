@@ -14,7 +14,10 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
-    Route::resource('inventory', ProductController::class)->parameters(['inventory' => 'product']);
+    Route::middleware('role:admin')->group(function () {
+        Route::resource('inventory', ProductController::class)->parameters(['inventory' => 'product']);
+        Route::resource('users', \App\Http\Controllers\UserController::class);
+    });
 
     Route::get('/pos', [POSController::class, 'index'])->name('pos.index');
     Route::get('/pos/search', [POSController::class, 'search'])->name('pos.search');

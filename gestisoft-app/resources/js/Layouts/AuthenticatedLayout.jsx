@@ -30,12 +30,22 @@ export default function AuthenticatedLayout({ header, children }) {
                                 >
                                     Dashboard
                                 </NavLink>
-                                <NavLink
-                                    href={route('inventory.index')}
-                                    active={route().current('inventory.*')}
-                                >
-                                    Inventario
-                                </NavLink>
+                                {user.role === 'admin' && (
+                                    <>
+                                        <NavLink
+                                            href={route('inventory.index')}
+                                            active={route().current('inventory.*')}
+                                        >
+                                            Inventario
+                                        </NavLink>
+                                        <NavLink
+                                            href={route('users.index')}
+                                            active={route().current('users.*')}
+                                        >
+                                            Usuarios
+                                        </NavLink>
+                                    </>
+                                )}
                                 <NavLink
                                     href={route('pos.index')}
                                     active={route().current('pos.*')}
@@ -146,12 +156,22 @@ export default function AuthenticatedLayout({ header, children }) {
                         >
                             Dashboard
                         </ResponsiveNavLink>
-                        <ResponsiveNavLink
-                            href={route('inventory.index')}
-                            active={route().current('inventory.*')}
-                        >
-                            Inventario
-                        </ResponsiveNavLink>
+                        {user.role === 'admin' && (
+                            <>
+                                <ResponsiveNavLink
+                                    href={route('inventory.index')}
+                                    active={route().current('inventory.*')}
+                                >
+                                    Inventario
+                                </ResponsiveNavLink>
+                                <ResponsiveNavLink
+                                    href={route('users.index')}
+                                    active={route().current('users.*')}
+                                >
+                                    Usuarios
+                                </ResponsiveNavLink>
+                            </>
+                        )}
                         <ResponsiveNavLink
                             href={route('pos.index')}
                             active={route().current('pos.*')}
