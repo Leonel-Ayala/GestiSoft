@@ -1,7 +1,7 @@
-Evidencia / restricci髇,Necesidad,Requisito,Criterio,PBI,Prueba prevista,Estado
-P01 (Falta de control),N-05,"RF-08, RF-09","AC-06, AC-07",PBI-01,T-01: CRUD Inventario,Listo
-O01 (Demoras mouse),N-02,RF-01 al RF-05,"AC-03, AC-04, AC-05",PBI-02,T-02: POS Reactivo,Listo
-P01 (Descuadres),N-01,"RF-06, RF-07","AC-01, AC-02",PBI-03,T-03: Bloqueo de turno,Por Hacer
-P01 (Miedo a robos),N-06,"RF-10, RF-11","AC-08, AC-09",PBI-04,T-05: Bloqueo por Rol,Por Hacer
-P01 (Ceguera ventas),N-07,"RF-12, RF-13","AC-10, AC-11",PBI-05,T-06: Verificaci髇 Graficos,Por Hacer
-RSK-03 (Aislamiento),N-03,RNF-SEC-01,AC-SEC-01,SPIKE-01,T-04: Seguridad Tenant,Listo
+Evidencia / restricci贸n,Necesidad,Decisi贸n,Requisito,Criterio,PBI,Prueba prevista,Estado
+P01 (Falta de control),N-05,DEC-01 (Control sobre reportes),"RF-08, RF-09","AC-06, AC-07",PBI-01,T-01: CRUD Inventario,Listo
+O01 (Demoras mouse),N-02,DEC-02 (Arquitectura Reactiva),RF-01 al RF-05,"AC-03, AC-04, AC-05",PBI-02,T-02: POS Reactivo,Listo
+P01 (Descuadres),N-01,DEC-03 (Postergar m贸dulo de Caja),"RF-06, RF-07","AC-01, AC-02",PBI-03,T-03: Bloqueo de turno,Pendiente
+P01 (Miedo a robos),N-06,DEC-04 (Aplicar control de roles),"RF-10, RF-11","AC-08, AC-09",PBI-04,T-05: Bloqueo por Rol,Pendiente
+P01 (Ceguera ventas),N-07,DEC-05 (Postergar m贸dulo gr谩ficas),"RF-12, RF-13","AC-10, AC-11",PBI-05,T-06: Verificaci贸n Gr谩ficos,Pendiente
+RSK-03 (Aislamiento),N-03,ADR-01 (Global Scopes de Laravel),RNF-SEC-01,AC-SEC-01,SPIKE-01,T-04: Seguridad Tenant,Listo
