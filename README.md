@@ -10,7 +10,7 @@ GestiSoft es una plataforma SaaS (Software as a Service) multi-inquilino diseña
 
 ## Pila Tecnológica (Tech Stack)
 
-*   **Backend:** Laravel (PHP)
+*   **Backend:** Laravel 11 (PHP)
 *   **Frontend:** React.js integrado mediante Inertia.js
 *   **Estilos:** Tailwind CSS
 *   **Base de Datos:** MySQL / PostgreSQL
@@ -25,21 +25,23 @@ GestiSoft es una plataforma SaaS (Software as a Service) multi-inquilino diseña
 ## Instalación y Configuración Local
 
 1. Clona este repositorio:
-   \`git clone https://github.com/Leonel-Ayala/GestiSoft.git\`
-2. Instala las dependencias de PHP:
-   \`composer install\`
-3. Instala las dependencias de Node:
-   \`npm install\`
-4. Configura tu entorno:
-   * Copia el archivo \`.env.example\` a \`.env\`.
-   * Actualiza las credenciales de tu base de datos en el archivo \`.env\`.
-5. Genera la llave de la aplicación:
-   \`php artisan key:generate\`
-6. Ejecuta las migraciones y seeders (Carga de datos y Tenants de prueba):
-   \`php artisan migrate --seed\`
-7. Compila los assets del frontend y levanta el servidor local:
-   \`npm run dev\`
-   \`php artisan serve\`
+   `git clone https://github.com/Leonel-Ayala/GestiSoft.git`
+2. Entra a la carpeta del proyecto (¡Importante!):
+   `cd gestisoft-app`
+3. Instala las dependencias de PHP:
+   `composer install`
+4. Instala las dependencias de Node:
+   `npm install`
+5. Configura tu entorno:
+   * Copia el archivo `.env.example` a `.env`.
+   * Actualiza las credenciales de tu base de datos en el archivo `.env`.
+6. Genera la llave de la aplicación:
+   `php artisan key:generate`
+7. Ejecuta las migraciones y seeders (Carga de datos y Tenants de prueba):
+   `php artisan migrate --seed`
+8. Compila los assets del frontend y levanta el servidor local:
+   `npm run dev`
+   `php artisan serve`
 
 ## Documentación del Proyecto
-Toda la documentación de requerimientos, historias de usuario, PBIs y matrices de trazabilidad se encuentra en la carpeta \`/product\`.
+Toda la documentación de requerimientos, historias de usuario, PBIs y matrices de trazabilidad se encuentra en la carpeta `/product`.
