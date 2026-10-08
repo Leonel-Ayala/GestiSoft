@@ -11,6 +11,7 @@ export default function Edit({ auth, product }) {
         name: product.name,
         price: product.price,
         stock: product.stock,
+        motivo: '',
     });
 
     const submit = (e) => {
@@ -84,6 +85,20 @@ export default function Edit({ auth, product }) {
                                     <InputError message={errors.stock} className="mt-2" />
                                 </div>
                             </div>
+
+                            {data.stock != product.stock && (
+                                <div className="p-4 bg-yellow-50 rounded border border-yellow-200">
+                                    <InputLabel htmlFor="motivo" value="Motivo del ajuste de stock (Ej: Deterioro, Merma, Ajuste)" />
+                                    <TextInput
+                                        id="motivo"
+                                        className="mt-1 block w-full bg-white"
+                                        value={data.motivo}
+                                        onChange={(e) => setData('motivo', e.target.value)}
+                                        required={data.stock != product.stock}
+                                    />
+                                    <InputError message={errors.motivo} className="mt-2" />
+                                </div>
+                            )}
 
                             <div className="flex items-center justify-end mt-8 border-t pt-4">
                                 <Link href={route('inventory.index')} className="text-gray-500 hover:text-gray-900 mr-4 font-medium transition">
