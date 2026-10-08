@@ -43,7 +43,16 @@ class ProductController extends Controller
             'sku.unique' => 'Ya existe un producto con este SKU en tu inventario.',
         ]);
 
-        Product::create($validated);
+        $product = Product::create($validated);
+
+        \App\Models\MovimientoStock::create([
+            'product_id' => $product->id,
+            'user_id' => auth()->id(),
+            'cantidad_anterior' => 0,
+            'cantidad_nueva' => $product->stock,
+            'diferencia' => $product->stock,
+            'motivo' => 'Inventario Inicial',
+        ]);
 
         return redirect()->route('inventory.index');
     }
@@ -68,11 +77,26 @@ class ProductController extends Controller
             'name' => 'required|string|max:255',
             'price' => 'required|integer|min:0',
             'stock' => 'required|integer|min:0',
+            'motivo' => 'required_if:stock,!='.$product->stock.'|nullable|string|max:255',
         ], [
             'sku.unique' => 'Ya existe un producto con este SKU en tu inventario.',
+            'motivo.required_if' => 'Debe justificar el motivo al modificar el stock manualmente.',
         ]);
 
+        $cantidadAnterior = $product->stock;
+
         $product->update($validated);
+
+        if ($product->wasChanged('stock')) {
+            \App\Models\MovimientoStock::create([
+                'product_id' => $product->id,
+                'user_id' => auth()->id(),
+                'cantidad_anterior' => $cantidadAnterior,
+                'cantidad_nueva' => $product->stock,
+                'diferencia' => $product->stock - $cantidadAnterior,
+                'motivo' => $request->motivo,
+            ]);
+        }
 
         return redirect()->route('inventory.index');
     }
