@@ -17,11 +17,14 @@
 
 ## 3. Requisitos y Aceptación
 - **Requisitos Satisfechos:** RF-10, RF-11, RNF-SEC-01 (parcialmente)
-- **Criterios de Aceptación:** AC-08 (Normal), AC-09 (Seguridad/Límite)
+- **Criterios de Aceptación:** AC-08 (Normal), AC-09 (Seguridad/Límite), AC-12 (Ocultamiento en DOM).
+- **Pruebas Automatizadas:** `tests/Feature/RoleSecurityTest.php` (7 tests).
+- **Mecanismos Clave:** `RoleMiddleware` (kernel HTTP), inyección de sesión en `HandleInertiaRequests`, y `SoftDeletes` en el modelo `User`.
+- **Estado Actual:** Completado e integrado en el Incremento Funcional 1 (Semanas 6-9).
 
 ## 4. Justificación de Priorización (Criterios Rúbrica)
 - **Valor:** Proporciona tranquilidad administrativa y disminuye el riesgo de fraude interno limitando quién puede modificar los precios.
 - **Aprendizaje:** Introduce middlewares de autorización, validando que el sistema puede escalar a múltiples tipos de usuarios internos.
-- **Riesgo:** Presenta un riesgo moderado en complejidad de seguridad (Middlewares en Laravel y Gates).
-- **Dependencias:** Requiere el cimiento Multi-tenant (SPIKE-01) implementado para que los usuarios nazcan asociados a una PYME.
-- **Estimación Preliminar:** 3 Puntos de Historia. *(Nota: Excluido del MVP de la Semana 4 por focalización de esfuerzos)*.
+- **Riesgo:** Mitigado mediante `SPIKE-02` (inyección reactiva de sesión sin parpadeos) y `RoleMiddleware` probado exhaustivamente.
+- **Dependencias:** Requiere el cimiento Multi-tenant (`SPIKE-01`) implementado para que los usuarios nazcan asociados a una PYME.
+- **Estimación y Ejecución:** 5 Puntos de Historia. Desarrollado e integrado como objetivo central del Incremento Funcional 1.
