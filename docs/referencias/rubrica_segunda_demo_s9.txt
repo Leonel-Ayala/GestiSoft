@@ -1,0 +1,354 @@
+
+
+
+Taller de Desarrollo de Software
+Rúbrica segunda demostración y defensa
+Puntos: 140 = 7.0
+Rúbrica preparada por: Héctor Tejo Uval y Jerman Espíndola Sandoval – Docentes Facultad de Ingeniería UCM
+Ponderación interna: demostración grupal 80% (16 criterios) y defensa individual 20% (4 criterios).
+
+
+Criterio/Ítem
+
+
+Excelente
+(7 puntos)
+
+
+Regular
+(4 puntos)
+
+
+Insuficiente
+(0.5 puntos)
+
+
+A) DEMOSTRACIÓN DEL PRODUCTO - EVALUACIÓN GRUPAL (112 PUNTOS)
+
+
+Aprendizaje y reorientación desde la primera defensa
+
+
+Excelente: Explica qué observaciones de la retroalimentación cambiaron decisiones del producto o de la forma de trabajo y demuestra su efecto trazable en backlog, aceptación, arquitectura o riesgos.
+
+
+Regular: Presenta observaciones y cambios posteriores, pero la relación entre retroalimentación, decisión y evidencia es parcial o poco precisa.
+
+
+Insuficiente: No vincula la retroalimentación con cambios verificables o continúa el trabajo sin justificar por qué las observaciones no modificaron decisiones.
+
+
+Objetivo, hipótesis de valor y señal de éxito
+
+
+Excelente: Declara un resultado de usuario coherente, una hipótesis refutable y una señal observable; compara la meta con la evidencia obtenida y explica la decisión derivada.
+
+
+Regular: El objetivo y la hipótesis son comprensibles, pero la señal, la evidencia obtenida o la decisión posterior es incompleta.
+
+
+Insuficiente: No establece una hipótesis o señal verificable, o confunde que las pruebas técnicas pasen con validar el valor del producto.
+
+
+Alcance, flujo prioritario y exclusiones
+
+
+Excelente: Delimita inclusiones, postergaciones y exclusiones; demuestra un flujo prioritario completo y justifica el corte por valor, riesgo, capacidad y aprendizaje.
+
+
+Regular: El flujo principal y el alcance se comprenden, pero alguna inclusión, exclusión o justificación permanece ambigua.
+
+
+Insuficiente: El alcance cambia durante la demostración, mezcla trabajo no comprometido o no existe un flujo prioritario claramente delimitado.
+
+
+
+
+Criterio/Ítem
+
+
+Excelente
+(7 puntos)
+
+
+Regular
+(4 puntos)
+
+
+Insuficiente
+(0.5 puntos)
+
+
+Refinamiento y priorización del Product Backlog
+
+
+Excelente: Muestra un backlog actualizado y ordenado por valor, aprendizaje, riesgo y dependencias; explica cambios de prioridad, renuncias y resultados de spikes cuando corresponda.
+
+
+Regular: Existe un orden razonable y actualizado, pero la justificación considera solo algunos factores o no explica suficientemente los cambios y renuncias.
+
+
+Insuficiente: El backlog está desactualizado, parece arbitrario o contradice el incremento que se demuestra.
+
+
+Arquitectura y decisiones trazables
+
+
+Excelente: Los drivers justifican contexto, contenedores, componentes, contratos y datos del incremento; las decisiones relevantes se registran mediante ADR o evidencia equivalente y permanecen coherentes con lo implementado.
+
+
+Regular: La arquitectura es comprensible, pero faltan algunos vínculos con drivers, decisiones, contratos, riesgos o con el incremento realmente construido.
+
+
+Insuficiente: Presenta diagramas o decisiones genéricas, desactualizadas o desconectadas del comportamiento, la calidad y los riesgos del incremento.
+
+
+Producto ejecutable y reproducible
+
+
+Excelente: La versión candidata se obtiene y ejecuta siguiendo instrucciones breves y verificables, sin correcciones improvisadas, dependencias ocultas ni pasos críticos omitidos.
+
+
+Regular: El producto se ejecuta, pero requiere ayuda menor, pasos no documentados o ajustes manuales que no alteran el resultado central.
+
+
+Insuficiente: El producto no se ejecuta de forma confiable o depende de intervención sustantiva para iniciar o completar la demostración.
+
+
+Corte vertical e integración
+
+
+Excelente: Demuestra un comportamiento de extremo a extremo integrado entre las partes necesarias del sistema, observable y coherente con el objetivo del Incremento Funcional 1.
+
+
+Regular: Demuestra un flujo parcialmente integrado o con sustituciones menores, aunque el comportamiento principal puede comprenderse.
+
+
+Insuficiente: Presenta componentes aislados, maquetas o evidencia que no constituye un incremento funcional integrado.
+
+
+
+
+Criterio/Ítem
+
+
+Excelente
+(7 puntos)
+
+
+Regular
+(4 puntos)
+
+
+Insuficiente
+(0.5 puntos)
+
+
+Comportamiento funcional comprometido
+
+
+Excelente: Todos los requisitos funcionales comprometidos para el incremento se ejecutan correctamente y corresponden al backlog y alcance vigentes.
+
+
+Regular: La mayoría del comportamiento comprometido funciona, pero existe una desviación menor o una correspondencia incompleta con backlog o alcance.
+
+
+Insuficiente: Falla el comportamiento principal, faltan requisitos comprometidos o se demuestra funcionalidad distinta de la acordada.
+
+
+Criterios de aceptación: normal, alternativos, errores y casos límite
+
+
+Excelente: Ejecuta los escenarios prioritarios con entradas y resultados observables; incluye recorrido normal, alternativas, errores y bordes relevantes y permite decidir claramente si cada criterio pasa o falla.
+
+
+Regular: Ejecuta el recorrido principal y algunos escenarios no normales, pero omite una condición, borde o evidencia necesaria para verificar completamente la aceptación.
+
+
+Insuficiente: Solo describe los criterios, omite escenarios prioritarios o el producto falla sin un tratamiento controlado que permita comprobar la aceptación.
+
+
+Pruebas y evidencia de verificación
+
+
+Excelente: Presenta pruebas ejecutadas, resultados reproducibles y evidencia suficiente para los criterios comprometidos; distingue pruebas planificadas de resultados obtenidos y muestra integración o humo cuando corresponde.
+
+
+Regular: Existen pruebas y resultados, pero la cobertura, reproducibilidad o relación con criterios y flujo integrado es parcial.
+
+
+Insuficiente: No presenta resultados verificables o las pruebas no corresponden al comportamiento demostrado.
+
+
+
+
+Criterio/Ítem
+
+
+Excelente
+(7 puntos)
+
+
+Regular
+(4 puntos)
+
+
+Insuficiente
+(0.5 puntos)
+
+
+Atributos de calidad y escenarios medibles
+
+
+Excelente: Demuestra los atributos de calidad comprometidos mediante condición, respuesta, medida y método reproducible, con evidencia consistente con el entorno declarado.
+
+
+Regular: Considera atributos de calidad, pero alguna condición, medida, método o evidencia es incompleta.
+
+
+Insuficiente: Los atributos de calidad son declaraciones generales sin medida, método de verificación ni demostración.
+
+
+Seguridad, privacidad y desarrollo seguro
+
+
+Excelente: Demuestra controles acordados, tratamiento de entradas inválidas, ausencia de secretos, minimización de datos y uso exclusivo de datos permitidos o simulados; los riesgos prioritarios tienen respuesta verificable.
+
+
+Regular: Cumple los controles esenciales, pero la evidencia o explicación de alguna condición de seguridad, privacidad o riesgo es incompleta.
+
+
+Insuficiente: Expone secretos o datos no permitidos, omite controles prioritarios o no puede demostrar su cumplimiento.
+
+
+Trazabilidad de extremo a extremo
+
+
+Excelente: Permite recorrer en ambos sentidos evidencia y retroalimentación, necesidad, decisión, requisito o driver, aceptación, PBI, prueba y resultado demostrado mediante identificadores estables y enlaces localizables.
+
+
+Regular: La cadena principal puede seguirse, pero presenta uno o más enlaces incompletos, desactualizados o difíciles de localizar.
+
+
+Insuficiente: No es posible justificar por qué existe lo construido ni vincularlo de forma confiable con evidencia, decisiones y verificación.
+
+
+
+
+Criterio/Ítem
+
+
+Excelente
+(7 puntos)
+
+
+Regular
+(4 puntos)
+
+
+Insuficiente
+(0.5 puntos)
+
+
+Repositorio, versionado, CI y revisión entre pares
+
+
+Excelente: El repositorio identifica claramente el incremento y la versión candidata; presenta historial coherente, CI verificable, pruebas automatizadas pertinentes y evidencia de revisión entre pares; no se valora cantidad bruta de commits.
+
+
+Regular: El repositorio permite reconstruir el trabajo, pero presenta organización irregular, CI parcial, revisión incompleta o una versión candidata poco clara.
+
+
+Insuficiente: El repositorio no permite identificar o reconstruir el incremento, carece de integración verificable o no presenta evidencia de revisión.
+
+
+Validación, limitaciones, riesgos y próximo incremento
+
+
+Excelente: Presenta la validación realizada, interpreta la señal de éxito sin exagerar resultados, distingue limitaciones y riesgos vigentes y propone el siguiente incremento de forma coherente con la evidencia obtenida.
+
+
+Regular: Reconoce resultados, limitaciones y próximos pasos, pero la relación con señales, riesgos, evidencia o prioridades es parcial.
+
+
+Insuficiente: Presenta el incremento como terminado sin reconocer evidencia pendiente, limitaciones o riesgos, o propone próximos pasos desconectados del aprendizaje.
+
+
+Ejecución de la demostración y coordinación del equipo
+
+
+Excelente: La demostración es ordenada, comprensible y ajustada al tiempo; el equipo coordina roles y utiliza el producto en ejecución, la trazabilidad y la evidencia para sostener sus afirmaciones.
+
+
+Regular: La demostración permite comprender el resultado, pero presenta desorden, uso ineficiente del tiempo, coordinación desigual o dependencia excesiva de explicaciones sin evidencia.
+
+
+Insuficiente: La exposición es improvisada, excede significativamente el tiempo o impide comprender y verificar el incremento.
+
+
+
+
+Criterio/Ítem
+
+
+Excelente
+(7 puntos)
+
+
+Regular
+(4 puntos)
+
+
+Insuficiente
+(0.5 puntos)
+
+
+B) DEFENSA TÉCNICA - EVALUACIÓN INDIVIDUAL (28 PUNTOS)
+
+
+Contribución individual significativa
+
+
+Excelente: Identifica y demuestra una contribución relevante al Incremento Funcional 1, explica su efecto y las revisiones realizadas; bitácora, PR, pruebas u otra evidencia del repositorio respaldan su responsabilidad.
+
+
+Regular: Describe una contribución real, pero su relevancia, efecto, revisión o evidencia es parcial o poco precisa.
+
+
+Insuficiente: No puede identificar una contribución verificable o atribuye trabajo del equipo sin evidenciar responsabilidad personal.
+
+
+Dominio técnico y arquitectónico de la contribución
+
+
+Excelente: Explica cómo funciona su aporte, sus dependencias, componentes o contratos implicados, pruebas y decisiones de implementación; puede razonar sobre cambios, fallos y consecuencias en la arquitectura.
+
+
+Regular: Comprende el funcionamiento general, pero presenta vacíos al explicar dependencias, arquitectura, pruebas o consecuencias técnicas.
+
+
+Insuficiente: No demuestra comprensión suficiente del código, artefacto, decisión o comportamiento que declara haber desarrollado.
+
+
+Criterio y justificación de decisiones
+
+
+Excelente: Justifica decisiones y compromisos mediante evidencia, requisitos, calidad y riesgos; compara alternativas, reconoce consecuencias y explica bajo qué condiciones revisaría la decisión.
+
+
+Regular: Justifica la decisión principal, pero con evidencia parcial, alternativas poco analizadas o criterios incompletos.
+
+
+Insuficiente: Responde mediante preferencias o afirmaciones sin evidencia y no puede explicar alternativas ni consecuencias de la decisión.
+
+
+Respuestas, reflexión y aprendizaje
+
+
+Excelente: Responde con precisión y autonomía, reconoce errores o límites, explica qué aprendió durante las semanas 6 a 9 y propone una acción siguiente coherente con ese aprendizaje.
+
+
+Regular: Responde las preguntas principales, pero requiere apoyo o su reflexión y próxima acción son generales.
+
+
+Insuficiente: No responde de manera consistente, evade preguntas o no identifica aprendizaje ni acciones de mejora.

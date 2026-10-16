@@ -41,5 +41,28 @@ Este documento aporta la **evidencia empírica y comprobable** de los atributos 
 | Aislamiento de Productos (Tenant 1 vs Tenant 2) | `tests/Feature/MultiTenantSecurityTest.php` | ✅ Passed |
 | Bloqueo de Venta cuando Stock es 0 | `tests/Feature/POSTest.php` | ✅ Passed |
 | Historial Auditoría Stock (Kardex) obligatorio | `tests/Feature/InventoryTest.php` | ✅ Passed |
+| Control de Roles y Protección 403 (PBI-04) | `tests/Feature/RoleSecurityTest.php` | ✅ Passed (7/7 tests) |
 
 *Conclusión:* Mediante los tests automatizados verificamos que la inyección del *Global Scope* del `negocio_id` impide técnicamente cualquier intento de IDOR (Insecure Direct Object Reference). Modificar parámetros en la URL o intentar acceder a productos de otra empresa es interceptado directamente por la capa de la base de datos de Laravel.
+
+---
+
+## 4. Pruebas de Roles y Control de Acceso (RNF-SEC-02 / PBI-04)
+**Atributos:**
+- **RNF-SEC-02:** 100% de intercepción en servidor (HTTP 403) ante intentos de escalamiento horizontal o vertical de privilegios.
+- **RNF-ACC-02:** Eliminación de elementos no autorizados en el DOM sin parpadeos visuales ni filtración de endpoints.
+- **Integridad de Datos:** Eliminación lógica de usuarios (*Soft Deletes*) preservando la integridad referencial histórica.
+
+**Método de Medición:** Batería de pruebas automatizadas en `tests/Feature/RoleSecurityTest.php`.
+
+| Caso de Prueba Automatizado | Objetivo de Verificación | Resultado Observado |
+|-----------------------------|---------------------------|:-------------------:|
+| `test_admin_puede_ver_lista_de_usuarios_de_su_negocio` | Listado seguro de personal del negocio actual. | ✅ Passed (200 OK) |
+| `test_admin_puede_crear_un_nuevo_cajero_para_su_negocio` | Alta de cajero con hash Bcrypt y asociación al tenant. | ✅ Passed (302 Redirect + DB Assert) |
+| `test_cajero_no_puede_acceder_a_gestion_de_usuarios_retorna_403` | Bloqueo a nivel de kernel/middleware al intentar entrar a `/users`. | ✅ Passed (403 Forbidden) |
+| `test_cajero_no_puede_acceder_a_inventario_retorna_403` | Bloqueo a nivel de middleware al intentar entrar a `/inventory`. | ✅ Passed (403 Forbidden) |
+| `test_admin_no_puede_eliminarse_a_si_mismo` | Validación de regla de negocio que evita el autobloqueo de la cuenta administradora. | ✅ Passed (Session Error + No Delete) |
+| `test_al_eliminar_usuario_se_aplica_soft_deletes_y_se_mantiene_en_base_de_datos` | Verificación de que `$user->delete()` fija `deleted_at` sin destruir el registro físico. | ✅ Passed (assertSoftDeleted) |
+| `test_admin_no_puede_eliminar_usuario_de_otro_negocio` | Verificación de que no se pueden borrar usuarios entre diferentes tenants. | ✅ Passed (403 Forbidden) |
+
+*Conclusión:* Con 7 tests adicionales específicos para PBI-04, la suite completa totaliza **11 tests y 31 aserciones** ejecutadas en ~1.5 segundos, garantizando la cobertura de todos los escenarios normales, alternativos, de seguridad y bordes críticos del Incremento Funcional 1.

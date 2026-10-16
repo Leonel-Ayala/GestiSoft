@@ -1,0 +1,490 @@
+
+
+
+Taller de Desarrollo de Software
+Rúbrica primera demostración y defensa
+Puntos: 140 = 7.0
+Rúbrica preparada por: Héctor Tejo Uval y Jerman Espíndola Sandoval – Docentes Facultad de Ingeniería UCM
+Ponderación interna: demostración grupal 80% (16 criterios) y defensa individual 20% (4 criterios).
+
+
+Criterio/Ítem
+
+
+Excelente
+(7 puntos)
+
+
+Regular
+(4 puntos)
+
+
+Insuficiente
+(0.5 puntos)
+
+
+A) DEMOSTRACIÓN DEL PRODUCTO - EVALUACIÓN GRUPAL (112 PUNTOS)
+
+
+Contexto, evidencia y necesidad
+
+
+Excelente: Presenta con precisión el problema, las fuentes de evidencia y las necesidades validadas; distingue hechos, interpretación y nivel de confianza.
+
+
+Regular: Presenta el problema y alguna evidencia, pero existen vínculos incompletos, interpretaciones poco diferenciadas o confianza sin justificar.
+
+
+Insuficiente: Describe una idea general sin evidencia verificable o sin necesidades claramente derivadas.
+
+
+Hipótesis de valor y criterios de éxito
+
+
+Excelente: Explica qué valor debía producir el incremento, para quién y mediante qué señal observable se evaluaría el aprendizaje o resultado.
+
+
+Regular: Explica el valor esperado, pero la señal de éxito es genérica, incompleta o difícil de comprobar.
+
+
+Insuficiente: No establece una hipótesis de valor ni una señal verificable de éxito.
+
+
+Objetivo, alcance y exclusiones del MVP
+
+
+Excelente: Declara un objetivo coherente, delimita lo incluido y excluido, y justifica el corte con evidencia, capacidad y aprendizaje esperado.
+
+
+Regular: El alcance principal es comprensible, pero alguna inclusión, exclusión o justificación permanece ambigua.
+
+
+Insuficiente: El alcance es confuso, cambia durante la demostración o incluye trabajo no justificado.
+
+
+
+
+Criterio/Ítem
+
+
+Excelente
+(7 puntos)
+
+
+Regular
+(4 puntos)
+
+
+Insuficiente
+(0.5 puntos)
+
+
+Priorización del Product Backlog
+
+
+Excelente: Justifica el orden del backlog mediante valor, aprendizaje, riesgo y dependencias; las decisiones y renuncias son explícitas.
+
+
+Regular: Existe un orden razonable, pero la justificación usa solo algunos factores o no explica adecuadamente las renuncias.
+
+
+Insuficiente: El orden parece arbitrario, no está actualizado o contradice el incremento demostrado.
+
+
+Producto ejecutable y reproducible
+
+
+Excelente: El producto se obtiene y ejecuta siguiendo instrucciones breves, sin correcciones improvisadas ni dependencias ocultas.
+
+
+Regular: El producto se ejecuta, pero requiere ayuda menor, pasos no documentados o ajustes manuales que no alteran el resultado central.
+
+
+Insuficiente: El producto no se ejecuta de forma confiable o depende de intervención sustantiva para iniciar.
+
+
+Corte vertical e integración
+
+
+Excelente: Demuestra un comportamiento de extremo a extremo integrado, observable y coherente con el objetivo del incremento.
+
+
+Regular: Demuestra un flujo parcialmente integrado o con sustituciones menores, aunque el comportamiento principal puede comprenderse.
+
+
+Insuficiente: Presenta componentes aislados, maquetas o evidencia que no constituye un incremento integrado.
+
+
+Comportamiento functional
+
+
+Excelente: Todos los requisitos funcionales comprometidos se ejecutan correctamente y corresponden al backlog seleccionado.
+
+
+Regular: La mayoría de los requisitos comprometidos funciona, pero existe una desviación menor o una correspondencia incompleta con el backlog.
+
+
+Insuficiente: Falla el comportamiento principal, faltan requisitos comprometidos o se demuestra funcionalidad diferente de la acordada.
+
+
+
+
+Criterio/Ítem
+
+
+Excelente
+(7 puntos)
+
+
+Regular
+(4 puntos)
+
+
+Insuficiente
+(0.5 puntos)
+
+
+Criterios de aceptación: recorrido normal
+
+
+Excelente: Ejecuta los escenarios normales con entradas y resultados observables, y permite decidir claramente si pasa o falla.
+
+
+Regular: Ejecuta el recorrido principal, pero omite una condición, resultado o evidencia necesaria para verificar completamente el criterio.
+
+
+Insuficiente: Solo describe el comportamiento o la demostración no permite comprobar los criterios normales.
+
+
+Criterios alternativos, de error y casos límite
+
+
+Excelente: Demuestra los escenarios alternativos, errores y bordes prioritarios; el sistema responde de manera controlada y consistente.
+
+
+Regular: Incluye algunos escenarios no normales, pero omite un caso prioritario o la respuesta esperada no está completamente definida.
+
+
+Insuficiente: No demuestra casos alternativos o de error, o el producto falla sin tratamiento controlado.
+
+
+Trazabilidad de extremo a extremo
+
+
+Excelente: Permite recorrer en ambos sentidos evidencia, necesidad, decisión, requisito, aceptación, PBI, prueba y resultado demostrado mediante identificadores estables.
+
+
+Regular: La cadena principal puede seguirse, pero presenta uno o más enlaces incompletos, desactualizados o difíciles de localizar.
+
+
+Insuficiente: No es posible justificar por qué existe lo construido ni vincularlo con evidencia y verificación.
+
+
+
+
+Criterio/Ítem
+
+
+Excelente
+(7 puntos)
+
+
+Regular
+(4 puntos)
+
+
+Insuficiente
+(0.5 puntos)
+
+
+Pruebas y evidencia de verificación
+
+
+Excelente: Presenta pruebas ejecutadas, resultados reproducibles y evidencia suficiente para los criterios comprometidos; distingue prueba planificada de resultado obtenido.
+
+
+Regular: Existen pruebas y resultados, pero la cobertura, reproducibilidad o relación con los criterios es parcial.
+
+
+Insuficiente: No presenta resultados verificables o las pruebas no corresponden al comportamiento demostrado.
+
+
+Atributos de calidad
+
+
+Excelente: Demuestra medidas o revisiones explícitas para los atributos comprometidos, como rendimiento, accesibilidad y mantenibilidad.
+
+
+Regular: Considera atributos de calidad, pero alguna medida, condición o evidencia es incompleta.
+
+
+Insuficiente: Los atributos de calidad son declaraciones generales sin medida, revisión ni demostración.
+
+
+Seguridad, privacidad y desarrollo seguro
+
+
+Excelente: Demuestra controles acordados, entradas inválidas tratadas, ausencia de secretos y uso exclusivo de datos permitidos o simulados.
+
+
+Regular: Cumple los controles esenciales, pero la evidencia o explicación de alguna condición de seguridad o privacidad es incompleta.
+
+
+Insuficiente: Expone secretos o datos no permitidos, omite controles prioritarios o no puede demostrar su cumplimiento.
+
+
+
+
+Criterio/Ítem
+
+
+Excelente
+(7 puntos)
+
+
+Regular
+(4 puntos)
+
+
+Insuficiente
+(0.5 puntos)
+
+
+Repositorio, versionado, integración y revisión
+
+
+Excelente: El repositorio contiene entregables localizables, historial coherente, integración verificable y evidencia de revisión entre pares; no se valora cantidad bruta de commits.
+
+
+Regular: El repositorio permite reconstruir el trabajo, pero presenta organización irregular, revisión parcial o evidencia de integración incompleta.
+
+
+Insuficiente: El repositorio está desorganizado, no permite identificar el incremento o carece de evidencia de integración y revisión.
+
+
+Limitaciones, riesgos y próximos pasos
+
+
+Excelente: Distingue con honestidad lo logrado, lo pendiente y las limitaciones; explica riesgos vigentes y propone el siguiente incremento de forma coherente.
+
+
+Regular: Reconoce algunas limitaciones y próximos pasos, pero sin suficiente relación con riesgos, evidencia o prioridades.
+
+
+Insuficiente: Presenta el producto como terminado sin reconocer pendientes relevantes o propone pasos desconectados del aprendizaje obtenido.
+
+
+Ejecución de la demostración y coordinación del equipo
+
+
+Excelente: La demostración es ordenada, comprensible y ajustada al tiempo; los integrantes coordinan roles y utilizan el producto y la evidencia para sostener sus afirmaciones.
+
+
+Regular: La demostración permite comprender el resultado, pero presenta desorden, uso ineficiente del tiempo o coordinación desigual.
+
+
+Insuficiente: La exposición es improvisada, excede significativamente el tiempo o impide comprender y verificar el producto.
+
+
+
+
+Criterio/Ítem
+
+
+Excelente
+(7 puntos)
+
+
+Regular
+(4 puntos)
+
+
+Insuficiente
+(0.5 puntos)
+
+
+B) DEFENSA TÉCNICA - EVALUACIÓN INDIVIDUAL (28 PUNTOS)
+
+
+Contribución individual significativa
+
+
+Excelente: Identifica y demuestra una contribución relevante, su efecto en el incremento y las revisiones realizadas; la bitácora y el repositorio respaldan su explicación.
+
+
+Regular: Describe una contribución real, pero su relevancia, efecto o evidencia es parcial o poco precisa.
+
+
+Insuficiente: No puede identificar una contribución verificable o atribuye trabajo del equipo sin evidenciar responsabilidad personal.
+
+
+Dominio técnico de la contribución
+
+
+Excelente: Explica cómo funciona su aporte, sus dependencias, pruebas y decisiones de implementación; puede razonar sobre cambios o fallos probables.
+
+
+Regular: Comprende el funcionamiento general, pero presenta vacíos al explicar dependencias, pruebas o consecuencias técnicas.
+
+
+Insuficiente: No demuestra comprensión suficiente del código, artefacto o comportamiento que declara haber desarrollado.
+
+
+Criterio y justificación de decisiones
+
+
+Excelente: Justifica decisiones y compromisos mediante evidencia, requisitos, calidad y riesgos; distingue alternativas y reconoce cuándo cambiaría la decisión.
+
+
+Regular: Justifica la decisión principal, pero con evidencia parcial, alternativas poco analizadas o criterios incompletos.
+
+
+Insuficiente: Responde mediante preferencias o afirmaciones sin evidencia y no puede explicar las consecuencias de la decisión.
+
+
+Respuestas, reflexión y aprendizaje
+
+
+Excelente: Responde con precisión y autonomía, reconoce errores o límites, explica lo aprendido y propone una acción siguiente coherente.
+
+
+Regular: Responde las preguntas principales, pero requiere apoyo o su reflexión y próxima acción son generales.
+
+
+Insuficiente: No responde de manera consistente, evade preguntas o no identifica aprendizaje ni acciones de mejora.
+Puntos: 119
+Nota: 5,9
+
+
+
+
+Comentarios
+1. Contexto, evidencia y necesidad — Regular — 4 pts
+El grupo sí dispone de evidencia primaria y distingue observación, interpretación e implicación. Por ejemplo, registra:
+un cierre de caja con 45 minutos de conciliación;
+una observación de aproximadamente 15 segundos extra por venta debido a navegación con mouse;
+problemas por sistemas inestables;
+pérdida de cotizaciones almacenadas en Excel.
+También sintetiza patrones y asigna niveles de confianza.
+Pero la base empírica es todavía estrecha y existen inconsistencias metodológicas.
+El plan de investigación declara actividades entre el 2 y el 9 de septiembre, pero las evidencias registradas aparecen fechadas entre el 27 y el 29 de agosto.
+Además, algunos patrones reciben confianza Alta a partir de una única entrevista o una única observación. Por ejemplo, el problema de cierre de caja se sostiene principalmente en P01 y la lentitud del POS en O01.
+Existe evidencia real y útil, pero el nivel de confianza está algo sobreafirmado respecto del tamaño de la muestra.
+5. Producto ejecutable y reproducible — Regular — 4 pts
+El ZIP contiene un proyecto real y sustancialmente completo:
+Laravel;
+React/Inertia;
+migraciones;
+modelos;
+controladores;
+inventario;
+POS;
+autenticación;
+.env.example;
+composer.lock;
+package-lock.json;
+instrucciones de instalación.
+La presentación identifica correctamente la pila tecnológica y los requisitos previos.
+La brecha está en las instrucciones del README.
+El ZIP tiene esta estructura: Código/gestisoft-app/...
+pero el README raíz indica directamente:
+composer install
+npm install
+php artisan ...
+sin indicar que primero debe ingresarse a gestisoft-app.
+Ejecutar literalmente las instrucciones desde la raíz del entregable falla porque allí no están composer.json, package.json ni artisan.
+7. Comportamiento funcional — Regular — 4 pts
+El incremento comprometido está muy bien alineado con el código:
+PBI-01: inventario;
+PBI-02: POS;
+SPIKE-01: aislamiento Multi-Tenant.
+El código implementa efectivamente:
+alta de productos;
+edición de stock;
+búsqueda por SKU;
+adición al carro;
+incremento automático de cantidad;
+prevención de agregar productos sin stock;
+cálculo de vuelto;
+registro de la venta;
+decremento transaccional del stock;
+aislamiento mediante negocio_id.
+El problema está específicamente en RF-09 / AC-07.
+La especificación declara que el ajuste manual de stock debe registrar el cambio efectuado, y el criterio AC-07 incluso utiliza como ejemplo una disminución de dos unidades justificando "deterioro".
+El código solamente permite editar directamente el campo stock. No existe:
+motivo de ajuste;
+registro del ajuste;
+historial;
+auditoría de quién realizó el cambio;
+diferencia antes/después.
+Por lo tanto, la mayoría de los requisitos comprometidos está implementada, pero hay una desviación funcional real en PBI-01.
+9. Criterios alternativos, de error y casos límite — Regular — 4 pts
+El grupo diseñó buenos escenarios de borde. Entre ellos:
+reingreso del mismo SKU;
+intento de vender producto sin stock;
+modificación de stock;
+intento de acceso a otro tenant.
+La presentación documenta AC-04 y AC-05 para POS, además de AC-SEC-01 para multitenencia.
+El código efectivamente controla:
+productos con stock 0;
+cantidades superiores al stock disponible;
+condiciones de carrera durante checkout mediante lockForUpdate;
+acceso cruzado entre negocios mediante Global Scope.
+La brecha está  en AC-07: el ajuste por deterioro está parcialmente implementado, porque el stock cambia pero la justificación y el registro del ajuste no existen.
+Por ello no todos los escenarios comprometidos están implementados exactamente como fueron especificados.
+10. Trazabilidad de extremo a extremo — Regular — 4 pts
+La presentación posee una matriz bastante completa:
+evidencia → necesidad → requisito → criterio → PBI → prueba prevista → estado. Grupo 6 - S1 - Presentación
+Esto permite, por ejemplo:
+O01 → N-02 → RF-01...RF-05 → AC-03/04/05 → PBI-02 → T-02.
+Además, existen decisiones DEC-01, DEC-02 y DEC-03, justificadas mediante evidencia o riesgo.
+Sin embargo, falta incorporar explícitamente en la cadena:
+evidencia → necesidad → decisión → requisito → aceptación → PBI → prueba → resultado demostrado.
+La matriz principal no incorpora las decisiones DEC-* como eslabón.
+Hay además una inconsistencia documental relevante: el archivo traceability.csv incluido en el ZIP marca PBI-03, PBI-04 y PBI-05 como “Listo”, mientras que la presentación los declara correctamente como Pendientes. En la propia presentación, PBI-03, PBI-04 y PBI-05 aparecen pendientes.
+La cadena principal es buena, pero no completamente consistente.
+
+Corrección :el ejemplo de matriz de trazabilidad entregada por el profesor contaba con  esta estructura 
+
+Y nos guiamos en base a esta estructura para hacer nuestra matriz de trazabilidad, además en el gihub el documento de traceability.csv si esta actualizado y los pbi están bien definidos:
+
+11. Pruebas y evidencia de verificación — Regular — 4 pts
+La presentación incluye una tabla titulada “Pruebas y Evidencia de Verificación”, pero lo que contiene son esencialmente los escenarios Given/When/Then y sus resultados esperados.
+Al inspeccionar el ZIP, los tests automatizados existentes son básicamente los tests estándar de Laravel Breeze:
+autenticación;
+registro;
+recuperación de contraseña;
+perfil;
+verificación de correo.
+No existen pruebas automatizadas para:
+PBI-01;
+PBI-02;
+AC-03;
+AC-04;
+AC-05;
+AC-06;
+AC-07;
+AC-SEC-01;
+aislamiento multi-tenant;
+checkout;
+concurrencia de stock.
+Por tanto, los criterios del incremento tienen pruebas previstas y escenarios definidos, pero no resultados reproducibles almacenados como evidencia.
+12. Atributos de calidad — Regular — 4 pts
+Los atributos están muy bien formulados.
+La presentación define:
+RNF-PERF-01: p95 ≤ 1 s;
+RNF-ACC-01: 100% operabilidad por teclado;
+RNF-SEC-01: cero filtración entre tenants.
+El código muestra además evidencia estructural:
+React/Inertia sin recarga completa;
+autofocus en el POS;
+navegación por Enter;
+Global Scope multi-tenant.
+Sin embargo, falta la medición.
+No se encontró:
+resultados p95;
+benchmark;
+medición de latencia;
+checklist de accesibilidad;
+prueba formal de 100% de operación por teclado.
+La implementación apunta correctamente hacia esos atributos, pero la rúbrica exige demostrar medidas o revisiones explícitas.
