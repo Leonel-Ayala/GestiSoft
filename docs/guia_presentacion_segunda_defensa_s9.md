@@ -18,7 +18,7 @@ En la primera entrega obtuvimos **119 puntos (Nota 5.9)** debido a 7 observacion
 | **3** | **Comportamiento Funcional** | **Falla en RF-09 / AC-07:** El ajuste de stock no pedía motivo, ni registraba Kardex, ni guardaba historial/auditoría. | Modelo `MovimientoStock`, tabla relacional con motivo obligatorio (ej. "Deterioro"), usuario auditor y cálculo antes/después. | ✅ Excelente |
 | **4** | **Criterios Alternativos y Errores** | Escenario de deterioro incompleto por falta de Kardex; falta de validación de casos límite. | Flujo de deterioro 100% operativo con registro Kardex, `lockForUpdate` en checkout y bloqueo estricto de stock 0. | ✅ Excelente |
 | **5** | **Trazabilidad de Extremo a Extremo** | La matriz no vinculaba las Decisiones (`DEC-*`) y había discrepancias en los estados de PBIs. | `product/week3/traceability.csv` actualizado con columna `Decisión` (`DEC-01` a `DEC-05`, `ADR-01`, `ADR-02`) y estados sincrónicos. | ✅ Excelente |
-| **6** | **Pruebas y Verificación** | Solo existían tests de Laravel Breeze (auth), sin tests para inventario, POS ni multi-tenant. | Suite automatizada de **11 tests y 31 aserciones** en `tests/Feature/` (`InventoryTest`, `POSTest`, `MultiTenantSecurityTest`, `RoleSecurityTest`). | ✅ Excelente |
+| **6** | **Pruebas y Verificación** | Solo existían tests de Laravel Breeze (auth), sin tests para inventario, POS ni multi-tenant. | Suite automatizada de **14 tests y 37 aserciones** en `tests/Feature/` (`InventoryTest`, `POSTest`, `MultiTenantSecurityTest`, `RoleSecurityTest`). | ✅ Excelente |
 | **7** | **Atributos de Calidad** | Faltaban mediciones empíricas de latencia p95 (< 1s) y checklist formal de accesibilidad por teclado. | Reporte `product/week3/mediciones-calidad.md` con mediciones empíricas Network DevTools (p95 = 120ms) y auditoría 100% teclado. | ✅ Excelente |
 
 ---
@@ -131,11 +131,11 @@ Para garantizar fluidez y coordinación impecable (Criterio 16 de la Rúbrica):
 * **Criterios Rúbrica S9:** *Criterios de aceptación alternativos y errores (7 pts) y Seguridad (7 pts).*
 * **Acciones en Vivo:**
   1. Cerrar sesión de Admin e iniciar sesión con la cuenta de **Carlos Cajero**.
-  2. **Inspección de UI (AC-12):** Mostrar la barra de navegación: los botones de "Inventario" y "Usuarios" **no existen en el DOM**.
-  3. **Intento de Intrusión / URL Forzada (AC-09):** Escribir manualmente en la barra del navegador: `http://localhost:8000/inventory` o `http://localhost:8000/users`.
-  4. **Resultado Observable:** Pantalla inmediata de **HTTP 403 Forbidden - Acceso Denegado**.
+  2. **Inspección de UI (AC-12):** Mostrar la barra de navegación: los botones de "Dashboard", "Inventario" y "Usuarios" **no existen en el DOM**. Solo ve "Punto de Venta" y su perfil con pill de cajero.
+  3. **Intento de Intrusión / URL Forzada (AC-09):** Escribir manualmente en la barra del navegador: `http://localhost:8000/inventory` o `http://localhost:8000/users` (bloqueo inmediato con 403) o `http://localhost:8000/dashboard` (redirección forzada automática a `/pos`).
+  4. **Resultado Observable:** Pantalla inmediata de **HTTP 403 Forbidden - Acceso Denegado** o redirección a su área de trabajo.
 * **Qué decir en vivo:**
-  * *"La seguridad no es cosmética. Aunque un atacante conozca la URL o intente inyectar JavaScript en el navegador, el `RoleMiddleware` en el servidor intercepta la solicitud antes de que toque la lógica de negocio o la base de datos."*
+  * *"La seguridad no es cosmética. Aunque un atacante conozca la URL o intente inyectar JavaScript en el navegador, el `RoleMiddleware` en el servidor intercepta la solicitud antes de que toque la lógica de negocio o la base de datos, y las rutas administrativas están totalmente vedadas para perfiles de cajero."*
 
 #### Slide 10: Auditoría de Inventario (Kardex - AC-07) y Borrado Lógico (Soft Deletes)
 * **Criterios Rúbrica S9:** *Comportamiento funcional comprometido (7 pts) y Manejo de errores/bordes (7 pts).*
@@ -157,9 +157,9 @@ Para garantizar fluidez y coordinación impecable (Criterio 16 de la Rúbrica):
 * **Criterio Rúbrica S9:** *Pruebas y evidencia de verificación (7 pts).*
 * **Documentos a Proyectar:**
   * Ejecución de tests en terminal: `php vendor/phpunit/phpunit/phpunit tests/Feature/MultiTenantSecurityTest.php tests/Feature/InventoryTest.php tests/Feature/POSTest.php tests/Feature/RoleSecurityTest.php`.
-  * Mostrar que corren **11 tests y 31 aserciones** en ~1.5 segundos con resultado **100% Passed**.
+  * Mostrar que corren **14 tests y 37 aserciones** en ~1.6 segundos con resultado **100% Passed**.
 * **Qué decir y argumentar:**
-  * *"El profesor nos indicó que en la primera entrega solo teníamos tests genéricos de autenticación. Hoy presentamos una suite automatizada robusta construida específicamente para nuestras reglas de negocio: control de roles (7 tests en `RoleSecurityTest.php`), auditoría de stock y Kardex (`InventoryTest.php`), prevención de stock negativo (`POSTest.php`) y aislamiento multi-tenant (`MultiTenantSecurityTest.php`). Toda la evidencia es reproducible en cualquier máquina."*
+  * *"El profesor nos indicó que en la primera entrega solo teníamos tests genéricos de autenticación. Hoy presentamos una suite automatizada robusta construida específicamente para nuestras reglas de negocio: control de roles (10 tests en `RoleSecurityTest.php`), auditoría de stock y Kardex (`InventoryTest.php`), prevención de stock negativo (`POSTest.php`) y aislamiento multi-tenant (`MultiTenantSecurityTest.php`). Toda la evidencia es reproducible en cualquier máquina."*
 
 #### Slide 12: Atributos de Calidad y Escenarios Medibles
 * **Criterio Rúbrica S9:** *Atributos de calidad y escenarios medibles (7 pts).*
@@ -222,8 +222,8 @@ La rúbrica evalúa a cada integrante de forma individual en:
   * *R:* *"Evita la ruptura de integridad referencial. Si hiciéramos un `DELETE` tradicional sobre un cajero que tiene registradas ventas en `ventas` o movimientos en `movimiento_stocks`, la base de datos rechazaría la consulta por restricción de llave foránea, o peor aún, si estuviera en cascada borraría el historial de ventas. `SoftDeletes` marca `deleted_at`, revocando el login pero manteniendo intacta la auditoría contable."*
 
 ### Alan Troncoso (QA y Calidad)
-* **P: ¿Cómo pasaron de tener 0 tests de negocio en la primera entrega a 11 tests automatizados hoy?**
-  * *R:* *"Estructuramos pruebas de integración en Laravel usando PHPUnit y `RefreshDatabase`. Diseñamos casos específicos para cada Criterio de Aceptación: probamos el camino feliz, las excepciones de stock 0, las restricciones de roles (403), el borrado lógico y el aislamiento multi-tenant, logrando una suite que se ejecuta en 1.5 segundos de forma totalmente reproducible."*
+* **P: ¿Cómo pasaron de tener 0 tests de negocio en la primera entrega a 14 tests automatizados hoy?**
+  * *R:* *"Estructuramos pruebas de integración en Laravel usando PHPUnit y `RefreshDatabase`. Diseñamos casos específicos para cada Criterio de Aceptación: probamos el camino feliz, las excepciones de stock 0, las restricciones de roles (403), el borrado lógico, el aislamiento multi-tenant y las protecciones y redirecciones de dashboard, logrando una suite que se ejecuta en 1.6 segundos de forma totalmente reproducible."*
 * **P: ¿Cómo midieron que el p95 realmente es menor a 1 segundo?**
   * *R:* *"Realizamos un perfilado de red en Chrome DevTools Network ejecutando 50 muestras de búsqueda de SKU y checkout con una base de datos poblada. La búsqueda arrojó un p95 de 120 ms y el cierre de venta 310 ms. Esto se debe a que React con Inertia no recarga el DOM completo y Laravel ejecuta consultas indexadas en milisegundos."*
 

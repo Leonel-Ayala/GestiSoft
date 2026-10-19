@@ -157,4 +157,48 @@ class RoleSecurityTest extends TestCase
             'deleted_at' => null,
         ]);
     }
+
+    public function test_cajero_que_intenta_acceder_a_dashboard_es_redirigido_a_pos()
+    {
+        $negocio = Negocio::create(['name' => 'Negocio Test']);
+        $cajero = User::factory()->cajero()->create([
+            'negocio_id' => $negocio->id,
+        ]);
+
+        $this->actingAs($cajero);
+
+        $response = $this->get('/dashboard');
+        $response->assertRedirect(route('pos.index'));
+    }
+
+    public function test_admin_puede_acceder_a_dashboard()
+    {
+        $negocio = Negocio::create(['name' => 'Negocio Test']);
+        $admin = User::factory()->create([
+            'negocio_id' => $negocio->id,
+            'role' => 'admin',
+        ]);
+
+        $this->actingAs($admin);
+
+        $response = $this->get('/dashboard');
+        $response->assertStatus(200);
+    }
+
+    public function test_login_de_cajero_redirige_a_pos()
+    {
+        $negocio = Negocio::create(['name' => 'Negocio Test']);
+        $cajero = User::factory()->cajero()->create([
+            'negocio_id' => $negocio->id,
+            'password' => \Illuminate\Support\Facades\Hash::make('password123'),
+        ]);
+
+        $response = $this->post('/login', [
+            'email' => $cajero->email,
+            'password' => 'password123',
+        ]);
+
+        $this->assertAuthenticated();
+        $response->assertRedirect(route('pos.index', absolute: false));
+    }
 }
