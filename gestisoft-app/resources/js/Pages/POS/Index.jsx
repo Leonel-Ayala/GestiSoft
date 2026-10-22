@@ -7,8 +7,33 @@ import Modal from '@/Components/Modal';
 export default function Index({ auth }) {
     const { props } = usePage();
     const { errors: pageErrors, flash } = props;
-    
-    const [cart, setCart] = useState([]);
+    // Clave de almacenamiento aislada por negocio y por usuario autenticado
+    const cartStorageKey = `gestisoft_pos_cart_${auth.user?.negocio_id || '0'}_${auth.user?.id || '0'}`;
+
+    // Inicializar el carrito desde localStorage para que persista al cambiar de página o navegar por el menú
+    const [cart, setCart] = useState(() => {
+        try {
+            const savedCart = localStorage.getItem(cartStorageKey);
+            return savedCart ? JSON.parse(savedCart) : [];
+        } catch (error) {
+            console.error('Error al recuperar el carrito desde localStorage:', error);
+            return [];
+        }
+    });
+
+    // Guardar el carrito automáticamente cada vez que cambie
+    useEffect(() => {
+        try {
+            if (cart.length > 0) {
+                localStorage.setItem(cartStorageKey, JSON.stringify(cart));
+            } else {
+                localStorage.removeItem(cartStorageKey);
+            }
+        } catch (error) {
+            console.error('Error al guardar el carrito en localStorage:', error);
+        }
+    }, [cart, cartStorageKey]);
+
     const [searchQuery, setSearchQuery] = useState('');
     const [searchResults, setSearchResults] = useState([]);
     const [isSearching, setIsSearching] = useState(false);
