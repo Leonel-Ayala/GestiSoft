@@ -68,6 +68,11 @@ class POSController extends Controller
                 // Bloqueo pesimista para evitar condiciones de carrera en el stock
                 $product = Product::where('id', $item['product_id'])->lockForUpdate()->first();
 
+                if (!$product) {
+                    $nombre = $item['name'] ?? 'solicitado';
+                    throw new \Exception("El producto '{$nombre}' ya no se encuentra disponible en el inventario.");
+                }
+
                 if ($product->stock < $item['quantity']) {
                     throw new \Exception("Stock insuficiente para el producto: {$product->name}");
                 }

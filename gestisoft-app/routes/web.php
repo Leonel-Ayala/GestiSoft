@@ -10,6 +10,9 @@ use Inertia\Inertia;
 Route::redirect('/', '/login');
 
 Route::get('/dashboard', function () {
+    if (auth()->check() && auth()->user()->role === 'cajero') {
+        return redirect()->route('pos.index');
+    }
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 

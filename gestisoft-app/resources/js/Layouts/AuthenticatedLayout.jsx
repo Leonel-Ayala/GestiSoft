@@ -24,14 +24,14 @@ export default function AuthenticatedLayout({ header, children }) {
                             </div>
 
                             <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                                <NavLink
-                                    href={route('dashboard')}
-                                    active={route().current('dashboard')}
-                                >
-                                    Dashboard
-                                </NavLink>
                                 {user.role === 'admin' && (
                                     <>
+                                        <NavLink
+                                            href={route('dashboard')}
+                                            active={route().current('dashboard')}
+                                        >
+                                            Dashboard
+                                        </NavLink>
                                         <NavLink
                                             href={route('inventory.index')}
                                             active={route().current('inventory.*')}
@@ -62,12 +62,20 @@ export default function AuthenticatedLayout({ header, children }) {
                                         <span className="inline-flex rounded-md">
                                             <button
                                                 type="button"
-                                                className="inline-flex items-center rounded-md border border-transparent bg-white px-3 py-2 text-sm font-medium leading-4 text-gray-500 transition duration-150 ease-in-out hover:text-gray-700 focus:outline-none"
+                                                className="inline-flex items-center gap-2.5 rounded-lg border border-gray-200/80 bg-white px-3 py-1.5 text-sm font-medium leading-4 text-gray-700 transition duration-150 ease-in-out hover:bg-gray-50 hover:border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500/20"
                                             >
-                                                {user.name}
+                                                <div className="w-7 h-7 rounded-full bg-indigo-50 border border-indigo-200/70 text-indigo-700 font-bold text-xs flex items-center justify-center shrink-0">
+                                                    {user.name.charAt(0).toUpperCase()}
+                                                </div>
+                                                <div className="flex flex-col text-left">
+                                                    <span className="font-semibold text-xs text-gray-800 leading-tight">{user.name}</span>
+                                                    <span className="text-[10px] font-medium text-gray-500 leading-tight">
+                                                        {user.role === 'admin' ? 'Administrador' : 'Cajero'}
+                                                    </span>
+                                                </div>
 
                                                 <svg
-                                                    className="-me-0.5 ms-2 h-4 w-4"
+                                                    className="-me-0.5 ms-1 h-3.5 w-3.5 text-gray-400"
                                                     xmlns="http://www.w3.org/2000/svg"
                                                     viewBox="0 0 20 20"
                                                     fill="currentColor"
@@ -86,14 +94,14 @@ export default function AuthenticatedLayout({ header, children }) {
                                         <Dropdown.Link
                                             href={route('profile.edit')}
                                         >
-                                            Profile
+                                            Mi Perfil
                                         </Dropdown.Link>
                                         <Dropdown.Link
                                             href={route('logout')}
                                             method="post"
                                             as="button"
                                         >
-                                            Log Out
+                                            Cerrar Sesión
                                         </Dropdown.Link>
                                     </Dropdown.Content>
                                 </Dropdown>
@@ -150,14 +158,14 @@ export default function AuthenticatedLayout({ header, children }) {
                     }
                 >
                     <div className="space-y-1 pb-3 pt-2">
-                        <ResponsiveNavLink
-                            href={route('dashboard')}
-                            active={route().current('dashboard')}
-                        >
-                            Dashboard
-                        </ResponsiveNavLink>
                         {user.role === 'admin' && (
                             <>
+                                <ResponsiveNavLink
+                                    href={route('dashboard')}
+                                    active={route().current('dashboard')}
+                                >
+                                    Dashboard
+                                </ResponsiveNavLink>
                                 <ResponsiveNavLink
                                     href={route('inventory.index')}
                                     active={route().current('inventory.*')}
@@ -180,26 +188,31 @@ export default function AuthenticatedLayout({ header, children }) {
                         </ResponsiveNavLink>
                     </div>
 
-                    <div className="border-t border-gray-200 pb-1 pt-4">
-                        <div className="px-4">
-                            <div className="text-base font-medium text-gray-800">
-                                {user.name}
+                    <div className="border-t border-gray-200 pb-2 pt-4">
+                        <div className="px-4 flex items-center gap-3">
+                            <div className="w-10 h-10 rounded-full bg-indigo-50 border border-indigo-200/70 text-indigo-700 font-bold text-sm flex items-center justify-center shrink-0">
+                                {user.name.charAt(0).toUpperCase()}
                             </div>
-                            <div className="text-sm font-medium text-gray-500">
-                                {user.email}
+                            <div>
+                                <div className="text-base font-semibold text-gray-800">
+                                    {user.name}
+                                </div>
+                                <div className="text-xs text-gray-500">
+                                    {user.role === 'admin' ? 'Administrador' : 'Cajero'} · {user.email}
+                                </div>
                             </div>
                         </div>
 
                         <div className="mt-3 space-y-1">
                             <ResponsiveNavLink href={route('profile.edit')}>
-                                Profile
+                                Mi Perfil
                             </ResponsiveNavLink>
                             <ResponsiveNavLink
                                 method="post"
                                 href={route('logout')}
                                 as="button"
                             >
-                                Log Out
+                                Cerrar Sesión
                             </ResponsiveNavLink>
                         </div>
                     </div>

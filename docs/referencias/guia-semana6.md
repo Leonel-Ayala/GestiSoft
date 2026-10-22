@@ -223,7 +223,7 @@ La Semana 6 transforma la retroalimentación de la primera defensa en un objetiv
 | Rodrigo Bertolini | Refinamiento de Backlog y Trazabilidad de Reorientación. | Priorización de PBI-04 sobre PBI-03/PBI-05 basada en feedback y reducción de riesgo. | `guia-semana6.md`, `traceability.csv`, `PBI-04.md`. | Justificar postergaciones basándose en capacidad y riesgo de seguridad. |
 | Luis Barrios | Arquitectura de Middleware y Configuración de Rutas de Seguridad. | Protección kernel HTTP (`RoleMiddleware`) y diseño de contratos para el Incremento 1. | `RoleMiddleware.php`, `bootstrap/app.php`, `routes/web.php`. | Diseñar seguridad estricta en el backend sin depender de cosmética visual. |
 | Leonel Ayala | Desarrollo Fullstack de PBI-04 y SoftDeletes. | Implementación de `UserController`, vistas React condicionales y migración de SoftDeletes. | `UserController.php`, `Users/Index.jsx`, migración `deleted_at`. | Dominio de arquitectura de datos, Eloquent SoftDeletes y paso de sesión con Inertia. |
-| Alan Troncoso | Suite de Pruebas Automatizadas y Reporte de Mediciones. | Creación de `RoleSecurityTest.php` (7 tests) y tablas empíricas de p95 y accesibilidad. | `RoleSecurityTest.php`, `mediciones-calidad.md`. | Validación empírica reproducible de atributos de calidad y criterios de aceptación. |
+| Alan Troncoso | Suite de Pruebas Automatizadas y Reporte de Mediciones. | Creación de `RoleSecurityTest.php` (10 tests) y tablas empíricas de p95 y accesibilidad. | `RoleSecurityTest.php`, `mediciones-calidad.md`. | Validación empírica reproducible de atributos de calidad y criterios de aceptación. |
 
 ---
 

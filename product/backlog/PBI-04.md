@@ -11,15 +11,17 @@
 - **Incluye:** 
   - CRUD básico de cuentas de usuario dentro del tenant.
   - Asignación de rol "Administrador" o "Cajero".
-  - Protección y bloqueo de rutas críticas (Inventario, Reportes, Cierre) para el rol "Cajero".
+  - Protección y bloqueo de rutas críticas (Inventario, Reportes, Usuarios, Dashboard) para el rol "Cajero".
+  - Redirección automática de cajeros hacia `/pos` al intentar acceder al Dashboard o iniciar sesión.
+  - Optimización de interfaces (UI/UX) con badges de rol, atajos de teclado visuales, accesibilidad y números tabulares.
 - **No Incluye:** 
   - Recuperación de contraseñas olvidadas por correo electrónico.
 
 ## 3. Requisitos y Aceptación
-- **Requisitos Satisfechos:** RF-10, RF-11, RNF-SEC-01 (parcialmente)
+- **Requisitos Satisfechos:** RF-10, RF-11, RNF-SEC-01, RNF-SEC-02, RNF-ACC-02
 - **Criterios de Aceptación:** AC-08 (Normal), AC-09 (Seguridad/Límite), AC-12 (Ocultamiento en DOM).
-- **Pruebas Automatizadas:** `tests/Feature/RoleSecurityTest.php` (7 tests).
-- **Mecanismos Clave:** `RoleMiddleware` (kernel HTTP), inyección de sesión en `HandleInertiaRequests`, y `SoftDeletes` en el modelo `User`.
+- **Pruebas Automatizadas:** `tests/Feature/RoleSecurityTest.php` (10 tests).
+- **Mecanismos Clave:** `RoleMiddleware` (kernel HTTP), redirecciones de ruta en `web.php` y `AuthenticatedSessionController`, inyección de sesión en `HandleInertiaRequests`, y `SoftDeletes` en el modelo `User`.
 - **Estado Actual:** Completado e integrado en el Incremento Funcional 1 (Semanas 6-9).
 
 ## 4. Justificación de Priorización (Criterios Rúbrica)
