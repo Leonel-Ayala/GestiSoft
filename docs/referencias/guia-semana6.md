@@ -113,6 +113,17 @@ La Semana 6 transforma la retroalimentación de la primera defensa en un objetiv
 | Sistema GestiSoft | Sistema Web SPA | Procesa transacciones, aísla multi-tenant, bloquea accesos no autorizados. | Aplicación Laravel 11 + React / Inertia. |
 | Base de Datos MySQL | Persistencia | Almacena productos, usuarios con roles, transacciones y movimientos. | Aislamiento por `negocio_id` con SoftDeletes. |
 
+```mermaid
+C4Context
+  title Diagrama de Contexto de Sistema - GestiSoft
+  Person(admin, "Dueño (Admin)", "Gestiona el negocio, inventario y empleados")
+  Person(cajero, "Cajero (Empleado)", "Atiende el mostrador velozmente")
+  System(gestisoft, "GestiSoft (SaaS)", "Plataforma de POS e Inventario Multi-Tenant con roles")
+  
+  Rel(admin, gestisoft, "Administra y opera")
+  Rel(cajero, gestisoft, "Vende usando el POS")
+```
+
 ---
 
 ### 11. Contenedores y responsabilidades
