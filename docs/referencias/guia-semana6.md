@@ -1,21 +1,21 @@
 # GUÍA DE TRABAJO EN EQUIPO - Semana 6
 ## Reorientar y diseñar el incremento funcional 1
 
-**RESULTADO:** Arquitectura y plan del Incremento 1[cite: 11]
-**ENTRADA:** Primera demostración y defensa[cite: 11]
-**DEFENSA:** Semana 10[cite: 11]
+**RESULTADO:** Arquitectura y plan del Incremento 1
+**ENTRADA:** Primera demostración y defensa
+**DEFENSA:** Semana 10
 
 ---
 
 ### 1. Propósito y resultados esperados
-La Semana 6 transforma la retroalimentación de la primera defensa en un objetivo de incremento, una arquitectura suficiente para construirlo y un plan verificable para las semanas 7 a 9[cite: 11].
+La Semana 6 transforma la retroalimentación de la primera defensa en un objetivo de incremento, una arquitectura suficiente para construirlo y un plan verificable para las semanas 7 a 9.
 
 | Elemento | Definición de trabajo |
 | :--- | :--- |
-| **Aprender** | Convertir observaciones de la defensa en decisiones y acciones trazables[cite: 11]. |
-| **Enfocar** | Definir el resultado, la hipótesis de valor, el flujo prioritario y los límites[cite: 11]. |
-| **Diseñar** | Asignar responsabilidades a componentes, contratos y datos según drivers reales[cite: 11]. |
-| **Planificar** | Ordenar PBIs, riesgos, spikes, revisiones y evidencia para las semanas 7 a 9[cite: 11]. |
+| **Aprender** | Convertir observaciones de la defensa en decisiones y acciones trazables. |
+| **Enfocar** | Definir el resultado, la hipótesis de valor, el flujo prioritario y los límites. |
+| **Diseñar** | Asignar responsabilidades a componentes, contratos y datos según drivers reales. |
+| **Planificar** | Ordenar PBIs, riesgos, spikes, revisiones y evidencia para las semanas 7 a 9. |
 
 ---
 
