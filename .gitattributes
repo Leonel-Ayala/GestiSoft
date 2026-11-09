@@ -1,0 +1,6 @@
+# Configuración global de Git y GitHub Linguist para GestiSoft
+* text=auto eol=lf
+
+# Excluir herramientas auxiliares de agentes de las estadísticas de lenguajes de GitHub
+gestisoft-app/.agents/** linguist-vendored
+gestisoft-app/.agents/** linguist-detectable=false

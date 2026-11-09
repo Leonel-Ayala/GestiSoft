@@ -9,3 +9,8 @@
 /.github export-ignore
 CHANGELOG.md export-ignore
 .styleci.yml export-ignore
+
+# Excluir herramientas auxiliares de agentes de las estadísticas de lenguajes de GitHub
+.agents/** linguist-vendored
+.agents/** linguist-detectable=false
+
