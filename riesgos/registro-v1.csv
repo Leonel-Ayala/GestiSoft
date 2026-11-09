@@ -1,0 +1,8 @@
+ID,Categoria,Descripcion_Riesgo,Probabilidad,Impacto,Nivel_Riesgo,Estrategia,Accion_Mitigacion_o_Contingencia,Responsable,Estado
+RSK-01,Tecnico,Filtracion o cruce de informacion entre comercios al compartir una sola base de datos (Multi-Tenant),Media,Critico,Alto,Mitigar,Implementar Trait HasNegocio con Global Scope en Eloquent y pruebas de integracion MultiTenantSecurityTest,Leonel Ayala,Mitigado
+RSK-02,Usabilidad,Perdida de foco del teclado o lentitud al mostrar alertas durante horas punta de atencion en el POS,Alta,Alto,Alto,Mitigar,Manejo de autofocus persistente en React/Inertia y atajos de teclado globales F4 F8 y Esc sin tocar el mouse,Luis Barrios,Mitigado
+RSK-03,Seguridad,Desconfianza del comerciante de que otros locales o competidores vean sus ventas o catalogo en la nube,Alta,Critico,Alto,Evitar,Aislamiento forzado por negocio_id a nivel de servidor y cifrado de credenciales con Bcrypt,Rodrigo Bertolini,Mitigado
+RSK-04,Seguridad,Ocultar botones en React pero olvidar proteger los endpoints en el servidor (Falso aislamiento visual),Media,Critico,Alto,Mitigar,Aplicar RoleMiddleware en rutas de Laravel bloqueando peticiones no autorizadas con HTTP 403 Forbidden,Alan Troncoso,Mitigado
+RSK-05,Operativo,Un administrador edita su propio rol o elimina su propia cuenta quedando bloqueado del sistema,Media,Alto,Medio,Evitar,Validacion en UserController que impide la auto-eliminacion del usuario con sesion activa,Luis Barrios,Mitigado
+RSK-06,Rendimiento,Degradacion de los tiempos de respuesta del buscador del POS ante catalogos grandes (violando RNF-PERF-01),Media,Alto,Medio,Mitigar,Limitar busquedas reactivas a 10 resultados e indexar por SKU en la base de datos,Leonel Ayala,Controlado
+
