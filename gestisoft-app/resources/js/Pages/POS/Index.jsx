@@ -1,7 +1,7 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, router, usePage } from '@inertiajs/react';
 import { useState, useRef, useEffect } from 'react';
-import axios from 'axios'; 
+import axios from 'axios';
 import Modal from '@/Components/Modal';
 
 export default function Index({ auth }) {
@@ -40,7 +40,7 @@ export default function Index({ auth }) {
     const [checkoutProcessing, setCheckoutProcessing] = useState(false);
     const [errorMsg, setErrorMsg] = useState(pageErrors?.checkout || null);
     const [successMsg, setSuccessMsg] = useState(flash?.success || null);
-    
+
     const searchInputRef = useRef(null);
     const searchContainerRef = useRef(null); // Ref para detectar clics fuera del buscador
 
@@ -103,7 +103,6 @@ export default function Index({ auth }) {
     }, []);
 
     const totalCart = cart.reduce((acc, item) => acc + (item.price * item.quantity), 0);
-    // En Chile, el precio suele incluir el IVA (19%). Calculamos el Neto y el IVA a partir del Total Bruto.
     const ivaRate = 0.19;
     const neto = Math.round(totalCart / (1 + ivaRate));
     const iva = totalCart - neto;
@@ -167,7 +166,7 @@ export default function Index({ auth }) {
                 max_stock: product.stock
             }];
         });
-        
+
         setSearchQuery('');
         setSearchResults([]);
     };
@@ -190,7 +189,7 @@ export default function Index({ auth }) {
 
     const handleCheckout = () => {
         if (cart.length === 0) return;
-        
+
         if (paymentMethod === 'Efectivo') {
             if (!amountReceived || parseInt(amountReceived) < totalCart) {
                 setErrorMsg('El monto recibido debe ser mayor o igual al total a pagar.');
@@ -200,7 +199,7 @@ export default function Index({ auth }) {
 
         setCheckoutProcessing(true);
         setErrorMsg(null);
-        
+
         router.post(route('pos.checkout'), {
             items: cart,
             total: totalCart,
@@ -227,12 +226,12 @@ export default function Index({ auth }) {
 
             <div className="py-8 bg-gray-50 min-h-screen">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    
+
                     {/* Alertas Accesibles y Modernas (Screen Readers + High Contrast) */}
                     {errorMsg && (
-                        <div 
-                            aria-live="assertive" 
-                            className="mb-6 bg-red-50/90 border border-red-200 text-red-900 px-4 py-3.5 rounded-xl shadow-xs flex items-center justify-between gap-3 animate-shake" 
+                        <div
+                            aria-live="assertive"
+                            className="mb-6 bg-red-50/90 border border-red-200 text-red-900 px-4 py-3.5 rounded-xl shadow-xs flex items-center justify-between gap-3 animate-shake"
                             role="alert"
                         >
                             <div className="flex items-center gap-3">
@@ -246,7 +245,7 @@ export default function Index({ auth }) {
                                     <p className="text-sm text-red-700">{errorMsg}</p>
                                 </div>
                             </div>
-                            <button 
+                            <button
                                 onClick={() => setErrorMsg(null)}
                                 className="text-red-400 hover:text-red-700 p-1.5 rounded-lg hover:bg-red-100/50 transition-colors"
                                 aria-label="Cerrar notificación de error"
@@ -258,9 +257,9 @@ export default function Index({ auth }) {
                         </div>
                     )}
                     {successMsg && (
-                        <div 
-                            aria-live="polite" 
-                            className="mb-6 bg-emerald-50/90 border border-emerald-200 text-emerald-900 px-4 py-3.5 rounded-xl shadow-xs flex items-center justify-between gap-3" 
+                        <div
+                            aria-live="polite"
+                            className="mb-6 bg-emerald-50/90 border border-emerald-200 text-emerald-900 px-4 py-3.5 rounded-xl shadow-xs flex items-center justify-between gap-3"
                             role="alert"
                         >
                             <div className="flex items-center gap-3">
@@ -274,7 +273,7 @@ export default function Index({ auth }) {
                                     <p className="text-sm text-emerald-700">{successMsg}</p>
                                 </div>
                             </div>
-                            <button 
+                            <button
                                 onClick={() => setSuccessMsg(null)}
                                 className="text-emerald-500 hover:text-emerald-800 p-1.5 rounded-lg hover:bg-emerald-100/50 transition-colors"
                                 aria-label="Cerrar notificación de éxito"
@@ -287,12 +286,12 @@ export default function Index({ auth }) {
                     )}
 
                     <div className="flex flex-col lg:flex-row gap-6">
-                        
+
                         {/* Columna Izquierda: Buscador y Carrito */}
                         <div className="w-full lg:w-2/3 flex flex-col gap-6">
-                            
+
                             {/* Panel Buscador Ergonómico */}
-                            <div 
+                            <div
                                 ref={searchContainerRef}
                                 className="bg-white p-4 sm:p-5 rounded-2xl shadow-xs border border-gray-200/80 relative"
                             >
@@ -331,7 +330,7 @@ export default function Index({ auth }) {
                                                 Resultados de búsqueda ({searchResults.length})
                                             </div>
                                             {searchResults.map(prod => (
-                                                <button 
+                                                <button
                                                     key={prod.id}
                                                     onClick={() => addToCart(prod)}
                                                     className="w-full text-left px-3.5 py-3 hover:bg-indigo-50/60 rounded-lg flex justify-between items-center transition-colors group"
@@ -343,11 +342,10 @@ export default function Index({ auth }) {
                                                         <div className="text-xs text-gray-500 flex items-center gap-2 mt-0.5">
                                                             <span className="font-mono">SKU: {prod.sku}</span>
                                                             <span>•</span>
-                                                            <span className={`inline-flex items-center px-1.5 py-0.5 rounded text-[11px] font-semibold ${
-                                                                prod.stock > 0 
-                                                                    ? 'bg-emerald-50 text-emerald-700' 
+                                                            <span className={`inline-flex items-center px-1.5 py-0.5 rounded text-[11px] font-semibold ${prod.stock > 0
+                                                                    ? 'bg-emerald-50 text-emerald-700'
                                                                     : 'bg-red-50 text-red-700'
-                                                            }`}>
+                                                                }`}>
                                                                 {prod.stock > 0 ? `Stock: ${prod.stock}` : 'Agotado'}
                                                             </span>
                                                         </div>
@@ -374,7 +372,7 @@ export default function Index({ auth }) {
                                         )}
                                     </h3>
                                     {cart.length > 0 && (
-                                        <button 
+                                        <button
                                             onClick={() => setCart([])}
                                             className="text-xs text-gray-400 hover:text-red-600 transition-colors font-medium"
                                         >
@@ -412,7 +410,7 @@ export default function Index({ auth }) {
                                                         ${item.subtotal.toLocaleString('es-CL')}
                                                     </td>
                                                     <td className="px-4 py-3.5 whitespace-nowrap text-right">
-                                                        <button 
+                                                        <button
                                                             onClick={() => removeFromCart(item.product_id)}
                                                             className="text-gray-400 hover:text-red-600 hover:bg-red-50 p-1.5 rounded-lg transition-colors"
                                                             title="Eliminar del carrito"
@@ -455,7 +453,7 @@ export default function Index({ auth }) {
                                     <h3 className="text-gray-500 text-xs font-bold uppercase tracking-wider mb-5">
                                         Resumen de la Transacción
                                     </h3>
-                                    
+
                                     <div className="space-y-3 mb-6 text-sm">
                                         <div className="flex justify-between items-center text-gray-600">
                                             <span>Unidades totales</span>
@@ -493,11 +491,10 @@ export default function Index({ auth }) {
                                     <button
                                         onClick={openPaymentModal}
                                         disabled={cart.length === 0}
-                                        className={`w-full py-4 rounded-xl font-bold text-lg flex items-center justify-center gap-2.5 transition-all duration-200 ${
-                                            cart.length === 0 
-                                            ? 'bg-gray-100 text-gray-400 cursor-not-allowed' 
-                                            : 'bg-indigo-600 text-white hover:bg-indigo-700 shadow-sm hover:shadow-md active:scale-[0.99]'
-                                        }`}
+                                        className={`w-full py-4 rounded-xl font-bold text-lg flex items-center justify-center gap-2.5 transition-all duration-200 ${cart.length === 0
+                                                ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                                                : 'bg-indigo-600 text-white hover:bg-indigo-700 shadow-sm hover:shadow-md active:scale-[0.99]'
+                                            }`}
                                     >
                                         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" />
@@ -534,12 +531,12 @@ export default function Index({ auth }) {
                             ${totalCart.toLocaleString('es-CL')}
                         </span>
                     </div>
-                    
+
                     <div className="mb-5">
                         <label className="block text-xs font-bold uppercase tracking-wider text-gray-600 mb-2">
                             Método de Pago
                         </label>
-                        <select 
+                        <select
                             className="w-full border-gray-200 rounded-xl shadow-xs focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500 text-sm font-medium py-2.5"
                             value={paymentMethod}
                             onChange={(e) => setPaymentMethod(e.target.value)}
@@ -590,7 +587,7 @@ export default function Index({ auth }) {
                                     </button>
                                 ))}
                             </div>
-                            
+
                             <div className="mt-4 pt-3 border-t border-gray-200/60 flex justify-between items-center text-sm">
                                 <span className="text-gray-600 font-medium">Vuelto a entregar:</span>
                                 <span className={`text-xl font-black tabular-nums ${change > 0 ? 'text-emerald-600' : 'text-gray-900'}`}>
@@ -612,11 +609,10 @@ export default function Index({ auth }) {
                             type="button"
                             onClick={handleCheckout}
                             disabled={checkoutProcessing || (paymentMethod === 'Efectivo' && (!amountReceived || parseInt(amountReceived) < totalCart))}
-                            className={`w-2/3 py-3 rounded-xl font-bold text-white flex justify-center items-center gap-2 transition-all duration-200 text-sm ${
-                                checkoutProcessing || (paymentMethod === 'Efectivo' && (!amountReceived || parseInt(amountReceived) < totalCart))
-                                ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
-                                : 'bg-indigo-600 hover:bg-indigo-700 shadow-sm hover:shadow'
-                            }`}
+                            className={`w-2/3 py-3 rounded-xl font-bold text-white flex justify-center items-center gap-2 transition-all duration-200 text-sm ${checkoutProcessing || (paymentMethod === 'Efectivo' && (!amountReceived || parseInt(amountReceived) < totalCart))
+                                    ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                                    : 'bg-indigo-600 hover:bg-indigo-700 shadow-sm hover:shadow'
+                                }`}
                         >
                             {checkoutProcessing ? 'Procesando venta...' : 'Confirmar Venta'}
                         </button>

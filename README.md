@@ -1,50 +1,121 @@
-# GestiSoft - SaaS POS & Inventory Management
+# GestiSoft - Sistema SaaS de Punto de Venta (POS) e Inventario
 
-GestiSoft es una plataforma SaaS (Software as a Service) multi-inquilino diseñada para agilizar la operación comercial de pymes de retail. Su objetivo principal es centralizar la gestión de inventario y acelerar el proceso de ventas en el mostrador mediante una interfaz optimizada.
+GestiSoft es una plataforma SaaS (*Software as a Service*) multi-inquilino (*multi-tenant*) diseñada para agilizar la operación comercial de PYMEs y comercios del sector retail. Su objetivo principal es centralizar la gestión de inventario, controlar los roles de acceso y acelerar el proceso de ventas en mostrador mediante una interfaz reactiva operable 100% por teclado.
 
-## Características del Sistema (Incremento Funcional 1 - Semana 9)
+---
 
-*   **Aislamiento Multi-Tenant:** Arquitectura segura (Single-Database) mediante Global Scopes en Eloquent que garantiza que los datos, usuarios y productos de cada pyme estén estrictamente aislados.
-*   **Gestión de Empleados y Roles (RBAC - PBI-04):** Separación estricta de perfiles (`Administrador` y `Cajero`). Los cajeros operan exclusivamente la terminal de venta (POS) y son redirigidos automáticamente si intentan acceder al Dashboard o módulos administrativos (HTTP 403 / Redirección forzada).
-*   **Gestión de Inventario y Kardex:** CRUD para el registro de SKUs, precios y control de stock con auditoría obligatoria de movimientos (motivo de mermas, deterioros y ajustes).
-*   **Borrado Lógico (*Soft Deletes*):** Protección de integridad referencial histórica; la eliminación de un empleado deshabilita su acceso sin destruir el historial contable de sus ventas.
-*   **Punto de Venta (POS) Ágil y Accesible:** Interfaz reactiva operada 100% mediante atajos de teclado (`[F4]` buscar, `[F8]` cobrar, `[Esc]` cancelar), alertas accesibles, desglose de IVA y validación de stock en tiempo real.
-*   **Suite de Pruebas Automatizadas:** Batería de 14 tests de integración y 37 aserciones con PHPUnit (`MultiTenantSecurityTest`, `InventoryTest`, `POSTest`, `RoleSecurityTest`).
+## Características del Sistema (Incremento Funcional 1)
 
-## Pila Tecnológica (Tech Stack)
+* **Aislamiento Multi-Tenant Estricto:** Arquitectura segura (*Single-Database*) mediante *Global Scopes* en Eloquent (Trait `HasNegocio`) que garantiza que los datos, usuarios, inventarios y ventas de cada comercio estén estrictamente aislados y privados.
+* **Gestión de Empleados y Roles (RBAC - PBI-04):** Separación estricta de perfiles (`Administrador` y `Cajero`). Los cajeros operan exclusivamente la terminal de venta (POS) y son bloqueados con código `HTTP 403 Forbidden` o redirigidos si intentan acceder a inventarios o usuarios.
+* **Control de Inventario y Kardex:** CRUD para el registro de SKUs, precios y existencias con auditoría obligatoria de movimientos de stock (justificación de mermas, deterioros y ajustes manuales).
+* **Integridad y Borrado Lógico (*Soft Deletes*):** La desvinculación de un empleado inhabilita su acceso sin destruir el historial contable ni los registros de sus ventas pasadas.
+* **Punto de Venta (POS) Ultrarrápido y Accesible:** Interfaz reactiva operada mediante atajos de teclado (`[F4]` buscar producto, `[F8]` cobrar, `[Esc]` cancelar), cálculo automático de IVA (19%), cálculo instantáneo de vuelto en efectivo y persistencia de carrito en `localStorage` ante cambios de página.
+* **Suite de Pruebas Automatizadas:** Batería de pruebas de integración con PHPUnit (`MultiTenantSecurityTest`, `InventoryTest`, `POSTest`, `RoleSecurityTest`) que garantizan el cumplimiento de las reglas de negocio y seguridad.
 
-*   **Backend:** Laravel 11 (PHP)
-*   **Frontend:** React.js integrado mediante Inertia.js
-*   **Estilos:** Tailwind CSS
-*   **Base de Datos:** MySQL / PostgreSQL
+---
+
+## Pila Tecnológica
+
+* **Backend:** Laravel 11 (PHP 8.2+)
+* **Frontend:** React 18 integrado de forma monolítica mediante Inertia.js
+* **Estilos y Diseño:** Tailwind CSS
+* **Base de Datos:** MySQL / MariaDB (InnoDB)
+* **Empaquetador:** Vite
+
+---
+
+## Estructura del Repositorio
+
+```text
+GestiSoft/
+├── bitacoras/          # Registros individuales de trabajo del equipo por semana
+├── docs/               # Acuerdos de equipo, referencias externas y manuales
+│   └── assets/         # Recursos visuales y logos del proyecto (branding)
+├── gestisoft-app/      # Código fuente de la aplicación web (Laravel + React)
+├── investigacion/      # Descubrimiento, síntesis de necesidades y entrevistas anonimizadas
+├── producto/           # Backlog (PBIs, SPIKEs), visión, planes de incremento y trazabilidad
+│   ├── backlog/        # Definición de ítems del Product Backlog (PBI-01 a PBI-05, SPIKEs)
+│   ├── semana-3/       # Requisitos, glosario, matriz de trazabilidad y criterios de aceptación
+│   └── semana-6/       # Plan de arquitectura e incremento funcional 1
+└── riesgos/            # Matriz y registro formal de riesgos del proyecto
+```
+
+---
 
 ## Requisitos Previos
 
-*   PHP >= 8.2
-*   Composer
-*   Node.js & npm
-*   Base de datos configurada (MySQL/PostgreSQL)
+* PHP >= 8.2 (con extensiones `pdo_mysql`, `mbstring`, `openssl`, `bcmath`)
+* Composer
+* Node.js (v18+) & npm
+* Servidor MySQL activo (ej. Laragon, XAMPP o servicio local en puerto 3306)
 
-## Instalación y Configuración Local
+---
 
-1. Clona este repositorio:
-   `git clone https://github.com/Leonel-Ayala/GestiSoft.git`
-2. Entra a la carpeta del proyecto (¡Importante!):
-   `cd gestisoft-app`
-3. Instala las dependencias de PHP:
-   `composer install`
-4. Instala las dependencias de Node:
-   `npm install`
-5. Configura tu entorno:
-   * Copia el archivo `.env.example` a `.env`.
-   * Actualiza las credenciales de tu base de datos en el archivo `.env`.
-6. Genera la llave de la aplicación:
-   `php artisan key:generate`
-7. Ejecuta las migraciones y seeders (Carga de datos y Tenants de prueba):
-   `php artisan migrate --seed`
-8. Compila los assets del frontend y levanta el servidor local:
-   `npm run dev`
-   `php artisan serve`
+## Instalación y Puesta en Marcha Local
 
-## Documentación del Proyecto
-Toda la documentación de requerimientos, historias de usuario, PBIs y matrices de trazabilidad se encuentra en la carpeta `/product`.
+1. **Clonar el repositorio:**
+   ```bash
+   git clone https://github.com/Leonel-Ayala/GestiSoft.git
+   ```
+
+2. **Entrar al directorio de la aplicación:**
+   ```bash
+   cd GestiSoft/gestisoft-app
+   ```
+
+3. **Instalar dependencias del Backend:**
+   ```bash
+   composer install
+   ```
+
+4. **Instalar dependencias del Frontend:**
+   ```bash
+   npm install
+   ```
+
+5. **Configurar variables de entorno:**
+   * Copiar `.env.example` a `.env`:
+     ```bash
+     copy .env.example .env
+     ```
+   * Asegurar las credenciales de base de datos en `.env`:
+     ```ini
+     DB_CONNECTION=mysql
+     DB_HOST=127.0.0.1
+     DB_PORT=3306
+     DB_DATABASE=gestisoft
+     DB_USERNAME=root
+     DB_PASSWORD=
+     ```
+
+6. **Generar la clave de la aplicación:**
+   ```bash
+   php artisan key:generate
+   ```
+
+7. **Ejecutar migraciones y poblar datos de prueba (Seeders temáticos):**
+   ```bash
+   php artisan migrate --seed
+   ```
+   *(Carga automáticamente 5 comercios temáticos: Ropa, Pokémon TCG, Heladería, Comida Rápida y Abarrotes con sus administradores y 10 productos cada uno).*
+
+8. **Compilar el frontend y levantar el servidor:**
+   * En una terminal:
+     ```bash
+     npm run dev
+     ```
+   * En otra terminal:
+     ```bash
+     php artisan serve
+     ```
+   * Abrir en el navegador: `http://localhost:8000`
+
+---
+
+## Equipo de Desarrollo
+
+* **Rodrigo Bertolini** — *Product Owner*
+* **Alan Troncoso** — *Scrum Master & QA Lead*
+* **Luis Barrios** — *Fullstack & UI/UX Lead*
+* **Leonel Ayala** — *Fullstack & Backend/DB Lead*

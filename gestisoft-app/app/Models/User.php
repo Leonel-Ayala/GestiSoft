@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 #[Fillable(['name', 'email', 'password','negocio_id', 'role'])]
@@ -32,8 +33,13 @@ class User extends Authenticatable
         ];
     }
 
-    public function negocio()
+    public function negocio(): BelongsTo
     {
         return $this->belongsTo(Negocio::class);
+    }
+
+    public function turnosCaja(): HasMany
+    {
+        return $this->hasMany(TurnoCaja::class);
     }
 }
