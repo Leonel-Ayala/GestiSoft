@@ -20,6 +20,8 @@ class TurnoCaja extends Model
         'estado',
         'monto_inicial',
         'monto_ventas_efectivo',
+        'monto_ventas_debito',
+        'monto_ventas_credito',
         'monto_ventas_tarjeta',
         'monto_ventas_transferencia',
         'total_esperado',
@@ -37,6 +39,8 @@ class TurnoCaja extends Model
             'fecha_cierre' => 'datetime',
             'monto_inicial' => 'integer',
             'monto_ventas_efectivo' => 'integer',
+            'monto_ventas_debito' => 'integer',
+            'monto_ventas_credito' => 'integer',
             'monto_ventas_tarjeta' => 'integer',
             'monto_ventas_transferencia' => 'integer',
             'total_esperado' => 'integer',
@@ -68,13 +72,33 @@ class TurnoCaja extends Model
      */
     public function sincronizarTotales(): void
     {
-        $ventasEfectivo = $this->ventas()->where('payment_method', 'Efectivo')->sum('total');
-        $ventasTarjeta = $this->ventas()->whereIn('payment_method', ['Tarjeta', 'Débito', 'Crédito'])->sum('total');
-        $ventasTransferencia = $this->ventas()->where('payment_method', 'Transferencia')->sum('total');
+        $ventasEfectivo = (int) $this->ventas()
+            ->whereIn('payment_method', ['Efectivo', 'efectivo', 'cash'])
+            ->sum('total');
+
+        $ventasDebito = (int) $this->ventas()
+            ->whereIn('payment_method', ['Débito', 'Debito', 'debito', 'debit'])
+            ->sum('total');
+
+        $ventasCredito = (int) $this->ventas()
+            ->whereIn('payment_method', ['Crédito', 'Credito', 'credito', 'credit'])
+            ->sum('total');
+
+        $ventasTransferencia = (int) $this->ventas()
+            ->whereIn('payment_method', ['Transferencia', 'transferencia', 'transfer'])
+            ->sum('total');
+
+        $ventasTarjetaLegacy = (int) $this->ventas()
+            ->whereIn('payment_method', ['Tarjeta', 'tarjeta', 'card'])
+            ->sum('total');
+
+        $ventasTarjetaTotal = $ventasDebito + $ventasCredito + $ventasTarjetaLegacy;
 
         $this->update([
             'monto_ventas_efectivo' => $ventasEfectivo,
-            'monto_ventas_tarjeta' => $ventasTarjeta,
+            'monto_ventas_debito' => $ventasDebito,
+            'monto_ventas_credito' => $ventasCredito,
+            'monto_ventas_tarjeta' => $ventasTarjetaTotal,
             'monto_ventas_transferencia' => $ventasTransferencia,
             'total_esperado' => $this->monto_inicial + $ventasEfectivo,
         ]);
