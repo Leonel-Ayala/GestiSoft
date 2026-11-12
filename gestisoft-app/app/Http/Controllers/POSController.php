@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\TurnoCaja;
 use App\Models\Venta;
 use App\Models\VentaDetalle;
 use Illuminate\Http\Request;
@@ -13,7 +14,24 @@ class POSController extends Controller
 {
     public function index()
     {
-        return Inertia::render('POS/Index');
+        $turno = TurnoCaja::abierto()
+            ->where('user_id', auth()->id())
+            ->first();
+
+        return Inertia::render('POS/Index', [
+            'turnoActivo' => $turno ? [
+                'id' => $turno->id,
+                'monto_inicial' => $turno->monto_inicial,
+                'fecha_apertura' => $turno->fecha_apertura ? $turno->fecha_apertura->format('H:i d/m/Y') : null,
+                'ventas_efectivo' => $turno->monto_ventas_efectivo,
+                'ventas_debito' => $turno->monto_ventas_debito,
+                'ventas_credito' => $turno->monto_ventas_credito,
+                'ventas_tarjeta' => $turno->monto_ventas_tarjeta,
+                'ventas_transferencia' => $turno->monto_ventas_transferencia,
+                'total_ventas' => (int) $turno->ventas()->sum('total'),
+                'total_esperado' => $turno->total_esperado,
+            ] : null,
+        ]);
     }
 
     public function search(Request $request)
@@ -38,6 +56,15 @@ class POSController extends Controller
 
     public function checkout(Request $request)
     {
+        // 1. Validar que exista un turno de caja abierto para este cajero en este negocio
+        $turnoActivo = TurnoCaja::abierto()
+            ->where('user_id', auth()->id())
+            ->first();
+
+        if (!$turnoActivo) {
+            return back()->withErrors(['checkout' => 'Debe abrir un turno de caja antes de registrar ventas.']);
+        }
+
         $validated = $request->validate([
             'items' => 'required|array|min:1',
             'items.*.product_id' => 'required|exists:products,id',
@@ -55,7 +82,9 @@ class POSController extends Controller
             DB::beginTransaction();
 
             $venta = Venta::create([
+                'negocio_id' => auth()->user()->negocio_id,
                 'user_id' => auth()->id(),
+                'turno_caja_id' => $turnoActivo->id,
                 'total' => $validated['total'],
                 'neto' => $validated['neto'],
                 'iva' => $validated['iva'],
@@ -91,6 +120,9 @@ class POSController extends Controller
                     'subtotal' => $item['quantity'] * $item['price'],
                 ]);
             }
+
+            // Sincronizar totales del turno activo tras la venta
+            $turnoActivo->sincronizarTotales();
 
             DB::commit();
 
