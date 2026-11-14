@@ -16,6 +16,8 @@
 | **¿Cuál es mi próxima acción?** | Coordinar los acuerdos y la logística para el despliegue del piloto de campo en dos comercios de la Región del Maule durante 5 jornadas operativas continuas en la fase de estabilización final, midiendo la usabilidad con el estándar SUS. |
 
 ## Trazabilidad
-* **Evidencia:** `investigacion/validacion-h01.md` y `docs/guia-semana13.md` (Secciones 2, 4, 5, 6.1 y 7) | **Qué demuestra:** Protocolo de Role-Playing Testing para H-01, planificación del Incremento 2 y priorización fundada del Product Backlog.
-* **Evidencia:** `gestisoft-app/app/Http/Controllers/CajaController.php` y `app/Models/TurnoCaja.php` | **Qué demuestra:** Implementación del filtro mensual de auditoría y cálculo inmutable de totales multicanal.
-* **Evidencia:** `docs/guia-presentacion-defensa3.md` | **Qué demuestra:** Estructura estratégica, guión técnico y distribución de roles para la Tercera Demostración y Defensa.
+* **Validación de Hipótesis:** `investigacion/validacion-h01.md` y `investigacion/ensayos-h03.md` | **Qué demuestra:** Protocolo riguroso de Role-Playing Testing en laboratorio para H-01 (con límites honestos y marcadores para terreno) y ensayos empíricos de erradicación de ventas huérfanas para H-03.
+* **Product Backlog y Priorización:** `producto/backlog/PBI-03.md`, `PBI-04.md`, `PBI-05.md`, `SPIKE-02.md` y `docs/guia-semana14.md` | **Qué demuestra:** Priorización de PBI-03 por sobre PBI-05 basada en dolor de efectivo, criterios BDD y definición de alcance.
+* **Lógica de Caja y Auditoría:** `gestisoft-app/app/Http/Controllers/CajaController.php` y `app/Models/TurnoCaja.php` | **Qué demuestra:** Implementación de filtro mensual por defecto, conmutación a histórico, guardia contra recálculo en turnos cerrados (DEF-14) y cálculo inmutable de totales multicanal.
+* **Gestión de Riesgos:** `riesgos/registro-v1.csv` y `riesgos/registro-riesgos-v1.md` | **Qué demuestra:** Matriz actualizada de 18 riesgos (RSK-01 a RSK-18), con 17 mitigados y RSK-17 mantenido abierto con planificación transparente para la fase de campo.
+* **Guión de Defensa:** `docs/guia-presentacion-defensa3.md` | **Qué demuestra:** Estructura estratégica, guión técnico y distribución equilibrada de roles para los 4 integrantes en la Tercera Demostración y Defensa.

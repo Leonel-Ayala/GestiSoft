@@ -16,6 +16,8 @@
 | **¿Cuál es mi próxima acción?** | Diseñar la interfaz móvil responsiva del panel de auditoría de cajas para que los dueños de los comercios puedan revisar los cierres de turno y actas directamente desde sus teléfonos celulares en el Incremento 3. |
 
 ## Trazabilidad
-* **Evidencia:** `gestisoft-app/resources/js/Pages/POS/Index.jsx` | **Qué demuestra:** Implementación de modales de apertura, arqueo ciego y maquetación de Acta Oficial con CSS `@media print`.
-* **Evidencia:** `gestisoft-app/resources/js/Pages/Caja/Index.jsx` | **Qué demuestra:** Panel de auditoría gerencial con filtro del mes en curso por defecto, conmutador a histórico completo y desglose de boletas.
-* **Evidencia:** `docs/guia-semana13.md` (Sección 6.2 y Sección 16: ADR-04) | **Qué demuestra:** Flujo operativo de caja y justificación de experiencia de usuario en arqueo ciego.
+* **Punto de Venta y Teclado:** `gestisoft-app/resources/js/Pages/POS/Index.jsx` | **Qué demuestra:** Operación 100% por atajos de teclado (`F2`, `F8`, `F9`, `Enter`), modales bloqueantes de apertura y Arqueo Ciego (ADR-04), y sincronización de métodos de pago con backend (DEF-13).
+* **Auditoría y Acta Imprimible:** `gestisoft-app/resources/js/Pages/Caja/Index.jsx` | **Qué demuestra:** Panel de auditoría gerencial con filtro del mes en curso por defecto, conmutador a histórico completo y maquetación de Acta Oficial con directivas CSS `@media print`.
+* **Mínimo Privilegio en UI:** `gestisoft-app/resources/js/Pages/Users/Create.jsx` | **Qué demuestra:** Implementación de la opción A de ADR-06 (DEF-16) sustituyendo el selector de rol por badge informativo fijo "Cajero (Fijo ADR-06)".
+* **Ergonomía y Accesibilidad:** `producto/semana-14/mediciones-calidad.md` (Sección 2) | **Qué demuestra:** Verificación de cumplimiento 7/7 (100%) del checklist de atajos y navegación sin ratón para mostrador.
+* **Documentación y Decisiones:** `docs/adr/ADR-04-arqueo-ciego-transaccional.md` y `docs/guia-semana14.md` | **Qué demuestra:** Justificación de diseño de interacción para prevención de fraude en arqueo ciego.

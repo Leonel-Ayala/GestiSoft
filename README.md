@@ -4,6 +4,20 @@ GestiSoft es una plataforma SaaS (*Software as a Service*) multi-inquilino (*mul
 
 ---
 
+## Versión Candidata Oficial (Semana 14)
+
+* **Etiqueta (Tag):** [`v0.2.0-rc2`](https://github.com/Leonel-Ayala/GestiSoft/releases/tag/v0.2.0-rc2)
+* **Pre-release en GitHub:** [Release v0.2.0-rc2](https://github.com/Leonel-Ayala/GestiSoft/releases/tag/v0.2.0-rc2)
+* **Comando para clonar y posicionarse en la versión candidata evaluada:**
+  ```bash
+  git clone https://github.com/Leonel-Ayala/GestiSoft.git
+  cd GestiSoft
+  git checkout v0.2.0-rc2
+  ```
+* **Pipeline de Integración Continua (CI):** Ejecutado en GitHub Actions con dos pasos independientes: suite de regresión del Incremento 1 y suite completa (ambos 100% verdes).
+
+---
+
 ## Características del Sistema (Incremento Funcional 1 y 2 - PBI-01, PBI-02, PBI-03, PBI-04)
 
 * **Aislamiento Multi-Tenant Estricto:** Arquitectura segura (*Single-Database*) mediante *Global Scopes* en Eloquent (Trait `HasNegocio`) que garantiza que los datos, usuarios, inventarios, turnos y ventas de cada comercio estén estrictamente aislados y privados.
@@ -47,37 +61,34 @@ GestiSoft/
 
 ## Requisitos Previos
 
-* PHP >= 8.3 (con extensiones `pdo_mysql`, `pdo_sqlite`, `mbstring`, `openssl`, `bcmath`)
+* PHP >= 8.4 (con extensiones `pdo_mysql`, `pdo_sqlite`, `sqlite3`, `mbstring`, `xml`, `ctype`, `iconv`, `intl`, `zip`)
 * Composer
-* Node.js (v18+) & npm
+* Node.js (v20+ / v22) & npm
 * Servidor MySQL activo (ej. Laragon, XAMPP o servicio local en puerto 3306)
 
 ---
 
 ## Instalación y Puesta en Marcha Local
 
-1. **Clonar el repositorio:**
+1. **Clonar el repositorio y ubicarse en la versión candidata:**
    ```bash
    git clone https://github.com/Leonel-Ayala/GestiSoft.git
-   ```
-
-2. **Entrar al directorio raíz del proyecto y luego a la aplicación:**
-   ```bash
    cd GestiSoft
+   git checkout v0.2.0-rc2
    cd gestisoft-app
    ```
 
-3. **Instalar dependencias del Backend:**
+2. **Instalar dependencias del Backend:**
    ```bash
    composer install
    ```
 
-4. **Instalar dependencias del Frontend:**
+3. **Instalar dependencias del Frontend:**
    ```bash
-   npm install
+   npm install --legacy-peer-deps
    ```
 
-5. **Configurar variables de entorno:**
+4. **Configurar variables de entorno y modo seguro:**
    * En Linux / macOS:
      ```bash
      cp .env.example .env
@@ -86,39 +97,47 @@ GestiSoft/
      ```bash
      copy .env.example .env
      ```
-   * Asegurar las credenciales de base de datos en `.env`:
-     ```ini
-     DB_CONNECTION=mysql
-     DB_HOST=127.0.0.1
-     DB_PORT=3306
-     DB_DATABASE=gestisoft
-     DB_USERNAME=root
-     DB_PASSWORD=
-     ```
+   * **Nota de seguridad:** Para entornos de demostración y producción, configure `APP_DEBUG=false` en `.env` para prevenir la exposición de trazas de error o variables de entorno en pantalla.
 
-6. **Generar la clave de la aplicación:**
+5. **Generar la clave de la aplicación:**
    ```bash
    php artisan key:generate
    ```
 
-7. **Ejecutar migraciones y poblar datos de prueba (Seeders temáticos):**
+6. **Ejecutar migraciones y poblar datos de prueba (Seeders temáticos):**
    ```bash
    php artisan migrate --seed
    ```
    *(Carga automáticamente comercios temáticos: Ropa, Pokémon TCG, Heladería, Comida Rápida y Abarrotes con sus administradores, cajeros de prueba y catálogo inicial de productos).*
 
-8. **Compilar assets del frontend:**
+7. **Compilar assets del frontend:**
    ```bash
    npm run build
    ```
 
-9. **Ejecutar la suite completa de pruebas automatizadas:**
-   ```bash
-   php artisan test
-   ```
-   *(Valida 64 pruebas de seguridad multi-tenant, roles RBAC, transacciones atómicas, kardex inmutable y cuadratura de caja).*
+8. **Ejecutar las pruebas automatizadas (Regresión y Suite Completa):**
+   * **Suite de Regresión del Incremento 1 (24 tests / 92 aserciones):**
+     ```bash
+     php artisan test --group=regresion
+     ```
+   * **Suite Completa de Integración y Seguridad (74 tests / 281 aserciones):**
+     ```bash
+     php artisan test
+     ```
 
-10. **Levantar los servidores locales:**
+9. **Ejecutar mediciones reproducibles de latencia (C12):**
+   Desde la raíz del repositorio (`GestiSoft/`):
+   ```bash
+   php scripts/medir-latencia.php --n=50
+   ```
+   *(Genera archivo CSV crudo y reporte estadístico en `producto/semana-14/mediciones/`).*
+
+10. **Validar matriz de trazabilidad bidireccional:**
+    ```bash
+    php scripts/validar-trazabilidad.php producto/semana-14/trazabilidad.csv
+    ```
+
+11. **Levantar los servidores locales:**
     * En una terminal (Backend):
       ```bash
       php artisan serve

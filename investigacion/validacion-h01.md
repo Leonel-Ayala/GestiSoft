@@ -1,9 +1,10 @@
-# Protocolo de Evaluación y Validación de la Hipótesis H-01: Ensayo de Role-Playing en Laboratorio y Hoja de Ruta de Campo
+# Validación de la Hipótesis H-01: Evidencia de Laboratorio y Hoja de Ruta de Campo
 
-**Fecha de Ejecución:** 10 al 12 de Noviembre de 2026  
+**Fecha de Ejecución:** 10 al 14 de Noviembre de 2026  
 **Responsables Metodológicos:** Rodrigo Bertolini (Product Owner) y Alan Troncoso (Scrum Master / QA Lead)  
-**Versión Evaluada:** GestiSoft v0.2.0-rc2 (Incremento 1 con mitigación de integridad C1-C4 y módulo de turnos PBI-03)  
-**Metodología:** *Role-Playing Usability Testing* (Simulación controlada en laboratorio basada en Personas de Descubrimiento) + Declaración formal de límites de validación de campo.
+**Versión Evaluada:** GestiSoft v0.2.0-rc2 (Incremento 2: PBI-03 Arqueo y cierre de caja)  
+**Estado de Validación:** Evidencia de laboratorio (simulación interna del equipo; validación de campo con dueños reales pendiente)  
+**Metodología:** *Role-Playing Usability Testing* (Simulación controlada en laboratorio basada en Personas de Descubrimiento) + Protocolo formal de validación en terreno.
 
 ---
 
@@ -28,8 +29,8 @@ Frente a este desafío metodológico, y en estricto apego a la honestidad acadé
   * Los tiempos de cobro en el POS simulado deben ser inferiores a 15 segundos por transacción para no degradar la atención a clientes.
   * Los participantes que auditan el flujo como administradores evalúan la viabilidad de delegación con una calificación $\ge 4/5$ en la escala de satisfacción funcional.
 * **Criterio de Decisión Derivada:**
-  * **Señal Positiva en Laboratorio:** H-01 se considera **técnica y funcionalmente confirmada en ambiente controlado**; se valida la necesidad crítica de complementar el RBAC con el cierre de turnos y arqueo ciego (PBI-03), justificando plenamente haber postergado la reportería avanzada (PBI-05).
-  * **Señal Pendiente (Validación de Campo):** La validación empírica subjetiva externa queda formalmente consignada como **pendiente de validación en terreno** para el piloto de estabilización.
+  * **Evidencia Obtenida en Laboratorio:** H-01 cuenta con **evidencia de laboratorio (simulación interna del equipo)** en ambiente controlado; se valida la necesidad crítica de complementar el RBAC con el cierre de turnos y arqueo ciego (PBI-03), justificando haber priorizado el control de caja sobre la reportería avanzada (PBI-05).
+  * **Qué Falta Validar (Campo):** La percepción subjetiva de confianza de comerciantes reales en sus locales físicos queda formalmente consignada como **pendiente de validación en terreno** para el piloto de estabilización.
 
 ---
 
@@ -65,11 +66,11 @@ El ensayo se estructuró en 3 escenarios reproducibles de 25 minutos, ejecutados
 * **Perfil Evaluado:** Minimarket de alta rotación y ventas predominantemente en efectivo.
 * **Foco del Ensayo:** Verificar si un cajero puede adulterar el stock de abarrotes o sustraer dinero sin detección durante turnos continuos.
 * **Comportamiento y Resultados del Ensayo:**
-  1. Se inició sesión como cajero e intentó forzar navegación directa a `http://localhost:8000/inventory`. Redirección inmediata a `/pos` con alerta de seguridad.
+  1. Se inició sesión como cajero e intentó forzar navegación directa a `http://localhost:8000/inventory`. El sistema bloqueó la petición con respuesta HTTP 403 Forbidden (verificado por `RoleSecurityTest::test_cajero_no_puede_acceder_a_inventario_retorna_403`).
   2. En el POS se realizaron 5 ventas en efectivo sucesivas utilizando atajos de teclado (`F2`, `Enter`, `Barra Espaciadora`). Tiempo promedio por venta: **6.2 segundos**.
   3. Al cerrar caja, el sistema solicitó conteo ciego sin mostrar el total esperado ($612.790). Se ingresó declaración con faltante inducido de -$2.000.
   4. Desde el usuario administrador en `/cajas`, se detectó el descuadre exacto en rojo (`Faltante -$2.000`) y se generó el acta de turno.
-* **Veredicto del Perfil:** **Conforme (Calificación 4/5)**. Mitiga el riesgo de robo hormiga; la necesidad prioritaria identificada fue la visualización mensual por defecto en la vista de auditoría (incorporada).
+* **Veredicto del Perfil:** **Conforme (Calificación heurística 4/5 asignada internamente por el equipo; no constituye medición de satisfacción de usuarios)**. Mitiga el riesgo de robo hormiga; la necesidad prioritaria identificada fue la visualización mensual por defecto en la vista de auditoría (incorporada).
 
 ### Escenario 2: Perfil Boutique y Moda (Basado en Persona ENT-02 - Retail de Vestuario)
 * **Perfil Evaluado:** Boutique de prendas de vestir con precios unitarios medios-altos ($15.000 a $65.000).
@@ -78,16 +79,16 @@ El ensayo se estructuró en 3 escenarios reproducibles de 25 minutos, ejecutados
   1. Se interceptó la petición HTTP del checkout intentando enviar un payload alterado con `price: 1000` para un vestido de $35.000.
   2. El servidor ejecutó la validación C1 (`lockForUpdate` y recalculo obligatorio desde base de datos), cobrando el precio oficial del catálogo ($35.000) e ignorando el precio manipulado del cliente.
   3. Se probó venta con tarjeta de débito y crédito. El sistema discriminó correctamente los fondos electrónicos de la gaveta física de efectivo.
-* **Veredicto del Perfil:** **Conforme (Calificación 5/5)**. Integridad de precios garantizada al 100% en backend.
+* **Veredicto del Perfil:** **Conforme (Calificación heurística 5/5 asignada internamente por el equipo; no constituye medición de satisfacción de usuarios)**. Integridad de precios garantizada al 100% en backend.
 
 ### Escenario 3: Perfil Bazar y Coleccionables (Basado en Persona ENT-03 - Artículos de Alta Gama)
 * **Perfil Evaluado:** Tienda especializada con ítems coleccionables de alto valor unitario y stock limitado.
-* **Foco del Ensayo:** Comprobar que no existan ajustes manuales de stock sin justificación (Kardex inmutable C2) y que el cajero no pueda ver turnos de otros colegas (IDOR C5).
+* **Foco del Ensayo:** Comprobar que no existan ajustes manuales de stock sin justificación (Kardex inmutable C2) y que el cajero no pueda ver turnos de otros colegas, mitigando el riesgo RSK-10 (aislamiento de turnos entre cajeros).
 * **Comportamiento y Resultados del Ensayo:**
   1. Se verificó que el cajero `operador` no tiene acceso al Kardex ni a la opción de editar existencias.
   2. Como cajero, se intentó consultar el resumen de turno de otro cajero (`GET /caja/resumen/2`). El controlador retornó `HTTP 403 Forbidden` de inmediato (test `test_cajero_no_puede_ver_resumen_de_turno_de_otro_cajero`).
   3. Se comprobó la generación del comprobante impreso de acta de cierre con los nombres del negocio y cajero responsable.
-* **Veredicto del Perfil:** **Conforme (Calificación 4/5)**. Se solicitó agregar alertas visuales ante descuadres superiores a un umbral configurable (anotado para Incremento 3).
+* **Veredicto del Perfil:** **Conforme (Calificación heurística 4/5 asignada internamente por el equipo; no constituye medición de satisfacción de usuarios)**. Se solicitó agregar alertas visuales ante descuadres superiores a un umbral configurable (anotado para Incremento 3).
 
 ---
 
@@ -110,6 +111,20 @@ En cumplimiento de los estándares de honestidad técnica de la Facultad de Inge
    * La evidencia actual sustenta la **efectividad técnica, la usabilidad de laboratorio y la ausencia de vulnerabilidades lógicas** en el flujo de caja y roles.
    * No se afirma contar con métricas estadísticas de campo en comercios operando en vivo, dado que el producto se encuentra en fase de versión candidata (`v0.2.0-rc2`) previo al despliegue productivo.
 2. **Plan de Validación en Sitio (Fase de Estabilización / Incremento 3):**
+   * **Responsable:** Rodrigo Bertolini (Product Owner) y Luis Barrios (UX Lead).
+   * **Fecha comprometida:** Diciembre 2026.
    * **Objetivo:** Instalar una instancia de prueba en 2 comercios de Talca/Curicó durante 5 jornadas operativas continuas.
    * **Instrumento:** Encuesta SUS (*System Usability Scale*) y registro de discrepancias en arqueos de caja reales al final de cada jornada.
    * **Criterio de Aceptación de Campo:** Puntaje SUS $\ge 75$ y reducción a cero de diferencias de inventario no justificadas.
+
+---
+
+## 7. Sesiones con Dueños Reales (Trabajo de Campo)
+
+| Comercio (anonimizado) | Fecha | Versión probada | Confianza antes (1–5) | Confianza después (1–5) | ¿Delegaría la caja? | Qué le faltaría |
+| --- | --- | --- | --- | --- | --- | --- |
+| ENT-01 minimarket | [COMPLETAR POR EL EQUIPO] | v0.2.0-rc2 | [ ] | [ ] | [ ] | [ ] |
+| ENT-02 vestuario  | [COMPLETAR POR EL EQUIPO] | v0.2.0-rc2 | [ ] | [ ] | [ ] | [ ] |
+| ENT-03 bazar      | [COMPLETAR POR EL EQUIPO] | v0.2.0-rc2 | [ ] | [ ] | [ ] | [ ] |
+
+> *Nota:* Los marcadores `[COMPLETAR POR EL EQUIPO]` serán registrados por los integrantes al ejecutar las sesiones presenciales comprometidas para el piloto de campo.
