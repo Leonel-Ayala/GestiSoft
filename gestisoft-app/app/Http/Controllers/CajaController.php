@@ -56,40 +56,48 @@ class CajaController extends Controller
             'monto_inicial.min' => 'El monto inicial no puede ser negativo.',
         ]);
 
-        return DB::transaction(function () use ($validated, $request) {
-            // Bloqueo pesimista para evitar que dos peticiones simultáneas abran dos turnos
-            $turnoExistente = TurnoCaja::abierto()
-                ->where('user_id', Auth::id())
-                ->lockForUpdate()
-                ->first();
+        try {
+            return DB::transaction(function () use ($validated, $request) {
+                // Bloqueo pesimista para evitar que dos peticiones simultáneas abran dos turnos
+                $turnoExistente = TurnoCaja::abierto()
+                    ->where('user_id', Auth::id())
+                    ->lockForUpdate()
+                    ->first();
 
-            if ($turnoExistente) {
-                if ($request->wantsJson()) {
-                    return response()->json(['error' => 'Ya existe un turno de caja abierto para este usuario.'], 422);
+                if ($turnoExistente) {
+                    if ($request->wantsJson()) {
+                        return response()->json(['error' => 'Ya existe un turno de caja abierto para este usuario.'], 422);
+                    }
+                    return back()->withErrors(['caja' => 'Ya existe un turno de caja abierto para este usuario.']);
                 }
-                return back()->withErrors(['caja' => 'Ya existe un turno de caja abierto para este usuario.']);
-            }
 
-            $montoInicial = (int) $validated['monto_inicial'];
+                $montoInicial = (int) $validated['monto_inicial'];
 
-            $turno = TurnoCaja::create([
-                'user_id' => Auth::id(),
-                'monto_inicial' => $montoInicial,
-                'total_esperado' => $montoInicial,
-                'estado' => 'abierto',
-                'fecha_apertura' => now(),
-            ]);
-
-            if ($request->wantsJson()) {
-                return response()->json([
-                    'success' => true,
-                    'message' => 'Turno de caja abierto exitosamente.',
-                    'turno' => $turno,
+                $turno = TurnoCaja::create([
+                    'user_id' => Auth::id(),
+                    'monto_inicial' => $montoInicial,
+                    'total_esperado' => $montoInicial,
+                    'estado' => 'abierto',
+                    'fecha_apertura' => now(),
                 ]);
-            }
 
-            return redirect()->route('pos.index')->with('success', 'Turno de caja abierto exitosamente con fondo inicial de $' . number_format($montoInicial, 0, ',', '.'));
-        });
+                if ($request->wantsJson()) {
+                    return response()->json([
+                        'success' => true,
+                        'message' => 'Turno de caja abierto exitosamente.',
+                        'turno' => $turno,
+                    ]);
+                }
+
+                return redirect()->route('pos.index')->with('success', 'Turno de caja abierto exitosamente con fondo inicial de $' . number_format($montoInicial, 0, ',', '.'));
+            }, 3); // 3 reintentos ante deadlock (DEF-17)
+        } catch (\Illuminate\Database\QueryException $e) {
+            report($e);
+            $msg = 'Ya existe un turno de caja abierto o se está abriendo uno en este momento.';
+            return $request->wantsJson()
+                ? response()->json(['error' => $msg], 422)
+                : back()->withErrors(['caja' => $msg]);
+        }
     }
 
     /**
@@ -282,6 +290,7 @@ class CajaController extends Controller
             ->latest('created_at')
             ->get();
 
+        // Alias heredados solo para lectura de datos históricos; la escritura está restringida por POSController::METODOS_PAGO
         // Calculamos los subtotales directamente desde las ventas reales para total precisión
         $ventasEfectivo = (int) $ventas->filter(function ($v) {
             $m = mb_strtolower(trim($v->payment_method ?? ''));

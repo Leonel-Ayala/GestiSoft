@@ -2,16 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\MovimientoStock;
 use App\Models\Product;
 use App\Models\TurnoCaja;
 use App\Models\Venta;
 use App\Models\VentaDetalle;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\DB;
 
 class POSController extends Controller
 {
+    public const METODOS_PAGO = ['Efectivo', 'Débito', 'Crédito', 'Transferencia'];
     public function index()
     {
         $turno = TurnoCaja::abierto()
@@ -67,14 +70,24 @@ class POSController extends Controller
 
         $validated = $request->validate([
             'items' => 'required|array|min:1',
-            'items.*.product_id' => 'required|integer',
+            'items.*.product_id' => 'required|integer|distinct',
             'items.*.quantity' => 'required|integer|min:1',
-            'payment_method' => 'required|string',
+            'payment_method' => ['required', 'string', Rule::in(self::METODOS_PAGO)],
             'amount_received' => 'nullable|integer|min:0',
+        ], [
+            'items.*.product_id.distinct' => 'El mismo producto no puede venir repetido en la venta; agrupe las cantidades.',
+            'payment_method.in' => 'Medio de pago no válido.',
         ]);
 
         try {
             DB::beginTransaction();
+
+            // Re-lectura con bloqueo: el turno no puede cerrarse mientras esta venta se registra (DEF-14)
+            $turnoActivo = TurnoCaja::whereKey($turnoActivo->id)->lockForUpdate()->first();
+
+            if (!$turnoActivo || $turnoActivo->estado !== 'abierto') {
+                throw new \Exception('El turno de caja fue cerrado. Abra un nuevo turno para registrar ventas.');
+            }
 
             $totalCalculado = 0;
             $itemsDetalles = [];
@@ -107,7 +120,7 @@ class POSController extends Controller
             $iva = $totalCalculado - $neto;
 
             // 4. Validación de efectivo y cálculo de vuelto en servidor
-            $esEfectivo = in_array(mb_strtolower(trim($validated['payment_method'])), ['efectivo', 'cash']);
+            $esEfectivo = $validated['payment_method'] === 'Efectivo';
             $amountReceived = null;
             $change = null;
 
@@ -132,10 +145,13 @@ class POSController extends Controller
                 'change' => $change,
             ]);
 
-            // 6. Descontar stock y registrar detalles
+            // 6. Descontar stock, registrar detalles y dejar trazabilidad en el Kardex (ADR-07)
             foreach ($itemsDetalles as $detalle) {
                 $prod = $detalle['product'];
-                $prod->stock -= $detalle['quantity'];
+                $cantidadAnterior = (int) $prod->stock;
+                $cantidadNueva = $cantidadAnterior - $detalle['quantity'];
+
+                $prod->stock = $cantidadNueva;
                 $prod->save();
 
                 VentaDetalle::create([
@@ -145,6 +161,15 @@ class POSController extends Controller
                     'quantity' => $detalle['quantity'],
                     'price' => $detalle['price'],
                     'subtotal' => $detalle['subtotal'],
+                ]);
+
+                MovimientoStock::create([
+                    'product_id' => $prod->id,
+                    'user_id' => auth()->id(),
+                    'cantidad_anterior' => $cantidadAnterior,
+                    'cantidad_nueva' => $cantidadNueva,
+                    'diferencia' => -$detalle['quantity'],
+                    'motivo' => "Venta #{$venta->id}",
                 ]);
             }
 

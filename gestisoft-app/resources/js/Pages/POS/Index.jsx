@@ -69,7 +69,7 @@ export default function Index({ auth, turnoActivo: initialTurnoActivo }) {
     const [searchResults, setSearchResults] = useState([]);
     const [isSearching, setIsSearching] = useState(false);
     const [checkoutProcessing, setCheckoutProcessing] = useState(false);
-    const [errorMsg, setErrorMsg] = useState(pageErrors?.checkout || pageErrors?.caja || null);
+    const [errorMsg, setErrorMsg] = useState(null);
     const [successMsg, setSuccessMsg] = useState(flash?.success || null);
 
     const searchInputRef = useRef(null);
@@ -80,6 +80,7 @@ export default function Index({ auth, turnoActivo: initialTurnoActivo }) {
     const paymentButtonsRef = useRef([]);
     const amountReceivedInputRef = useRef(null);
 
+    // Constante sincronizada con POSController::METODOS_PAGO
     const METODOS_PAGO = [
         { id: 'Efectivo', label: 'Efectivo', icon: '💵', desc: 'Gaveta física' },
         { id: 'Débito', label: 'Débito', icon: '💳', desc: 'Tarjeta débito' },
@@ -87,14 +88,25 @@ export default function Index({ auth, turnoActivo: initialTurnoActivo }) {
         { id: 'Transferencia', label: 'Transferencia', icon: '📲', desc: 'Cta. bancaria' },
     ];
 
+    // Helper para extraer el primer error relevante de validación (DEF-13)
+    const getFirstRelevantError = (errs) => {
+        if (!errs) return null;
+        if (errs.checkout) return errs.checkout;
+        if (errs.payment_method) return errs.payment_method;
+        if (errs.caja) return errs.caja;
+        const itemKey = Object.keys(errs).find((k) => k.startsWith('items'));
+        if (itemKey) return errs[itemKey];
+        return Object.values(errs)[0] || null;
+    };
+
     // Estado del Modal de Pago
     const [showPaymentModal, setShowPaymentModal] = useState(false);
     const [paymentMethod, setPaymentMethod] = useState('Efectivo');
     const [amountReceived, setAmountReceived] = useState('');
 
-    // Limpiar errores cuando cambia el prop flash o pageErrors
+    // Limpiar o actualizar errores cuando cambia el prop flash o pageErrors (DEF-13)
     useEffect(() => {
-        setErrorMsg(pageErrors?.checkout || pageErrors?.caja || null);
+        setErrorMsg(getFirstRelevantError(pageErrors));
         setSuccessMsg(flash?.success || null);
     }, [pageErrors, flash]);
 
@@ -358,6 +370,9 @@ export default function Index({ auth, turnoActivo: initialTurnoActivo }) {
             onSuccess: () => {
                 clearCart();
                 closePaymentModal();
+            },
+            onError: (errors) => {
+                setErrorMsg(getFirstRelevantError(errors) || 'Error al procesar la venta.');
             },
             onFinish: () => setCheckoutProcessing(false)
         });
@@ -905,6 +920,13 @@ export default function Index({ auth, turnoActivo: initialTurnoActivo }) {
                             ${totalCart.toLocaleString('es-CL')}
                         </span>
                     </div>
+
+                    {errorMsg && (
+                        <div className="mb-4 p-3 bg-red-50 border border-red-200 text-red-700 rounded-xl text-xs font-semibold flex items-center gap-2" role="alert">
+                            <span aria-hidden="true">⚠️</span>
+                            <span>{errorMsg}</span>
+                        </div>
+                    )}
 
                     <div className="mb-5">
                         <div className="flex items-center justify-between mb-2">

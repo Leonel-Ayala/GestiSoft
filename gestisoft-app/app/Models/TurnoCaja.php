@@ -72,6 +72,12 @@ class TurnoCaja extends Model
      */
     public function sincronizarTotales(): void
     {
+        if ($this->estado === 'cerrado') {
+            // Un turno cerrado es inmutable: no se recalculan sus totales (ADR-04)
+            return;
+        }
+
+        // Alias heredados solo para lectura de datos históricos; la escritura está restringida por POSController::METODOS_PAGO
         $ventasEfectivo = (int) $this->ventas()
             ->whereIn('payment_method', ['Efectivo', 'efectivo', 'cash'])
             ->sum('total');

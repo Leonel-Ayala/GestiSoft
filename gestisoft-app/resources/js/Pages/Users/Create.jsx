@@ -80,20 +80,17 @@ export default function Create({ auth }) {
 
                             <div>
                                 <InputLabel htmlFor="role" value="Rol y Permisos del Sistema" />
-                                <select
-                                    id="role"
-                                    className="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-lg shadow-sm text-sm"
-                                    value={data.role}
-                                    onChange={(e) => setData('role', e.target.value)}
-                                    required
-                                >
-                                    <option value="cajero">Cajero — Acceso exclusivo a Caja y Punto de Venta (POS)</option>
-                                    <option value="admin">Administrador — Acceso completo (Inventario, Usuarios, POS, Dashboard)</option>
-                                </select>
+                                <div className="mt-1 flex items-center justify-between p-3.5 bg-gray-50 border border-gray-200 rounded-lg text-sm">
+                                    <div className="flex items-center gap-2">
+                                        <span className="w-2.5 h-2.5 rounded-full bg-indigo-600"></span>
+                                        <span className="font-semibold text-gray-900">Cajero</span>
+                                        <span className="text-xs text-gray-500">— Acceso exclusivo a Caja y Punto de Venta (POS)</span>
+                                    </div>
+                                    <span className="text-[11px] font-medium bg-gray-200 text-gray-700 px-2 py-0.5 rounded">Fijo (ADR-06)</span>
+                                </div>
                                 <p className="text-xs text-gray-500 mt-1.5">
-                                    Los cajeros no tendrán acceso al inventario ni al panel de administración.
+                                    Por política de mínimo privilegio (ADR-06), los nuevos usuarios creados desde este panel son exclusivamente cajeros.
                                 </p>
-                                <InputError message={errors.role} className="mt-2" />
                             </div>
 
                             <div className="flex items-center justify-end gap-3 mt-8 border-t border-gray-100 pt-5">

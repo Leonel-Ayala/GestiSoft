@@ -7,8 +7,10 @@ use App\Models\Negocio;
 use App\Models\Product;
 use App\Models\MovimientoStock;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use PHPUnit\Framework\Attributes\Group;
 use Tests\TestCase;
 
+#[Group('regresion')]
 class InventoryTest extends TestCase
 {
     use RefreshDatabase;
