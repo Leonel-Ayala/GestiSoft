@@ -67,61 +67,88 @@ class POSController extends Controller
 
         $validated = $request->validate([
             'items' => 'required|array|min:1',
-            'items.*.product_id' => 'required|exists:products,id',
+            'items.*.product_id' => 'required|integer',
             'items.*.quantity' => 'required|integer|min:1',
-            'items.*.price' => 'required|integer|min:0',
-            'total' => 'required|integer|min:0',
-            'neto' => 'required|integer|min:0',
-            'iva' => 'required|integer|min:0',
             'payment_method' => 'required|string',
             'amount_received' => 'nullable|integer|min:0',
-            'change' => 'nullable|integer|min:0',
         ]);
 
         try {
             DB::beginTransaction();
 
-            $venta = Venta::create([
-                'negocio_id' => auth()->user()->negocio_id,
-                'user_id' => auth()->id(),
-                'turno_caja_id' => $turnoActivo->id,
-                'total' => $validated['total'],
-                'neto' => $validated['neto'],
-                'iva' => $validated['iva'],
-                'payment_method' => $validated['payment_method'],
-                'amount_received' => $validated['amount_received'] ?? null,
-                'change' => $validated['change'] ?? null,
-            ]);
+            $totalCalculado = 0;
+            $itemsDetalles = [];
 
+            // 2. Procesar ítems bloqueando filas y calculando precios exclusivamente en servidor
             foreach ($validated['items'] as $item) {
-                // Bloqueo pesimista para evitar condiciones de carrera en el stock
                 $product = Product::where('id', $item['product_id'])->lockForUpdate()->first();
 
                 if (!$product) {
-                    $nombre = $item['name'] ?? 'solicitado';
-                    throw new \Exception("El producto '{$nombre}' ya no se encuentra disponible en el inventario.");
+                    throw new \Exception("Uno de los productos seleccionados no se encuentra disponible.");
                 }
 
                 if ($product->stock < $item['quantity']) {
                     throw new \Exception("Stock insuficiente para el producto: {$product->name}");
                 }
 
-                // Descontar stock
-                $product->stock -= $item['quantity'];
-                $product->save();
+                $subtotal = (int) $product->price * (int) $item['quantity'];
+                $totalCalculado += $subtotal;
 
-                // Registrar detalle de venta
+                $itemsDetalles[] = [
+                    'product' => $product,
+                    'quantity' => (int) $item['quantity'],
+                    'price' => (int) $product->price,
+                    'subtotal' => $subtotal,
+                ];
+            }
+
+            // 3. Cálculos tributarios oficiales
+            $neto = (int) round($totalCalculado / 1.19);
+            $iva = $totalCalculado - $neto;
+
+            // 4. Validación de efectivo y cálculo de vuelto en servidor
+            $esEfectivo = in_array(mb_strtolower(trim($validated['payment_method'])), ['efectivo', 'cash']);
+            $amountReceived = null;
+            $change = null;
+
+            if ($esEfectivo) {
+                $amountReceived = (int) ($validated['amount_received'] ?? 0);
+                if ($amountReceived < $totalCalculado) {
+                    throw new \Exception("El monto recibido ($" . number_format($amountReceived, 0, ',', '.') . ") es insuficiente para cubrir el total ($" . number_format($totalCalculado, 0, ',', '.') . ").");
+                }
+                $change = $amountReceived - $totalCalculado;
+            }
+
+            // 5. Crear la venta con importes garantizados por el servidor
+            $venta = Venta::create([
+                'negocio_id' => auth()->user()->negocio_id,
+                'user_id' => auth()->id(),
+                'turno_caja_id' => $turnoActivo->id,
+                'total' => $totalCalculado,
+                'neto' => $neto,
+                'iva' => $iva,
+                'payment_method' => $validated['payment_method'],
+                'amount_received' => $amountReceived,
+                'change' => $change,
+            ]);
+
+            // 6. Descontar stock y registrar detalles
+            foreach ($itemsDetalles as $detalle) {
+                $prod = $detalle['product'];
+                $prod->stock -= $detalle['quantity'];
+                $prod->save();
+
                 VentaDetalle::create([
                     'venta_id' => $venta->id,
-                    'product_id' => $product->id,
-                    'product_name' => $product->name,
-                    'quantity' => $item['quantity'],
-                    'price' => $item['price'],
-                    'subtotal' => $item['quantity'] * $item['price'],
+                    'product_id' => $prod->id,
+                    'product_name' => $prod->name,
+                    'quantity' => $detalle['quantity'],
+                    'price' => $detalle['price'],
+                    'subtotal' => $detalle['subtotal'],
                 ]);
             }
 
-            // Sincronizar totales del turno activo tras la venta
+            // 7. Sincronizar totales del turno activo tras la venta
             $turnoActivo->sincronizarTotales();
 
             DB::commit();

@@ -1,7 +1,10 @@
 Evidencia / restricción,Necesidad,Decisión,Requisito,Criterio,PBI,Prueba prevista,Estado
-P01 (Falta de control),N-05,DEC-01 (Control sobre reportes),"RF-08, RF-09","AC-06, AC-07",PBI-01,T-01: CRUD Inventario,Listo
-O01 (Demoras mouse),N-02,DEC-02 (Arquitectura Reactiva),RF-01 al RF-05,"AC-03, AC-04, AC-05",PBI-02,T-02: POS Reactivo,Listo
-P01 (Descuadres),N-01,DEC-03 (Postergar módulo de Caja),"RF-06, RF-07","AC-01, AC-02",PBI-03,T-03: Bloqueo de turno,Pendiente
-P01 (Miedo a robos),N-06,DEC-04 (Aplicar control de roles),"RF-10, RF-11","AC-08, AC-09, AC-12",PBI-04,T-05: RoleSecurityTest,Listo
-P01 (Ceguera ventas),N-07,DEC-05 (Postergar módulo gráficas),"RF-12, RF-13","AC-10, AC-11",PBI-05,T-06: Verificación Gráficos,Pendiente
-RSK-03 (Aislamiento),N-03,ADR-01 (Global Scopes de Laravel),RNF-SEC-01,AC-SEC-01,SPIKE-01,T-04: Seguridad Tenant,Listo
+P01 (Falta de control),N-05,DEC-01 (Control estricto inventario),"RF-08, RF-09","AC-06, AC-07",PBI-01,InventoryTest.php,Listo
+O01 (Demoras mouse),N-02,DEC-02 (Arquitectura Reactiva POS),RF-01 al RF-05,"AC-03, AC-04, AC-05",PBI-02,POSTest.php,Listo
+P01 (Descuadres y arqueo),N-01,ADR-04 (Arqueo Ciego en Servidor),"RF-06, RF-07","AC-CAJA-01 al AC-CAJA-05",PBI-03,TurnoCajaTest.php y CajaTurnoSecurityTest.php,Listo
+P01 (Miedo a robos / delegación),N-06,DEC-04 (Separación estricta RBAC),"RF-10, RF-11","AC-08, AC-09, AC-12",PBI-04,RoleSecurityTest.php y validacion-h01.md,Listo
+P01 (Ceguera ventas históricas),N-07,DEC-05 (Postergar módulo gráficas),"RF-12, RF-13","AC-10, AC-11",PBI-05,T-06: Verificación Gráficos,Postergado
+RSK-03 (Aislamiento de datos),N-03,ADR-01 (Global Scopes Eloquent),RNF-SEC-01,AC-SEC-01,SPIKE-01,MultiTenantSecurityTest.php,Listo
+RSK-11 (Manipulación importes cliente),N-02,ADR-03 (Cálculo montos en Servidor),RF-04,AC-SEC-POS-01,DEF-04,POSTest::test_venta_ignora_precio_enviado_por_cliente,Listo
+RSK-12 (Pérdida auditoría Kardex),N-05,ADR-05 (Kardex Inmutable SoftDeletes),RF-09,AC-07 (Bordes y Errores),DEF-06,InventoryTest::test_eliminar_producto_conserva_kardex,Listo
+RSK-14 (Exposición datos en React),N-06,SPIKE-02 (Minimización props Inertia),RNF-SEC-02,AC-SEC-02,DEF-07,RoleSecurityTest::test_inertia_no_comparte_campos_sensibles,Listo

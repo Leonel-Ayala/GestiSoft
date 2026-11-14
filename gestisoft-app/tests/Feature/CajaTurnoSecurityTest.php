@@ -310,6 +310,33 @@ class CajaTurnoSecurityTest extends TestCase
         ]);
     }
 
+    public function test_cajero_no_puede_ver_resumen_de_turno_de_otro_cajero()
+    {
+        $negocio = Negocio::create(['name' => 'Ferretería Central']);
+        $cajero1 = User::factory()->create([
+            'negocio_id' => $negocio->id,
+            'role' => 'cajero',
+        ]);
+        $cajero2 = User::factory()->create([
+            'negocio_id' => $negocio->id,
+            'role' => 'cajero',
+        ]);
+
+        $turnoCajero2 = TurnoCaja::create([
+            'negocio_id' => $negocio->id,
+            'user_id' => $cajero2->id,
+            'monto_inicial' => 10000,
+            'total_esperado' => 10000,
+            'estado' => 'abierto',
+            'fecha_apertura' => now(),
+        ]);
+
+        $this->actingAs($cajero1);
+
+        $response = $this->getJson("/caja/resumen/{$turnoCajero2->id}");
+        $response->assertStatus(403);
+    }
+
     public function test_administrador_puede_acceder_al_modulo_de_cajas_y_cajero_es_bloqueado()
     {
         $negocio = Negocio::create(['name' => 'Ferretería Central']);
@@ -460,5 +487,59 @@ class CajaTurnoSecurityTest extends TestCase
         $this->assertEquals(60000, $turno->monto_ventas_tarjeta); // Suma débito + crédito
         $this->assertEquals(10000, $turno->monto_ventas_transferencia);
         $this->assertEquals(45000, $turno->total_esperado); // Fondo Inicial (30.000) + Efectivo (15.000)
+    }
+
+    public function test_filtro_por_defecto_cajas_muestra_mes_actual_y_permite_historico()
+    {
+        $negocio = Negocio::create(['name' => 'Ferretería Central']);
+        $admin = User::factory()->create([
+            'negocio_id' => $negocio->id,
+            'role' => 'admin',
+        ]);
+
+        $this->actingAs($admin);
+
+        // Turno del mes actual
+        $turnoMesActual = TurnoCaja::create([
+            'negocio_id' => $negocio->id,
+            'user_id' => $admin->id,
+            'fecha_apertura' => now(),
+            'monto_inicial' => 10000,
+            'total_esperado' => 25000,
+            'monto_ventas_efectivo' => 15000,
+            'estado' => 'abierto',
+        ]);
+
+        // Turno del mes anterior
+        $turnoMesAnterior = TurnoCaja::create([
+            'negocio_id' => $negocio->id,
+            'user_id' => $admin->id,
+            'fecha_apertura' => now()->subMonths(1),
+            'monto_inicial' => 20000,
+            'total_esperado' => 40000,
+            'monto_ventas_efectivo' => 20000,
+            'estado' => 'cerrado',
+        ]);
+
+        // Consulta por defecto: debe ser periodo 'mes' y solo incluir el turno del mes actual
+        $response = $this->get('/cajas');
+        $response->assertStatus(200);
+        $response->assertInertia(fn ($page) => $page
+            ->component('Caja/Index')
+            ->where('filters.periodo', 'mes')
+            ->has('turnos.data', 1)
+            ->where('turnos.data.0.id', $turnoMesActual->id)
+            ->where('metrics.total_ventas_general', 15000)
+        );
+
+        // Consulta explícita de histórico: debe incluir ambos turnos
+        $responseHistorico = $this->get('/cajas?periodo=historico');
+        $responseHistorico->assertStatus(200);
+        $responseHistorico->assertInertia(fn ($page) => $page
+            ->component('Caja/Index')
+            ->where('filters.periodo', 'historico')
+            ->has('turnos.data', 2)
+            ->where('metrics.total_ventas_general', 35000)
+        );
     }
 }

@@ -1,0 +1,9 @@
+# Archivos temporales de Microsoft Office
+~$*.docx
+~$*.xlsx
+~$*.pptx
+
+# Archivos del sistema operativo
+.DS_Store
+Thumbs.db
+Desktop.ini

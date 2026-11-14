@@ -201,4 +201,30 @@ class RoleSecurityTest extends TestCase
         $this->assertAuthenticated();
         $response->assertRedirect(route('pos.index', absolute: false));
     }
+
+    public function test_inertia_no_comparte_campos_sensibles()
+    {
+        $negocio = Negocio::create(['name' => 'Negocio Test']);
+        $admin = User::factory()->create([
+            'negocio_id' => $negocio->id,
+            'role' => 'admin',
+        ]);
+
+        $this->actingAs($admin);
+
+        $response = $this->get('/inventory');
+        $response->assertStatus(200);
+
+        $page = $response->viewData('page');
+        $userProps = $page['props']['auth']['user'];
+
+        $this->assertNotNull($userProps);
+        $this->assertArrayHasKey('id', $userProps);
+        $this->assertArrayHasKey('name', $userProps);
+        $this->assertArrayHasKey('email', $userProps);
+        $this->assertArrayHasKey('role', $userProps);
+        $this->assertArrayHasKey('negocio_id', $userProps);
+        $this->assertArrayNotHasKey('password', $userProps);
+        $this->assertArrayNotHasKey('remember_token', $userProps);
+    }
 }

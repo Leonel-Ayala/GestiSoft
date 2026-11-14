@@ -1,0 +1,21 @@
+# Bitácora Individual - Luis Barrios
+
+* **Rol / Cargo:** Frontend Lead / UI-UX y Arquitectura Frontend
+* **Equipo / Producto:** GestiSoft
+* **Periodo registrado:** Semanas 10 a 14 (Evolución, Calidad y Estabilización - Incremento Funcional 2)
+
+## Registro de Aprendizaje y Contribución
+
+| Pregunta | Respuesta personal |
+|----------|--------------------|
+| **¿Qué contribución significativa realicé?** | Desarrollé la arquitectura y componentes de la interfaz de usuario para el Incremento 2. En el Punto de Venta (`resources/js/Pages/POS/Index.jsx`), implementé los modales reactivos con bloqueo de interfaz para apertura obligatoria con fondo inicial y cobro multicanal (`Efectivo`, `Débito`, `Crédito`, `Transferencia`). Diseñé e implementé el modal de **Arqueo Ciego** (`ADR-04`), asegurando que el cajero deba contar y declarar físicamente el dinero en gaveta sin que la interfaz exponga el saldo teórico del sistema. Diseñé y maqueté la **Acta Oficial de Cierre y Arqueo de Fondos** con vista previa y estilos CSS `@media print` para impresión física / guardado en PDF con formato estandarizado, desglose por canal de cobro y casillas de firma. Además, implementé en `resources/js/Pages/Caja/Index.jsx` el selector interactivo de períodos (`[🗓️ Este Mes]` vs `[📚 Histórico Completo]`) con filtros diarios rápidos y optimicé el carrito de compras en estado local de React (`useState`) a $<12\text{ ms}$ y 60 FPS. |
+| **¿Qué decisión puedo explicar y justificar?** | Decidí aislar el estado del carrito de compras exclusivamente en la memoria local de React (`useState` / memoria de cliente) en lugar de emitir peticiones AJAX al servidor por cada ítem añadido o removido (driver **DA-10**). Justificación técnica: En el mostrador de una PYME, la latencia de red de 200 ms por cada clic generaría lentitud y degradaría la atención. Mantener el carrito en memoria garantiza 60 cuadros por segundo y respuestas instantáneas en $<12\text{ ms}$, reservando la comunicación HTTP exclusivamente para la transacción atómica de checkout. Asimismo, en el Acta Oficial utilicé CSS nativo `@media print` en lugar de compilar PDFs pesados en el servidor, garantizando compatibilidad inmediata con cualquier impresora térmica o láser de los comercios. |
+| **¿Qué evidencia obtuve o analicé?** | Analicé el checklist de accesibilidad y ergonomía de mostrador, comprobando que el 100% de la operación de venta y cierre se puede realizar mediante atajos de teclado (`F2`, `F8`, `F9`, `Enter`, `Barra Espaciadora`) sin requerir mouse. Verifiqué mediante pruebas de impresión en el navegador que las reglas `@media print` oculten dinámicamente barras de navegación, botones y modales, generando un documento limpio apto para auditoría. |
+| **¿Qué revisión hice al trabajo de otra persona?** | Realicé las revisiones cruzadas `REV-10` y `REV-11` junto a Rodrigo Bertolini sobre el encabezado y desgloses del Acta de Cierre impresa, verificando que muestre dinámicamente el nombre real del comercio (`auth.user.negocio.name`) en lugar de textos genéricos y que los montos clasificados coincidan con los acumuladores de `TurnoCaja`. |
+| **¿Qué aprendí o corregí?** | Comprendí que diseñar para el retail exige diseñar bajo condiciones de alta presión operativa: cada clic innecesario, cada retraso visual o cada pérdida de foco en el cursor se traduce directamente en demoras y filas de clientes en el mostrador del negocio. |
+| **¿Cuál es mi próxima acción?** | Diseñar la interfaz móvil responsiva del panel de auditoría de cajas para que los dueños de los comercios puedan revisar los cierres de turno y actas directamente desde sus teléfonos celulares en el Incremento 3. |
+
+## Trazabilidad
+* **Evidencia:** `gestisoft-app/resources/js/Pages/POS/Index.jsx` | **Qué demuestra:** Implementación de modales de apertura, arqueo ciego y maquetación de Acta Oficial con CSS `@media print`.
+* **Evidencia:** `gestisoft-app/resources/js/Pages/Caja/Index.jsx` | **Qué demuestra:** Panel de auditoría gerencial con filtro del mes en curso por defecto, conmutador a histórico completo y desglose de boletas.
+* **Evidencia:** `docs/guia-semana13.md` (Sección 6.2 y Sección 16: ADR-04) | **Qué demuestra:** Flujo operativo de caja y justificación de experiencia de usuario en arqueo ciego.

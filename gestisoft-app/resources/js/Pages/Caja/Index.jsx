@@ -19,7 +19,11 @@ export default function Index({ auth, turnos, filters, metrics, cajeros = [] }) 
     const aplicarFiltros = (e) => {
         if (e && e.preventDefault) e.preventDefault();
         const params = {};
-        if (filtroFecha) params.fecha = filtroFecha;
+        if (filtroFecha) {
+            params.fecha = filtroFecha;
+        } else if (filters.periodo) {
+            params.periodo = filters.periodo;
+        }
         if (filtroEstado) params.estado = filtroEstado;
         if (filtroCajero) params.user_id = filtroCajero;
         router.get(route('cajas.index'), params, { preserveState: true });
@@ -29,7 +33,23 @@ export default function Index({ auth, turnos, filters, metrics, cajeros = [] }) 
         setFiltroFecha('');
         setFiltroEstado('');
         setFiltroCajero('');
-        router.get(route('cajas.index'), {}, { preserveState: true });
+        router.get(route('cajas.index'), { periodo: 'mes' }, { preserveState: true });
+    };
+
+    const setPeriodoMes = () => {
+        setFiltroFecha('');
+        const params = { periodo: 'mes' };
+        if (filtroEstado) params.estado = filtroEstado;
+        if (filtroCajero) params.user_id = filtroCajero;
+        router.get(route('cajas.index'), params, { preserveState: true });
+    };
+
+    const setPeriodoHistorico = () => {
+        setFiltroFecha('');
+        const params = { periodo: 'historico' };
+        if (filtroEstado) params.estado = filtroEstado;
+        if (filtroCajero) params.user_id = filtroCajero;
+        router.get(route('cajas.index'), params, { preserveState: true });
     };
 
     const setFechaHoy = () => {
@@ -186,35 +206,76 @@ export default function Index({ auth, turnos, filters, metrics, cajeros = [] }) 
             <div className="py-8">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
 
-                    {/* Tarjeta Hero Principal: Total Ventas Consolidado del Negocio */}
-                    <div className="bg-[#123764] text-white p-5 rounded-2xl shadow-sm border border-[#0d2747] flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    {/* Tarjeta Hero Principal: Total Ventas del Mes / Consolidado del Negocio */}
+                    <div className="bg-[#123764] text-white p-5 rounded-2xl shadow-sm border border-[#0d2747] flex flex-col md:flex-row md:items-center justify-between gap-4">
                         <div className="flex items-center gap-3.5">
                             <div className="w-12 h-12 rounded-xl bg-white/10 border border-white/20 flex items-center justify-center font-bold text-2xl shrink-0">
                                 📊
                             </div>
                             <div>
-                                <div className="flex items-center gap-2">
+                                <div className="flex flex-wrap items-center gap-2">
                                     <p className="text-xs font-bold uppercase tracking-wider text-sky-200">
-                                        Total Facturado {metrics.is_filtered ? '(Período Filtrado)' : 'Consolidado'}
+                                        {filters.fecha
+                                            ? `Total Facturado (Día: ${filters.fecha})`
+                                            : filters.periodo === 'historico'
+                                            ? 'Total Facturado Consolidado (Histórico)'
+                                            : `Total Facturado (${metrics.nombre_mes || 'Mes Actual'})`}
                                     </p>
-                                    {metrics.is_filtered && (
-                                        <span className="text-[10px] bg-sky-400/20 text-sky-100 font-semibold px-2 py-0.5 rounded-full border border-sky-300/30">
-                                            Filtro Activo
-                                        </span>
-                                    )}
+                                    <span className={`text-[10px] font-semibold px-2.5 py-0.5 rounded-full border ${
+                                        filters.fecha
+                                            ? 'bg-blue-400/20 text-blue-100 border-blue-300/30'
+                                            : filters.periodo === 'historico'
+                                            ? 'bg-amber-400/25 text-amber-100 border-amber-300/40'
+                                            : 'bg-emerald-400/25 text-emerald-100 border-emerald-300/40'
+                                    }`}>
+                                        {filters.fecha ? 'Filtro Diario' : filters.periodo === 'historico' ? 'Histórico Completo' : 'Mes en Curso'}
+                                    </span>
                                 </div>
                                 <p className="text-xs text-blue-100 font-medium mt-0.5">
-                                    Suma consolidada de todas las ventas del negocio (Efectivo gaveta + Débito + Crédito + Transferencias)
+                                    {filters.fecha
+                                        ? `Ventas del día ${filters.fecha} (Efectivo gaveta + Débito + Crédito + Transferencias)`
+                                        : filters.periodo === 'historico'
+                                        ? 'Suma acumulada de todas las ventas del negocio desde su creación'
+                                        : `Ventas acumuladas de ${metrics.nombre_mes || 'este mes'} (Efectivo gaveta + Débito + Crédito + Transferencias)`}
                                 </p>
                             </div>
                         </div>
-                        <div className="sm:text-right">
-                            <p className="text-3xl sm:text-4xl font-black tracking-tight tabular-nums text-white">
-                                {formatMoney(metrics.total_ventas_general)}
-                            </p>
-                            <span className="inline-block mt-0.5 text-xs font-semibold bg-white/15 text-white px-3 py-0.5 rounded-full border border-white/20">
-                                {metrics.total_turnos} turno{metrics.total_turnos === 1 ? '' : 's'} considerado{metrics.total_turnos === 1 ? '' : 's'}
-                            </span>
+
+                        {/* Switch rápido de Período y Monto */}
+                        <div className="flex flex-col sm:flex-row md:flex-col sm:items-center md:items-end justify-between sm:justify-start gap-3">
+                            <div className="flex items-center gap-1 bg-black/25 p-1 rounded-xl border border-white/10 self-start md:self-auto">
+                                <button
+                                    type="button"
+                                    onClick={setPeriodoMes}
+                                    className={`px-3 py-1 rounded-lg text-xs font-bold transition-all ${
+                                        !filters.fecha && filters.periodo !== 'historico'
+                                            ? 'bg-white text-[#123764] shadow-xs'
+                                            : 'text-white/80 hover:text-white hover:bg-white/10'
+                                    }`}
+                                >
+                                    🗓️ Este Mes
+                                </button>
+                                <button
+                                    type="button"
+                                    onClick={setPeriodoHistorico}
+                                    className={`px-3 py-1 rounded-lg text-xs font-bold transition-all ${
+                                        filters.periodo === 'historico'
+                                            ? 'bg-amber-400 text-gray-900 shadow-xs'
+                                            : 'text-white/80 hover:text-white hover:bg-white/10'
+                                    }`}
+                                >
+                                    📚 Histórico Completo
+                                </button>
+                            </div>
+
+                            <div className="md:text-right">
+                                <p className="text-3xl sm:text-4xl font-black tracking-tight tabular-nums text-white">
+                                    {formatMoney(metrics.total_ventas_general)}
+                                </p>
+                                <span className="inline-block mt-0.5 text-xs font-semibold bg-white/15 text-white px-3 py-0.5 rounded-full border border-white/20">
+                                    {metrics.total_turnos} turno{metrics.total_turnos === 1 ? '' : 's'} considerado{metrics.total_turnos === 1 ? '' : 's'}
+                                </span>
+                            </div>
                         </div>
                     </div>
 
@@ -273,7 +334,7 @@ export default function Index({ auth, turnos, filters, metrics, cajeros = [] }) 
                                     <label className="block text-xs font-semibold text-gray-600">
                                         Fecha de Apertura
                                     </label>
-                                    <div className="flex items-center gap-1">
+                                    <div className="flex flex-wrap items-center gap-1">
                                         <button
                                             type="button"
                                             onClick={setFechaHoy}
@@ -287,6 +348,28 @@ export default function Index({ auth, turnos, filters, metrics, cajeros = [] }) 
                                             className="text-[11px] font-semibold text-gray-600 hover:text-gray-800 bg-gray-100 hover:bg-gray-200 px-2 py-0.5 rounded-md transition-colors"
                                         >
                                             Ayer
+                                        </button>
+                                        <button
+                                            type="button"
+                                            onClick={setPeriodoMes}
+                                            className={`text-[11px] font-semibold px-2 py-0.5 rounded-md transition-colors ${
+                                                !filtroFecha && filters.periodo !== 'historico'
+                                                    ? 'bg-indigo-600 text-white'
+                                                    : 'text-gray-600 bg-gray-100 hover:bg-gray-200'
+                                            }`}
+                                        >
+                                            Mes Actual
+                                        </button>
+                                        <button
+                                            type="button"
+                                            onClick={setPeriodoHistorico}
+                                            className={`text-[11px] font-semibold px-2 py-0.5 rounded-md transition-colors ${
+                                                filters.periodo === 'historico'
+                                                    ? 'bg-amber-500 text-white'
+                                                    : 'text-gray-600 bg-gray-100 hover:bg-gray-200'
+                                            }`}
+                                        >
+                                            Histórico
                                         </button>
                                     </div>
                                 </div>
@@ -342,7 +425,7 @@ export default function Index({ auth, turnos, filters, metrics, cajeros = [] }) 
                                     <span>Filtrar</span>
                                 </button>
 
-                                {(filtroFecha || filtroEstado || filtroCajero) && (
+                                {(filtroFecha || filtroEstado || filtroCajero || filters.periodo === 'historico') && (
                                     <button
                                         type="button"
                                         onClick={limpiarFiltros}
