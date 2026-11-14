@@ -168,18 +168,28 @@ class CajaController extends Controller
 
     /**
      * Listado administrativo de turnos de caja con filtros y métricas.
+     * Por defecto muestra las ventas y turnos del mes en curso, con opción de consultar histórico completo.
      */
     public function index(Request $request)
     {
         $fecha = $request->input('fecha');
         $estado = $request->input('estado');
         $userId = $request->input('user_id');
+        $periodo = $request->input('periodo');
+
+        // Por defecto, si no se filtra por fecha específica ni se pide histórico, se acota al mes en curso
+        if (!$fecha && !$periodo) {
+            $periodo = 'mes';
+        }
 
         $query = TurnoCaja::with('user')
-            ->latest('created_at');
+            ->latest('fecha_apertura');
 
         if ($fecha) {
             $query->whereDate('fecha_apertura', $fecha);
+        } elseif ($periodo === 'mes') {
+            $query->whereYear('fecha_apertura', now()->year)
+                  ->whereMonth('fecha_apertura', now()->month);
         }
 
         if ($estado && in_array($estado, ['abierto', 'cerrado'])) {
@@ -202,7 +212,11 @@ class CajaController extends Controller
         $metricQuery = TurnoCaja::query();
         if ($fecha) {
             $metricQuery->whereDate('fecha_apertura', $fecha);
+        } elseif ($periodo === 'mes') {
+            $metricQuery->whereYear('fecha_apertura', now()->year)
+                        ->whereMonth('fecha_apertura', now()->month);
         }
+
         if ($estado && in_array($estado, ['abierto', 'cerrado'])) {
             $metricQuery->where('estado', $estado);
         }
@@ -222,6 +236,13 @@ class CajaController extends Controller
         $totalVentasGeneral = $totalRecaudadoEfectivo + $totalRecaudadoDebito + $totalRecaudadoCredito + $totalRecaudadoTransferencia + $totalRecaudadoTarjetaLegacy;
         $totalRecaudadoDigital = $totalRecaudadoDebito + $totalRecaudadoCredito + $totalRecaudadoTransferencia;
 
+        $meses = [
+            1 => 'Enero', 2 => 'Febrero', 3 => 'Marzo', 4 => 'Abril',
+            5 => 'Mayo', 6 => 'Junio', 7 => 'Julio', 8 => 'Agosto',
+            9 => 'Septiembre', 10 => 'Octubre', 11 => 'Noviembre', 12 => 'Diciembre'
+        ];
+        $nombreMesActual = ($meses[(int) now()->month] ?? '') . ' ' . now()->year;
+
         return Inertia::render('Caja/Index', [
             'turnos' => $turnos,
             'cajeros' => $cajeros,
@@ -229,8 +250,11 @@ class CajaController extends Controller
                 'fecha' => $fecha ?? '',
                 'estado' => $estado ?? '',
                 'user_id' => $userId ? (int) $userId : '',
+                'periodo' => $periodo ?? 'mes',
             ],
             'metrics' => [
+                'periodo' => $periodo ?? 'mes',
+                'nombre_mes' => $nombreMesActual,
                 'total_turnos' => $totalTurnos,
                 'total_turnos_global' => TurnoCaja::count(),
                 'turnos_abiertos' => $turnosAbiertosGlobal,
@@ -241,7 +265,7 @@ class CajaController extends Controller
                 'total_transferencia' => $totalRecaudadoTransferencia,
                 'total_digital' => $totalRecaudadoDigital,
                 'total_ventas_general' => $totalVentasGeneral,
-                'is_filtered' => !empty($fecha) || !empty($estado) || !empty($userId),
+                'is_filtered' => !empty($fecha) || !empty($estado) || !empty($userId) || $periodo === 'historico',
             ],
         ]);
     }
@@ -363,6 +387,10 @@ class CajaController extends Controller
     {
         $turno = TurnoCaja::with(['user', 'ventas'])
             ->findOrFail($id);
+
+        if (Auth::user()->role === 'cajero' && $turno->user_id !== Auth::id()) {
+            abort(403, 'No tiene permiso para consultar el resumen de turnos de otros usuarios.');
+        }
 
         return response()->json([
             'id' => $turno->id,

@@ -145,6 +145,19 @@ class NegociosYProductosSeeder extends Seeder
                 $admin->save();
             }
 
+            // Crear cajero de prueba para el primer negocio (Boutique Urbana) para evaluaciones y demos
+            if ($negocio->name === 'Boutique Urbana') {
+                User::firstOrCreate(
+                    ['email' => 'cajero@gestisoft.cl'],
+                    [
+                        'name' => 'Hugo Cajero',
+                        'password' => Hash::make('cajero1234'),
+                        'role' => 'cajero',
+                        'negocio_id' => $negocio->id,
+                    ]
+                );
+            }
+
             $this->command->info(sprintf(
                 '   -> Negocio [%d]: "%s" | Admin: "%s" (%s) | Clave: %s',
                 $negocio->id,

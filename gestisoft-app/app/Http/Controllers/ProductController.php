@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 use Illuminate\Validation\Rule;
 
@@ -43,16 +44,18 @@ class ProductController extends Controller
             'sku.unique' => 'Ya existe un producto con este SKU en tu inventario.',
         ]);
 
-        $product = Product::create($validated);
+        DB::transaction(function () use ($validated) {
+            $product = Product::create($validated);
 
-        \App\Models\MovimientoStock::create([
-            'product_id' => $product->id,
-            'user_id' => auth()->id(),
-            'cantidad_anterior' => 0,
-            'cantidad_nueva' => $product->stock,
-            'diferencia' => $product->stock,
-            'motivo' => 'Inventario Inicial',
-        ]);
+            \App\Models\MovimientoStock::create([
+                'product_id' => $product->id,
+                'user_id' => auth()->id(),
+                'cantidad_anterior' => 0,
+                'cantidad_nueva' => $product->stock,
+                'diferencia' => $product->stock,
+                'motivo' => 'Inventario Inicial',
+            ]);
+        });
 
         return redirect()->route('inventory.index');
     }
@@ -77,26 +80,40 @@ class ProductController extends Controller
             'name' => 'required|string|max:255',
             'price' => 'required|integer|min:0',
             'stock' => 'required|integer|min:0',
-            'motivo' => 'required_if:stock,!='.$product->stock.'|nullable|string|max:255',
+            'motivo' => [
+                Rule::requiredIf(fn () => (int) $request->stock !== (int) $product->stock),
+                'nullable',
+                'string',
+                'max:255',
+            ],
         ], [
             'sku.unique' => 'Ya existe un producto con este SKU en tu inventario.',
-            'motivo.required_if' => 'Debe justificar el motivo al modificar el stock manualmente.',
+            'motivo.required' => 'Debe justificar el motivo al modificar el stock manualmente.',
         ]);
 
-        $cantidadAnterior = $product->stock;
+        DB::transaction(function () use ($product, $validated, $request) {
+            $locked = Product::whereKey($product->id)->lockForUpdate()->firstOrFail();
+            $cantidadAnterior = $locked->stock;
+            $nuevoStock = (int) $validated['stock'];
 
-        $product->update($validated);
-
-        if ($product->wasChanged('stock')) {
-            \App\Models\MovimientoStock::create([
-                'product_id' => $product->id,
-                'user_id' => auth()->id(),
-                'cantidad_anterior' => $cantidadAnterior,
-                'cantidad_nueva' => $product->stock,
-                'diferencia' => $product->stock - $cantidadAnterior,
-                'motivo' => $request->motivo,
+            $locked->update([
+                'sku' => $validated['sku'],
+                'name' => $validated['name'],
+                'price' => $validated['price'],
+                'stock' => $nuevoStock,
             ]);
-        }
+
+            if ($nuevoStock !== $cantidadAnterior) {
+                \App\Models\MovimientoStock::create([
+                    'product_id' => $locked->id,
+                    'user_id' => auth()->id(),
+                    'cantidad_anterior' => $cantidadAnterior,
+                    'cantidad_nueva' => $nuevoStock,
+                    'diferencia' => $nuevoStock - $cantidadAnterior,
+                    'motivo' => $request->motivo,
+                ]);
+            }
+        });
 
         return redirect()->route('inventory.index');
     }
