@@ -35,7 +35,7 @@ jobs:
         run: php artisan key:generate
 
       - name: Build Frontend Assets
-        run: npm install && npm run build
+        run: npm install --legacy-peer-deps && npm run build
 
       - name: Run PHPUnit Tests
         run: php artisan test
