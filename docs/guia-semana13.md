@@ -278,17 +278,26 @@ jobs:
         working-directory: gestisoft-app
     steps:
       - uses: actions/checkout@v4
-      - uses: shivammathur/setup-php@v2
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.3'
-          extensions: pdo_sqlite
-      - uses: actions/setup-node@v4
+          php-version: '8.4'
+          extensions: mbstring, xml, ctype, iconv, intl, pdo_sqlite, sqlite3, zip
+          coverage: none
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - run: composer install --no-interaction --prefer-dist
-      - run: npm ci && npm run build
-      - run: cp .env.example .env && php artisan key:generate
-      - run: php artisan test
+      - name: Prepare Environment File
+        run: cp .env.example .env
+      - name: Install Composer Dependencies
+        run: composer install --no-interaction --prefer-dist --optimize-autoloader
+      - name: Generate App Key
+        run: php artisan key:generate
+      - name: Build Frontend Assets
+        run: npm install && npm run build
+      - name: Run PHPUnit Tests
+        run: php artisan test
 ```
 
 | Control de Integración | Frecuencia de Ejecución | Condición Esperada de Éxito | Evidencia Producida |
