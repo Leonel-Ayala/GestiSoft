@@ -19,8 +19,11 @@ Route::get('/dashboard', function () {
 
 Route::middleware('auth')->group(function () {
     Route::middleware('role:admin')->group(function () {
-        Route::resource('inventory', ProductController::class)->parameters(['inventory' => 'product']);
-        Route::resource('users', \App\Http\Controllers\UserController::class);
+        Route::resource('inventory', ProductController::class)
+            ->parameters(['inventory' => 'product'])
+            ->except(['show']);
+        Route::resource('users', \App\Http\Controllers\UserController::class)
+            ->only(['index', 'create', 'store', 'destroy']);
         Route::get('/cajas', [CajaController::class, 'index'])->name('cajas.index');
         Route::get('/cajas/{id}/transacciones', [CajaController::class, 'transacciones'])->name('cajas.transacciones');
     });

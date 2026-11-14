@@ -12,6 +12,10 @@ return new class extends Migration
      */
     public function up(): void
     {
+        // DEF-18: SQLite no soporta alteración de foreign keys mediante dropForeign() sin recrear la tabla.
+        // La restricción referencial física restrictOnDelete se aplica en motores RDBMS de producción (MySQL/PostgreSQL),
+        // mientras que a nivel de aplicación la integridad del Kardex ante eliminaciones está blindada por SoftDeletes
+        // en el modelo Product y validada en CI por InventoryTest::test_eliminar_producto_conserva_kardex.
         if (DB::getDriverName() !== 'sqlite') {
             Schema::table('movimiento_stocks', function (Blueprint $table) {
                 $table->dropForeign(['product_id']);

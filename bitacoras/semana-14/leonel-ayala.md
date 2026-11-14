@@ -16,6 +16,9 @@
 | **¿Cuál es mi próxima acción?** | Monitorear el comportamiento del motor transaccional y la persistencia de turnos de caja durante el piloto de campo en los comercios de la Región del Maule, y diseñar la estructura relacional para registrar sangrías y retiros parciales de efectivo durante la jornada operativa. |
 
 ## Trazabilidad
-* **Evidencia:** `gestisoft-app/app/Http/Controllers/POSController.php` (método `checkout`) | **Qué demuestra:** Recálculo obligatorio en servidor, transacción atómica y mitigación C1 (ADR-03).
-* **Evidencia:** `gestisoft-app/app/Models/Product.php` y migración `2026_11_12_100000_add_soft_deletes_to_products_table.php` | **Qué demuestra:** Inmutabilidad del Kardex contable mediante SoftDeletes y restricción foránea C3 (ADR-05).
-* **Evidencia:** `gestisoft-app/tests/Feature/POSTest.php` | **Qué demuestra:** Pruebas automatizadas de recálculo de precios, rechazo de efectivo insuficiente y aislamiento cross-tenant.
+* **Pull Request:** PR #18 en GitHub (`feat/PBI-03-Arqueo-y-cierre-de-caja`) | **Qué demuestra:** Entrega completa del Incremento 2, estabilización y subsanación de observaciones C1-C4 y defectos DEF-11 a DEF-19.
+* **Evidencia:** `gestisoft-app/app/Http/Controllers/POSController.php` (método `checkout`) | **Qué demuestra:** Recálculo obligatorio en servidor, transacción atómica, mitigación C1 (ADR-03), re-bloqueo pesimista de turno activo (DEF-14) y registro atómico en Kardex con motivo trazable (ADR-07 / DEF-11).
+* **Evidencia:** `gestisoft-app/app/Http/Controllers/UserController.php` y `docs/adr/ADR-06-creacion-administradores.md` | **Qué demuestra:** Principio de mínimo privilegio (ADR-06 / DEF-16) forzando rol `'cajero'` en creación de usuarios desde UI.
+* **Evidencia:** `gestisoft-app/app/Http/Controllers/CajaController.php` (método `abrir`) | **Qué demuestra:** Envoltura en transacción con 3 reintentos ante deadlock y control de concurrencia (DEF-17).
+* **Evidencia:** `gestisoft-app/app/Models/Product.php` y migraciones `2026_11_12_100000_add_soft_deletes_to_products_table.php` y `2026_11_12_100001_update_foreign_keys_on_movimiento_stocks_table.php` | **Qué demuestra:** Inmutabilidad del Kardex contable mediante SoftDeletes y restricción foránea C3 (ADR-05).
+* **Evidencia:** `gestisoft-app/tests/Feature/POSTest.php`, `TurnoCajaTest.php` e `InventoryTest.php` | **Qué demuestra:** Pruebas automatizadas de recálculo de precios, rechazo de efectivo insuficiente, inmutabilidad de Kardex y aislamiento cross-tenant con 100% de éxito.

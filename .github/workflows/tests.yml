@@ -37,5 +37,8 @@ jobs:
       - name: Build Frontend Assets
         run: npm install --legacy-peer-deps && npm run build
 
-      - name: Run PHPUnit Tests
+      - name: Regresión Incremento 1 (inventario, POS, roles, multi-tenant, Kardex)
+        run: php artisan test --group=regresion
+
+      - name: Suite completa
         run: php artisan test

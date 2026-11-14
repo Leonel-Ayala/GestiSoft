@@ -4,9 +4,12 @@ namespace Tests\Feature;
 
 use App\Models\User;
 use App\Models\Negocio;
+use App\Models\Product;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use PHPUnit\Framework\Attributes\Group;
 use Tests\TestCase;
 
+#[Group('regresion')]
 class RoleSecurityTest extends TestCase
 {
     use RefreshDatabase;
@@ -226,5 +229,65 @@ class RoleSecurityTest extends TestCase
         $this->assertArrayHasKey('negocio_id', $userProps);
         $this->assertArrayNotHasKey('password', $userProps);
         $this->assertArrayNotHasKey('remember_token', $userProps);
+    }
+
+    public function test_admin_no_puede_crear_otro_admin_desde_formulario()
+    {
+        $negocio = Negocio::create(['name' => 'Comercial Centro']);
+        $admin = User::factory()->create([
+            'negocio_id' => $negocio->id,
+            'role' => 'admin',
+        ]);
+
+        $this->actingAs($admin);
+
+        // Se intenta enviar role => 'admin' desde el request
+        $response = $this->post('/users', [
+            'name' => 'Intento Admin Secundario',
+            'email' => 'intento.admin@gestisoft.cl',
+            'password' => 'password123',
+            'role' => 'admin',
+        ]);
+
+        $response->assertRedirect('/users');
+
+        // ADR-06: Por política de mínimo privilegio, el usuario creado es forzosamente cajero
+        $this->assertDatabaseHas('users', [
+            'name' => 'Intento Admin Secundario',
+            'email' => 'intento.admin@gestisoft.cl',
+            'role' => 'cajero',
+            'negocio_id' => $negocio->id,
+        ]);
+
+        $this->assertDatabaseMissing('users', [
+            'email' => 'intento.admin@gestisoft.cl',
+            'role' => 'admin',
+        ]);
+    }
+
+    public function test_rutas_inexistentes_responden_404()
+    {
+        $negocio = Negocio::create(['name' => 'Comercial Centro']);
+        $admin = User::factory()->create([
+            'negocio_id' => $negocio->id,
+            'role' => 'admin',
+        ]);
+
+        $this->actingAs($admin);
+
+        $producto = Product::create([
+            'sku' => 'SKU-404',
+            'name' => 'Producto 404',
+            'price' => 1000,
+            'stock' => 5,
+        ]);
+
+        // Rutas no implementadas: antes arrojaban error 500 (BadMethodCallException).
+        // Al limitar el resource con except(['show']) y only(['index','create','store','destroy']):
+        // - URIs sin ruta registrada (/users/{id}/edit) retornan 404 Not Found.
+        // - URIs con verbo no implementado (/users/{id} y /inventory/{id}) retornan 405 Method Not Allowed en lugar de 500.
+        $this->assertEquals(405, $this->get('/users/' . $admin->id)->status());
+        $this->get('/users/' . $admin->id . '/edit')->assertNotFound();
+        $this->assertEquals(405, $this->get('/inventory/' . $producto->id)->status());
     }
 }

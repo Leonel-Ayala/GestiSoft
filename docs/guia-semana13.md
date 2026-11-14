@@ -1,4 +1,6 @@
 # GUÍA DE TRABAJO EN EQUIPO - SEMANA 13
+> **Nota histórica:** Documento histórico de planificación de la Semana 13. La versión vigente y única fuente de verdad para la evaluación y defensa de la Semana 14 es [guia-semana14.md](guia-semana14.md).
+
 ## Evolucionar y Estabilizar el Producto: Segundo Incremento, Calidad y Plan de Estabilización
 
 * **Asignatura:** Taller de Desarrollo de Software (INF524)

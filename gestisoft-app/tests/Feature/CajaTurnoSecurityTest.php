@@ -38,7 +38,7 @@ class CajaTurnoSecurityTest extends TestCase
         ]);
     }
 
-    public function test_no_se_puede_abrir_dos_turnos_simultaneos_para_el_mismo_usuario()
+    public function test_no_se_puede_abrir_un_segundo_turno_si_ya_hay_uno_abierto()
     {
         $negocio = Negocio::create(['name' => 'Ferretería Central']);
         $cajero = User::factory()->create([
@@ -52,7 +52,7 @@ class CajaTurnoSecurityTest extends TestCase
         $this->post('/caja/abrir', ['monto_inicial' => 30000]);
         $this->assertDatabaseCount('turnos_caja', 1);
 
-        // Intento de segunda apertura concurrente
+        // Intento de segunda apertura cuando ya hay uno abierto
         $response = $this->post('/caja/abrir', ['monto_inicial' => 20000]);
         $response->assertSessionHasErrors('caja');
         $this->assertDatabaseCount('turnos_caja', 1);
@@ -387,6 +387,7 @@ class CajaTurnoSecurityTest extends TestCase
             'stock' => 10,
         ]);
 
+        // Alias heredados solo para lectura de datos históricos; la escritura está restringida por POSController::METODOS_PAGO
         $venta = Venta::create([
             'negocio_id' => $negocio->id,
             'user_id' => $admin->id,

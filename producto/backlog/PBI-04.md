@@ -9,20 +9,21 @@
 
 ## 2. Alcance
 - **Incluye:** 
-  - CRUD básico de cuentas de usuario dentro del tenant.
-  - Asignación de rol "Administrador" o "Cajero".
-  - Protección y bloqueo de rutas críticas (Inventario, Reportes, Usuarios, Dashboard) para el rol "Cajero".
+  - Gestión de cuentas de usuario dentro del negocio (`negocio_id`).
+  - Creación de usuarios operativos con rol `cajero` desde la interfaz web administrativa bajo política de mínimo privilegio (**ADR-06**).
+  - Protección y bloqueo de rutas críticas (Inventario, Usuarios, Dashboard) para el rol `cajero` (retornando `HTTP 403`).
   - Redirección automática de cajeros hacia `/pos` al intentar acceder al Dashboard o iniciar sesión.
   - Optimización de interfaces (UI/UX) con badges de rol, atajos de teclado visuales, accesibilidad y números tabulares.
 - **No Incluye:** 
+  - Creación de administradores adicionales desde la interfaz web (restringido por **ADR-06** a seeders/registro inicial del comercio).
   - Recuperación de contraseñas olvidadas por correo electrónico.
 
 ## 3. Requisitos y Aceptación
 - **Requisitos Satisfechos:** RF-10, RF-11, RNF-SEC-01, RNF-SEC-02, RNF-ACC-02
-- **Criterios de Aceptación:** AC-08 (Normal), AC-09 (Seguridad/Límite), AC-12 (Ocultamiento en DOM).
-- **Pruebas Automatizadas:** `tests/Feature/RoleSecurityTest.php` (10 tests).
-- **Mecanismos Clave:** `RoleMiddleware` (kernel HTTP), redirecciones de ruta en `web.php` y `AuthenticatedSessionController`, inyección de sesión en `HandleInertiaRequests`, y `SoftDeletes` en el modelo `User`.
-- **Estado Actual:** Completado e integrado en el Incremento Funcional 1 (Semanas 6-9).
+- **Criterios de Aceptación:** AC-08 (Normal), AC-09 (Seguridad/Límite), AC-12 (Ocultamiento en DOM), **AC-USR-01** (Política de mínimo privilegio en creación de usuarios, ADR-06 / DEF-16).
+- **Pruebas Automatizadas:** `tests/Feature/RoleSecurityTest.php` (13 tests, grupo de regresión).
+- **Mecanismos Clave:** `CheckRole` middleware (alias `role:admin`), redirecciones de ruta en `web.php`, lista blanca en `HandleInertiaRequests`, `SoftDeletes` en el modelo `User` y política **ADR-06**.
+- **Estado Actual:** Completado en Incremento 1 y estabilizado en Incremento 2 con la política de mínimo privilegio ADR-06.
 
 ## 4. Justificación de Priorización (Criterios Rúbrica)
 - **Valor:** Proporciona tranquilidad administrativa y disminuye el riesgo de fraude interno limitando quién puede modificar los precios.

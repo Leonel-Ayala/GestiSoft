@@ -26,14 +26,14 @@ class UserController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8',
-            'role' => 'required|in:admin,cajero',
         ]);
 
+        // ADR-06 (Opción A - Mínimo Privilegio): Creación restringida estrictamente al rol cajero desde la interfaz
         User::create([
             'name' => $validated['name'],
             'email' => $validated['email'],
             'password' => Hash::make($validated['password']),
-            'role' => $validated['role'],
+            'role' => 'cajero',
             'negocio_id' => auth()->user()->negocio_id,
         ]);
 

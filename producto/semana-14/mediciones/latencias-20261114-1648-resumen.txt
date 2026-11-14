@@ -1,0 +1,23 @@
+========================================================================
+  GESTISOFT — INFORME DE MEDICIÓN DE LATENCIA (ATRIBUTOS DE CALIDAD)
+========================================================================
+Fecha: 2026-11-14 16:48:40
+Muestras por operación (n): 50
+Método de percentil: Nearest-Rank Method (ceil(p/100 * n))
+Entorno de ejecución:
+  - PHP: 8.5.12 (Windows WINNT)
+  - Modo: Laravel Kernel Request Dispatcher (In-Process Benchmark)
+  - DB Connection: sqlite
+  - CPU / Núcleos: 12 hilos
+  - Archivo CSV crudo: producto/semana-14/mediciones/latencias-20261114-1648.csv
+
+TABLA DE RESULTADOS Y CUMPLIMIENTO DE UMBRALES (C12):
+Operación      |    n | Mín (ms) | Prom(ms) |  p90(ms) |  p95(ms) | Máx(ms) | Umbral p95 | Cumplimiento
+----------------------------------------------------------------------------------------------------
+busqueda        |   50 |     2.28 |     4.83 |     4.77 |    10.77 |    71.65 |   150.00 ms | CUMPLE
+estado_caja     |   50 |     2.20 |     2.40 |     2.54 |     2.87 |     5.53 |   300.00 ms | CUMPLE
+checkout        |   50 |     3.42 |     8.94 |     5.45 |     6.63 |   246.76 |   500.00 ms | CUMPLE
+
+NOTAS Y LIMITACIONES:
+1. Medición de banco de pruebas local ejecutada sin concurrencia distribuida ni latencia de red WAN.
+2. Los percentiles p90 y p95 reflejan la respuesta interna del servidor garantizando el cumplimiento de los RNF en mostrador.

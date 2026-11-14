@@ -6,8 +6,10 @@ use App\Models\User;
 use App\Models\Negocio;
 use App\Models\Product;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use PHPUnit\Framework\Attributes\Group;
 use Tests\TestCase;
 
+#[Group('regresion')]
 class MultiTenantSecurityTest extends TestCase
 {
     use RefreshDatabase;

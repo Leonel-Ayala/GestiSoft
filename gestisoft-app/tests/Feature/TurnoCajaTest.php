@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\Negocio;
+use App\Models\Product;
 use App\Models\TurnoCaja;
 use App\Models\User;
 use App\Models\Venta;
@@ -74,6 +75,7 @@ class TurnoCajaTest extends TestCase
             'payment_method' => 'Efectivo',
         ]);
 
+        // Alias heredados solo para lectura de datos históricos; la escritura está restringida por POSController::METODOS_PAGO
         // Venta con tarjeta
         $ventaTarjeta = Venta::create([
             'negocio_id' => $negocio->id,
@@ -166,5 +168,88 @@ class TurnoCajaTest extends TestCase
         ]);
 
         $this->assertEquals(-3000, $turno->diferencia);
+    }
+
+    public function test_venta_rechazada_si_turno_se_cerro()
+    {
+        $negocio = Negocio::create(['name' => 'Comercio Turno Cerrado']);
+        $cajero = User::factory()->create([
+            'negocio_id' => $negocio->id,
+            'role' => 'cajero',
+        ]);
+
+        $this->actingAs($cajero);
+
+        $turno = TurnoCaja::create([
+            'negocio_id' => $negocio->id,
+            'user_id' => $cajero->id,
+            'fecha_apertura' => now(),
+            'monto_inicial' => 30000,
+            'total_esperado' => 30000,
+            'estado' => 'cerrado',
+            'fecha_cierre' => now(),
+        ]);
+
+        $producto = Product::create([
+            'negocio_id' => $negocio->id,
+            'sku' => 'LOCK-01',
+            'name' => 'Candado de Seguridad',
+            'price' => 5000,
+            'stock' => 5,
+        ]);
+
+        $response = $this->post('/pos/checkout', [
+            'items' => [
+                ['product_id' => $producto->id, 'quantity' => 1]
+            ],
+            'payment_method' => 'Efectivo',
+            'amount_received' => 5000,
+        ]);
+
+        $response->assertSessionHasErrors(['checkout']);
+        $this->assertEquals(5, $producto->fresh()->stock);
+        $this->assertDatabaseCount('ventas', 0);
+        $this->assertEquals('cerrado', $turno->fresh()->estado);
+        $this->assertEquals(30000, $turno->fresh()->total_esperado);
+    }
+
+    public function test_turno_cerrado_no_recalcula_totales()
+    {
+        $negocio = Negocio::create(['name' => 'Ferretería Inmutable']);
+        $cajero = User::factory()->create([
+            'negocio_id' => $negocio->id,
+            'role' => 'cajero',
+        ]);
+
+        $this->actingAs($cajero);
+
+        $turno = TurnoCaja::create([
+            'negocio_id' => $negocio->id,
+            'user_id' => $cajero->id,
+            'fecha_apertura' => now(),
+            'monto_inicial' => 20000,
+            'total_esperado' => 20000,
+            'monto_ventas_efectivo' => 0,
+            'estado' => 'cerrado',
+            'fecha_cierre' => now(),
+        ]);
+
+        // Se inserta directamente una venta asociada al turno cerrado
+        Venta::create([
+            'negocio_id' => $negocio->id,
+            'user_id' => $cajero->id,
+            'turno_caja_id' => $turno->id,
+            'total' => 10000,
+            'neto' => 8403,
+            'iva' => 1597,
+            'payment_method' => 'Efectivo',
+        ]);
+
+        // Al invocar sincronizarTotales(), la guarda de estado 'cerrado' previene alterar total_esperado (ADR-04)
+        $turno->sincronizarTotales();
+        $turno->refresh();
+
+        $this->assertEquals(20000, $turno->total_esperado);
+        $this->assertEquals(0, $turno->monto_ventas_efectivo);
     }
 }

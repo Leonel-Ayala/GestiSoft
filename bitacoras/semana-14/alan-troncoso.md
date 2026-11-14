@@ -16,6 +16,7 @@
 | **¿Cuál es mi próxima acción?** | Diseñar scripts de pruebas de carga y estrés concurrente utilizando herramientas de benchmarking (K6 o JMeter) para simular 50 usuarios simultáneos durante el piloto de campo en los comercios del Maule. |
 
 ## Trazabilidad
-* **Evidencia:** `.github/workflows/tests.yml` y suite `gestisoft-app/tests/Feature/CajaTurnoSecurityTest.php` | **Qué demuestra:** Pipeline de CI activo y blindaje contra accesos no autorizados e IDOR en turnos.
-* **Evidencia:** `producto/semana-3/mediciones-calidad.md` | **Qué demuestra:** Verificación empírica con tabla de 50 muestras crudas de p95 para búsqueda y checkout.
-* **Evidencia:** `producto/semana-3/trazabilidad.csv` | **Qué demuestra:** Trazabilidad bidireccional conectando necesidades, requisitos, decisiones arquitectónicas, PBIs y pruebas de QA.
+* **Pipeline CI y Regresión:** `.github/workflows/tests.yml` y `.github/pull_request_template.md` | **Qué demuestra:** Pipeline de CI en GitHub Actions con paso de suite de regresión (`--group=regresion`: 24 tests) previo a la suite completa (74 tests, 281 aserciones, 100% verde), además de plantilla estandarizada de Pull Request.
+* **Seguridad y Control de Acceso:** `gestisoft-app/tests/Feature/RoleSecurityTest.php` y `CajaTurnoSecurityTest.php` | **Qué demuestra:** Verificación de protección contra IDOR en turnos, aislamiento de rutas de inventario y usuarios (403 Forbidden a cajeros) y minimización de props de Inertia (C4).
+* **Atributos de Calidad Empíricos:** `scripts/medir-latencia.php`, `producto/semana-14/mediciones/` y `producto/semana-14/mediciones-calidad.md` | **Qué demuestra:** Mediciones reales de latencia en backend con 50 iteraciones: búsqueda p95 = 10.77 ms, estado de caja p95 = 2.87 ms, checkout atómico p95 = 6.63 ms (todos CUMPLE) y checklist 7/7 de atajos de teclado.
+* **Matriz de Trazabilidad:** `producto/semana-14/trazabilidad.csv` y script de validación `scripts/validar-trazabilidad.php` | **Qué demuestra:** Matriz bidireccional de 41 filas con 38 métodos de prueba verificados contra el código fuente y cero errores de consistencia.
