@@ -144,13 +144,13 @@
 ### SLIDE 09: Refinamiento del Product Backlog (PBI-03 y Defectos P0)
 * **Expositor:** Rodrigo Bertolini (Product Owner)
 * **Elementos Visuales:** Tabla del Sprint Backlog del Incremento 2 con prioridades (`P0 - Crítica`, `P1 - Calidad`), estimación en horas/puntos y estado:
-  * `C1 / DEF-07`: Recálculo de importes en servidor (P0, 3 hrs, Listo).
-  * `C2 / DEF-08`: Motivo obligatorio y transacción en Kardex (P0, 2 hrs, Listo).
-  * `C3 / DEF-09`: Kardex inmutable con SoftDeletes (P0, 3 hrs, Listo).
-  * `PBI-03`: Apertura, Arqueo Ciego, Auditoría y Acta (Valor Central, 8 pts, Listo).
-  * `C4 / DEF-10`: Minimización props Inertia (P1, 1 hr, Listo).
-  * `REG-02`: Suite de regresión 64 tests y CI (P1, 5 hrs, Listo).
-  * `PBI-05`: Dashboard gerencial (Postergado para Incremento 3).
+  * `C1 / DEF-04`: Recálculo de importes en servidor con `lockForUpdate` (P0, 3 hrs, Listo).
+  * `C2 / DEF-05`: Motivo obligatorio y transacción atómica en Kardex (P0, 2 hrs, Listo).
+  * `C3 / DEF-06`: Kardex inmutable con SoftDeletes y claves restrictivas (P0, 3 hrs, Listo).
+  * `PBI-03`: Apertura, Arqueo Ciego, Auditoría y Acta Oficial (Valor Central, 8 pts, Listo).
+  * `C4 / DEF-07`: Minimización de props de Inertia a 5 campos (P1, 1 hr, Listo).
+  * `REG-02 / DEF-08`: Corrección de payload ('items') y aserción en POSTest (P1, 1 hr, Listo).
+  * `PBI-05`: Dashboard gerencial con analítica histórica (Postergado para Incremento 3).
 * **Documento a Citar:** [trazabilidad.csv](file:///c:/Users/leone/Desktop/GestiSoft/producto/semana-3/trazabilidad.csv) y Sección 7 de Guía Semana 13.
 * **Guión del Expositor (Rodrigo):**
   > *"El refinamiento del backlog combinó entrega de valor con estabilización técnica. Las correcciones C1, C2 y C3 fueron tratadas como defectos P0 no negociables que debían quedar resueltos antes de dar por completado el módulo de cajas PBI-03. La capacidad del equipo se volcó a estabilizar la base antes de abordar nuevos módulos visuales."*
@@ -220,9 +220,9 @@
 ### SLIDE 15: Pila Tecnológica, Reproducibilidad y Configuración
 * **Expositor:** Leonel Ayala (Full Stack / Base de Datos Lead)
 * **Elementos Visuales:** Diagrama del stack:
-  * PHP 8.3 / 8.5 + Laravel 13
+  * PHP 8.4 / 8.5 + Laravel 13
   * Node.js 22 + React 19 + Tailwind CSS
-  * SQLite `:memory:` para CI ultrarrápido y MySQL para entorno productivo
+  * SQLite `:memory:` para CI ultrarrápido (6s) y MySQL InnoDB para entorno productivo
   * Cuadro de reproducibilidad: 5 comandos secuenciales documentados en `README.md`.
 * **Documento a Citar:** [README.md](file:///c:/Users/leone/Desktop/GestiSoft/README.md).
 * **Guión del Expositor (Leonel):**
