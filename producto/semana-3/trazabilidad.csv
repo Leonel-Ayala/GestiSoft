@@ -1,3 +1,4 @@
+# HISTORICO SEMANA 3: Reemplazado por producto/semana-14/trazabilidad.csv
 Evidencia / restricción,Necesidad,Decisión,Requisito,Criterio,PBI,Prueba prevista,Estado
 P01 (Falta de control),N-05,DEC-01 (Control estricto inventario),"RF-08, RF-09","AC-06, AC-07",PBI-01,InventoryTest.php,Listo
 O01 (Demoras mouse),N-02,DEC-02 (Arquitectura Reactiva POS),RF-01 al RF-05,"AC-03, AC-04, AC-05",PBI-02,POSTest.php,Listo

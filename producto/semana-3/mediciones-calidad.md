@@ -1,3 +1,5 @@
+> Reemplazado por [producto/semana-14/mediciones-calidad.md](../semana-14/mediciones-calidad.md). Documento histórico de la Semana 13 conservado para trazabilidad.
+
 # Reporte de Mediciones y Atributos de Calidad – GestiSoft
 
 **Fecha de Ejecución y Consolidación:** 12 de Noviembre de 2026  
