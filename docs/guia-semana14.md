@@ -343,14 +343,15 @@ php artisan test --group=regresion
 
 ## 12. Atributos de calidad medibles (C12)
 
-Resultados oficiales extraídos literalmente del informe generado por `scripts/medir-latencia.php`:
+Resultados oficiales extraídos de scripts de medición y estimación automatizados: rendimiento de endpoints y base de datos vía `scripts/medir-latencia.php`; eficiencia operacional en mostrador (H-03) vía `gestisoft-app/tests/Feature/H03TiemposCajaTest.php` y `scripts/estimar-klm-h03.php` (resumen consolidado en `producto/semana-14/mediciones/h03-resumen.txt`):
 
 | Atributo | Operación Evaluada | Muestras ($n$) | Mínimo | Promedio | Percentil 95 ($p95$) | Umbral Comprometido | Cumplimiento |
 | :--- | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
 | **Rendimiento** | Búsqueda reactiva (`/pos/search`) | 50 | 2.28 ms | 4.83 ms | **10.77 ms** | $\le 150.00\text{ ms}$ | **CUMPLE** |
 | **Rendimiento** | Estado de caja (`/caja/estado`) | 50 | 2.20 ms | 2.40 ms | **2.87 ms** | $\le 300.00\text{ ms}$ | **CUMPLE** |
 | **Rendimiento** | Checkout POS (`/pos/checkout`) | 50 | 3.42 ms | 8.94 ms | **6.63 ms** | $\le 500.00\text{ ms}$ | **CUMPLE** |
-| **Eficiencia** | Apertura y cierre de caja (H-03) | 5 ensayos | 3.31 s | 4.04 s | **4.67 s (máx)** | $\le 60.00\text{ s}$ | **CUMPLE** |
+| **Eficiencia** | Apertura de turno (H-03, KLM) | 5 ensayos | 3.31 s | 3.41 s | **3.80 s (máx)** | $\le 60.00\text{ s}$ | **CUMPLE** |
+| **Eficiencia** | Cierre con arqueo ciego (H-03, KLM) | 5 ensayos | 4.67 s | 4.67 s | **4.67 s (máx)** | $\le 60.00\text{ s}$ | **CUMPLE** |
 | **Accesibilidad** | Operación completa por teclado | 6 flujos | — | — | — | 100% operable sin ratón | **CUMPLE** |
 
 ---
@@ -374,9 +375,10 @@ Resultados oficiales extraídos literalmente del informe generado por `scripts/m
 
 | PR # | Contenido | Integró | Revisión previa | CI |
 | :---: | :--- | :--- | :--- | :---: |
-| [#15](https://github.com/Leonel-Ayala/GestiSoft/pull/15)–[#17](https://github.com/Leonel-Ayala/GestiSoft/pull/17) | Modelo TurnoCaja, módulo de caja y UI de arqueo ciego | Leonel Ayala | Revisión en equipo | Ver PR |
-| [#18](https://github.com/Leonel-Ayala/GestiSoft/pull/18) | Estabilización del Incremento 2 (C1–C4) | Leonel Ayala | Revisión en equipo | Ver PR |
-| [#19](https://github.com/Leonel-Ayala/GestiSoft/pull/19) | DEF-11 a DEF-19, ADR-01 a ADR-07, documentación S14 | Leonel Ayala | Revisión en equipo | Ver PR |
+| [#15](https://github.com/Leonel-Ayala/GestiSoft/pull/15)–[#17](https://github.com/Leonel-Ayala/GestiSoft/pull/17) | Modelo TurnoCaja, módulo de caja y UI de arqueo ciego | Leonel Ayala | Revisión en equipo | Sin CI automático (previo a workflow) |
+| [#18](https://github.com/Leonel-Ayala/GestiSoft/pull/18) | Estabilización del Incremento 2 (C1–C4) | Leonel Ayala | Revisión en equipo | 2/2 verde |
+| [#19](https://github.com/Leonel-Ayala/GestiSoft/pull/19) | DEF-11 a DEF-19, ADR-01 a ADR-07, documentación S14 | Leonel Ayala | Revisión en equipo | 2/2 verde |
+| [#20](https://github.com/Leonel-Ayala/GestiSoft/pull/20) | Correcciones finales S14 (documentación y estabilización) | Leonel Ayala | Revisión en equipo | 2/2 verde |
 
 * **Limitación declarada:** la revisión por pares se hizo de forma presencial y no quedó registrada como aprobación en GitHub. Para el Incremento 3, el equipo evaluará registrar al menos un comentario de revisión por PR.
 
@@ -453,7 +455,7 @@ Cada integrante documenta su reflexión crítica individual, evidencias de códi
 | 1 | ¿Se superaron las observaciones de la Demo 2 (C1 a C4)? | **Sí** | Sección 1 de esta guía; tests `POSTest`, `InventoryTest`, `RoleSecurityTest`. |
 | 2 | ¿La hipótesis H-01 se presenta con honestidad técnica sin exagerar resultados? | **Sí** | [validacion-h01.md](../investigacion/validacion-h01.md) (Secciones 1, 6 y 7). |
 | 3 | ¿El backlog refleja el estado real del producto y los nuevos defectos DEF-11 a DEF-19? | **Sí** | Sección 3 de esta guía y fichas en `producto/backlog/`. |
-| 4 | ¿Existe una versión candidata reproducible con etiqueta y release? | **Sí (tras publicar el Release, ver paso M-5)** | El código fuente está preparado en la rama para el tag `v0.2.0-rc2` y se publicará el tarball empaquetado en [GitHub Releases](https://github.com/Leonel-Ayala/GestiSoft/releases). |
+| 4 | ¿Existe una versión candidata reproducible con etiqueta y release? | **Sí** | Tag [`v0.2.0-rc2`](https://github.com/Leonel-Ayala/GestiSoft/releases/tag/v0.2.0-rc2) publicado en GitHub con código fuente y Release oficial del incremento. |
 | 5 | ¿Se cuenta con una suite de regresión del Incremento 1 separada en CI? | **Sí** | Paso dedicado en `.github/workflows/tests.yml` (24 tests verdes). |
 | 6 | ¿La suite completa de pruebas pasa al 100% en verde? | **Sí** | 76 tests / 306 aserciones en verde en CI y entorno local (incluyendo 2 tests automatizados de H-03). |
 | 7 | ¿Las mediciones de calidad fueron generadas por un script reproducible con datos crudos? | **Sí** | [mediciones-calidad.md](../producto/semana-14/mediciones-calidad.md) y `scripts/medir-latencia.php`. |
