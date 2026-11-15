@@ -75,7 +75,7 @@ A partir de la retroalimentación docente oficial de la segunda defensa (`Grupo 
 | **3** | **DEF-12** | Defecto | Validación `distinct` para ítems duplicados en checkout | 1 PH | **Cerrado** | `POSTest::test_items_duplicados_no_permiten_sobreventa` |
 | **4** | **DEF-13** | Defecto | Validación cerrada de `payment_method` con regla canónica | 1 PH | **Cerrado** | `POSTest::test_medio_de_pago_invalido_es_rechazado` |
 | **5** | **DEF-14** | Defecto | Bloqueo pesimista de turno en transacción de checkout | 2 PH | **Cerrado** | `TurnoCajaTest::test_venta_rechazada_si_turno_se_cerro` |
-| **6** | **DEF-15** | Defecto | Limitación de routes resource para evitar error 500 | 1 PH | **Cerrado** | `RoleSecurityTest::test_rutas_inexistentes_responden_404` |
+| **6** | **DEF-15** | Defecto | Limitación de routes resource para evitar error 500 | 1 PH | **Cerrado** | `RoleSecurityTest::test_rutas_no_implementadas_no_responden_500` |
 | **7** | **DEF-16** | Defecto | Política de creación de administradores (mínimo privilegio) | 2 PH | **Cerrado** | [ADR-06](adr/ADR-06-creacion-administradores.md) / `RoleSecurityTest::test_admin_no_puede_crear_otro_admin_desde_formulario` |
 | **8** | **DEF-17** | Defecto | Manejo de doble apertura concurrente con reintentos deadlock | 1 PH | **Cerrado** | `CajaTurnoSecurityTest::test_no_se_puede_abrir_un_segundo_turno_si_ya_hay_uno_abierto` |
 | **9** | **DEF-18** | Defecto | Declaración formal de `restrictOnDelete` en MySQL vs SQLite | 1 PH | **Cerrado** | `InventoryTest::test_eliminar_producto_conserva_kardex` |
@@ -254,8 +254,8 @@ Escenario: AC-CAJA-09 - Venta rechazada si el turno se cerró concurrentemente (
 Escenario: AC-SEC-03 - Rutas no implementadas responden con código controlado (DEF-15)
   Dado un usuario administrador autenticado
   Cuando intenta consultar rutas de recursos inexistentes como "GET /users/{id}/edit"
-  Entonces el servidor responde 404 Not Found o 405 Method Not Allowed, impidiendo errores 500 por métodos ausentes.
-  # Verificado por: tests/Feature/RoleSecurityTest.php::test_rutas_inexistentes_responden_404
+  Entonces responde 404 si la ruta no está registrada o 405 si el verbo no está permitido, y nunca 500.
+  # Verificado por: tests/Feature/RoleSecurityTest.php::test_rutas_no_implementadas_no_responden_500
 
 Escenario: AC-USR-01 - Creación de usuarios bajo mínimo privilegio (ADR-06 / DEF-16)
   Dado un administrador en el formulario "/users/create"
