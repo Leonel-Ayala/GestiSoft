@@ -1,5 +1,5 @@
 # GUÍA ESTRATÉGICA Y GUIÓN DE PRESENTACIÓN - TERCERA DEMOSTRACIÓN Y DEFENSA
-## GestiSoft: Evolución, Calidad y Estabilización (Versión Candidata v0.2.0-rc2)
+## GestiSoft: Evolución, Calidad y Estabilización (Versión Candidata v0.2.0-rc3)
 
 * **Asignatura:** Taller de Desarrollo de Software (INF524) – Facultad de Ingeniería UCM
 * **Docentes Evaluadores:** Héctor Tejo Uval y Jerman Espíndola Sandoval
@@ -17,7 +17,7 @@
 
 | Slide # | Título en la Presentación | Criterio Rúbrica INF524 | Expositor Asignado | Tabla Exacta a Proyectar | Documento Fuente Oficial |
 | :---: | :--- | :---: | :---: | :--- | :--- |
-| **01** | Portada Corporativa y Versión Candidata | **Criterio 4** | **Rodrigo Bertolini** | Ficha Técnica Oficial del Entregable | [README.md](../README.md) (Tag `v0.2.0-rc2`) |
+| **01** | Portada Corporativa y Versión Candidata | **Criterio 4** | **Rodrigo Bertolini** | Ficha Técnica Oficial del Entregable | [README.md](../README.md) (Tag `v0.2.0-rc3`) |
 | **02** | Contexto del Negocio y Dolor Financiero | **Criterio 2** | **Rodrigo Bertolini** | Matriz de Entrevistas de Descubrimiento (`ENT-01`, `ENT-02`, `ENT-03`) | `investigacion/registros-anonimizados/` |
 | **03** | Separador FASE 1: Aprendizaje, Valor y Alcance | **Criterios 1 al 8** | **Rodrigo Bertolini** | Hoja de Ruta FASE 1 (Criterios 1 al 8 de la Rúbrica) | `guia-semana14.md` Secciones 1 a 8 |
 | **04** | Retroalimentación 2ª Defensa y Mitigaciones C1-C4 | **Criterio 1** | **Rodrigo Bertolini** | Tabla Literal de Retroalimentación (`OBS-18` a `OBS-30`) | `guia-semana14.md` Sección 1 |
@@ -55,25 +55,25 @@
 * **Expositor:** Rodrigo Bertolini (Product Owner)
 * **Criterio de la Rúbrica S14:** **Criterio 4** (Producto ejecutable y versión candidata reproducible).
 * **Documento Fuente Oficial:** [README.md](../README.md) y [guia-semana14.md](./guia-semana14.md) Sección 4.
-* **Elementos Visuales:** Logo oficial de GestiSoft, versión destacada `v0.2.0-rc2`, datos institucionales UCM y equipo evaluado.
+* **Elementos Visuales:** Logo oficial de GestiSoft, versión destacada `v0.2.0-rc3`, datos institucionales UCM y equipo evaluado.
 
 #### 📊 Tabla Exacta para la Diapositiva:
 | Parámetro del Entregable | Valor Oficial en el Repositorio |
 | :--- | :--- |
 | **Nombre del Producto** | GestiSoft (Sistema Web SaaS de POS, Gestión Comercial e Inventario para Retail) |
 | **Incremento Funcional** | Incremento 2: Evolución, Calidad y Estabilización |
-| **Versión Candidata Oficial** | `v0.2.0-rc2` (Tag y Release formal en GitHub) |
+| **Versión Candidata Oficial** | `v0.2.0-rc3` (Tag y Release formal en GitHub) |
 | **Asignatura / Carrera** | Taller de Desarrollo de Software (INF524) – Escuela de Ingeniería Civil Informática UCM |
 | **Docentes Evaluadores** | Prof. Héctor Tejo Uval y Prof. Jerman Espíndola Sandoval |
 | **Equipo de Trabajo (Grupo 6)** | Rodrigo Bertolini (PO), Luis Barrios (UI-UX), Leonel Ayala (Full Stack/BD), Alan Troncoso (QA/CI) |
 | **Estado de Pruebas y CI** | 76 pruebas pasando al 100% en verde (306 aserciones, 24 de regresión) en GitHub Actions |
 
 * **Puntos Clave para Explicar la Tabla:**
-  * Destacar que la entrega está formalmente congelada en la etiqueta `v0.2.0-rc2` y respaldada por un Release público.
+  * Destacar que la entrega está formalmente congelada en la etiqueta `v0.2.0-rc3` y respaldada por un Release público.
   * Resaltar la distribución técnica de roles del equipo (PO, UX, Backend, QA) con titularidad verificable.
 
 * **Guión del Expositor (Rodrigo):**
-  > *"Estimados profesores Héctor Tejo y Jerman Espíndola. Como Grupo 6, presentamos la Tercera Demostración y Defensa de GestiSoft, nuestro sistema web de gestión comercial, inventario y punto de venta diseñado para PYMEs del retail local. Hoy defendemos el cierre del Incremento Funcional 2 bajo nuestra versión candidata `v0.2.0-rc2`. A lo largo de esta presentación y en la demostración en vivo, evidenciamos cómo convertimos cada una de las observaciones de la segunda defensa en soluciones de ingeniería verificables: integridad financiera en servidor, arqueo ciego de caja, inmutabilidad de Kardex, trazabilidad automática de ventas a movimientos de inventario y una batería de 76 pruebas automatizadas con suite de regresión integradas en GitHub Actions."*
+  > *"Estimados profesores Héctor Tejo y Jerman Espíndola. Como Grupo 6, presentamos la Tercera Demostración y Defensa de GestiSoft, nuestro sistema web de gestión comercial, inventario y punto de venta diseñado para PYMEs del retail local. Hoy defendemos el cierre del Incremento Funcional 2 bajo nuestra versión candidata `v0.2.0-rc3`. A lo largo de esta presentación y en la demostración en vivo, evidenciamos cómo convertimos cada una de las observaciones de la segunda defensa en soluciones de ingeniería verificables: integridad financiera en servidor, arqueo ciego de caja, inmutabilidad de Kardex, trazabilidad automática de ventas a movimientos de inventario y una batería de 76 pruebas automatizadas con suite de regresión integradas en GitHub Actions."*
 
 ---
 
@@ -84,18 +84,18 @@
 * **Elementos Visuales:** Iconos de los 3 tipos de comercios evaluados y resumen del dolor operativo del efectivo.
 
 #### 📊 Tabla Exacta para la Diapositiva (Fuente: `investigacion/registros-anonimizados/`):
-| Registro de Entrevista | Tipo de Negocio y Ubicación | Perfil del Entrevistado | Dolor Operativo Detectado en Terreno | Necesidad Formal |
-| :---: | :--- | :--- | :--- | :---: |
-| **ENT-01** | Minimarket y Almacén de Barrio (Región del Maule) | Dueña y Administradora General | Pérdida de dinero por falta de cuadre al cierre de jornada; billetes se cuentan sin control contrastado del sistema ni registro de descuadres. | **N-01** (Control de gaveta) |
-| **ENT-02** | Tienda de Vestuario y Calzado Urbano (Viña del Mar) | Administrador y Socio Fundador | Desconfianza al delegar la caja en empleados por temor a alteración de precios o cobros no registrados en el mostrador. | **N-06** (Delegación segura) |
-| **ENT-03** | Tienda de Cartas Coleccionables TCG (Quilpué) | Encargado de Tienda y Cajero Principal | Discrepancia entre stock físico en vitrina y ventas en mostrador; salidas de producto no reflejadas en Kardex con trazabilidad contable. | **N-05** (Kardex inmutable) |
+| Registro | Tipo de negocio y ubicación | Dolor detectado (hallazgo) | Necesidad derivada |
+| :---: | :--- | :--- | :---: |
+| **ENT-01** | Minimarket y almacén de barrio · Región del Maule | P01: cierres de caja lentos (40–50 min) y descuadres recurrentes. | **N-01** (control de turnos y auditoría de ventas) |
+| **ENT-02** | Tienda de vestuario y calzado urbano · Viña del Mar | OBS-02: no puede delegar la caja sin exponer costos/márgenes ni arriesgar cambios de precio. | **N-06** (segregación de funciones admin/cajero) |
+| **ENT-03** | Tienda de cartas coleccionables (TCG) · Quilpué | Pérdida del carrito al cambiar de vista y búsqueda lenta en catálogos con nombres largos. | Carrito persistente aislado por usuario y negocio; RNF-PERF-01 |
 
 * **Puntos Clave para Explicar la Tabla:**
   * Explicar que el problema raíz de los comercios entrevistados en Maule y Valparaíso es el descontrol del efectivo y la imposibilidad de delegar la caja con tranquilidad.
-  * Mapear cada comercio a las necesidades registradas en el backlog del sistema (`N-01`, `N-05`, `N-06`).
+  * Mapear cada comercio a las necesidades registradas en el backlog del sistema (`N-01`, `N-06` y persistencia en `localStorage`).
 
 * **Guión del Expositor (Rodrigo):**
-  > *"Durante el proceso de descubrimiento con comercios de la Región del Maule y de la Región de Valparaíso, detectamos que el dolor más crítico no radicaba en la falta de analítica predictiva, sino en el descontrol del dinero en efectivo y el temor a dejar solos a los empleados operando la caja. En el cuaderno y la calculadora no existe trazabilidad entre lo cobrado y lo vendido, y los sistemas tradicionales permiten alterar precios o inventario sin justificación. GestiSoft resuelve este problema dotando a la PYME de separación de roles y cuadratura ciega de caja."*
+  > *"Durante el proceso de descubrimiento con pequeños comercios de las regiones del Maule y Valparaíso, detectamos que el dolor más crítico no radicaba en la falta de analítica predictiva, sino en el descontrol del dinero en efectivo y el temor a dejar solos a los empleados operando la caja. En el cuaderno y la calculadora no existe trazabilidad entre lo cobrado y lo vendido, y los sistemas tradicionales permiten alterar precios o inventario sin justificación. GestiSoft resuelve este problema dotando a la PYME de separación de roles y cuadratura ciega de caja."*
 
 ---
 
@@ -133,7 +133,7 @@
 #### 📊 Tabla Exacta para la Diapositiva (Fuente: `guia-semana14.md` Sección 1):
 | ID | Criterio S12 | Hecho Observable en la Defensa | Decisión y Acción Correctiva en GestiSoft | Artefacto Modificado | Enlace a PR / Commit | Estado |
 | :---: | :---: | :--- | :--- | :--- | :---: | :---: |
-| **OBS-18** | 8 | El POS permitía registrar ventas libres sin turno de caja activo ni cajero responsable. | Diseñar e implementar el módulo de caja con bloqueo estricto del POS ante turnos cerrados. | `PBI-03.md`, `CajaController.php`, `POSController.php` | [PR #18](https://github.com/Leonel-Ayala/GestiSoft/pull/18) | **Cerrado** |
+| **OBS-18** | 10 | **C5:** Ausencia de control de turnos de caja y arqueo ciego en punto de venta. | Implementación completa del módulo de turnos de caja, bloqueo de POS sin caja y arqueo ciego. | `TurnoCaja.php`, `CajaController.php` | [PR #15–#17 y #18](https://github.com/Leonel-Ayala/GestiSoft/pull/18) | **Cerrado** |
 | **OBS-19** | 8 y 12 | **C1:** El método `checkout()` aceptaba importes y precios desde el cliente (vulnerabilidad de manipulación). | Recálculo obligatorio en servidor: `lockForUpdate()`, catálogo de BD, cálculo de neto, IVA y vuelto en backend. | [ADR-03](adr/ADR-03-precios-calculados-en-servidor.md), `POSController.php` | [PR #18](https://github.com/Leonel-Ayala/GestiSoft/pull/18) | **Cerrado** |
 | **OBS-20** | 8 y 9 | **C2:** `required_if:stock,!=X` inoperante; actualización de stock y Kardex no eran atómicos. | Uso de `Rule::requiredIf(fn() => →nuevo != →anterior)` y envoltura en `DB::transaction()` con reversión ante fallos. | `ProductController.php`, `InventoryTest.php` | [PR #18](https://github.com/Leonel-Ayala/GestiSoft/pull/18) | **Cerrado** |
 | **OBS-21** | 12 | **C3:** Clave foránea con `cascadeOnDelete()` borraba el Kardex contable al eliminar productos. | Adopción de `SoftDeletes` en `Product` y cambio de claves foráneas a `restrictOnDelete()`. | [ADR-05](adr/ADR-05-kardex-inmutable-softdeletes.md), migraciones BD | [PR #18](https://github.com/Leonel-Ayala/GestiSoft/pull/18) | **Cerrado** |
@@ -163,7 +163,7 @@
 | **Mantener (Lo que funcionó)** | Cohesión del equipo, comunicación regular y diseño de arquitectura guiado por drivers (ADR-01 a ADR-07). | 7 ADRs aprobados, commits regulares y distribución equitativa de tareas. |
 | **Corregir (Lo que falló en Demo 2)** | Ausencia de verificación de hipótesis con usuarios, estimaciones optimistas sin base empírica y pruebas desincronizadas. | Validación de H-01 en laboratorio con protocolo estructurado y mediciones crudas automatizadas. |
 | **Detener (Malas prácticas eliminadas)**| Desarrollar código sin trazabilidad, asumir requerimientos sin consulta a comerciantes y postergar integración de CI. | Erradicación de ramas huérfanas; flujo estricto de PRs con CI obligatorio antes de mergear. |
-| **Comenzar (Nuevas prácticas S14)** | Pruebas automatizadas en cada cambio, catalogación exhaustiva de defectos (DEF-01 al DEF-19) y validación de turno activo en `POSController`. | 76 tests automatizados verdes, matriz de defectos cerrada y bloqueo de POS sin caja abierta. |
+| **Comenzar (Nuevas prácticas S14)** | Pruebas automatizadas en cada cambio, catalogación exhaustiva de defectos (DEF-01 al DEF-19) y validación de turno activo en `POSController`. | 76 tests automatizados verdes, matriz de defectos cerrada y bloqueo de ventas sin turno y recálculo en backend (ADR-03). |
 
 * **Puntos Clave para Explicar la Tabla:**
   * Demostrar madurez del equipo: no limitarse a "hacer más reuniones", sino adoptar prácticas ingenieriles verificables en git.
@@ -184,14 +184,14 @@
 | ID | Hipótesis Refutable | Señal Observable | Evidencia Obtenida | Qué Falta Validar | Decisión Derivada |
 | :---: | :--- | :--- | :--- | :--- | :--- |
 | **H-01** | Si el sistema restringe al cajero para que no vea ni modifique inventario, precios ni usuarios, el dueño confiará en dejarlo solo operando la terminal de cobro. | El servidor ignora precios enviados por el cliente (`POSTest::test_venta_ignora_precio_enviado_por_cliente`), con evaluación →\ge 4/5→. | **Evidencia de laboratorio:** Ensayos de role-playing sobre 3 perfiles comerciales (minimarket, boutique, bazar) basados en la entrevista inicial y descubrimiento, más verificación automatizada de controles (tests RBAC HTTP 403, recálculo C1 e inmutabilidad de Kardex). | Confianza real de delegación en uso real (propuesto para el Incremento 3). | Mantener RBAC estricto y proponer piloto en uso real con comercios para el Incremento 3. |
-| **H-03** | Si el POS exige apertura de caja obligatoria con fondo inicial y navegación por teclado, se evitan ventas huérfanas y se mantiene una atención ágil (→\le 60	ext{ s}→). | 0 ventas registradas sin turno de caja en la suite de pruebas; tiempo de apertura y cierre →\le 60	ext{ s}→. | **Mediciones de laboratorio y modelo:** 0 ventas huérfanas en tests. Tiempos medidos en backend (`H03TiemposCajaTest`) más estimación de interacción humana mediante modelo KLM: apertura →3.41	ext{ s}→ promedio (→3.80	ext{ s}→ máximo); cierre con arqueo ciego →4.67	ext{ s}→ promedio (→4.67	ext{ s}→ máximo). Ambas bajo el umbral de →60	ext{ s}→. | Medición con cronómetro en mostrador real con cajeros reales en hora punta. | Mantener el flujo de apertura/cierre; declarar el uso de KLM como estimación de tiempo humano y proponer medición en terreno para el Incremento 3. |
+| **H-03** | Si el POS exige apertura de caja obligatoria con fondo inicial y navegación por teclado, se evitan ventas huérfanas y se mantiene una atención ágil (≤ 60 s). | 0 ventas registradas sin turno de caja en la suite de pruebas; tiempo de apertura y cierre ≤ 60 s. | **Mediciones de laboratorio y modelo:** 0 ventas huérfanas en tests. Tiempos medidos en backend (`H03TiemposCajaTest`) más estimación de interacción humana mediante modelo KLM: apertura 3.41 s promedio (3.80 s máximo); cierre con arqueo ciego 4.67 s promedio (4.67 s máximo). Ambas bajo el umbral de 60 s. | Medición con cronómetro en mostrador real con cajeros reales en hora punta. | Mantener el flujo de apertura/cierre; declarar el uso de KLM como estimación de tiempo humano y proponer medición en terreno para el Incremento 3. |
 | **H-04** | Si el cierre de caja se realiza mediante arqueo ciego (el cajero no ve el monto esperado por el sistema), se previene el ajuste artificial del efectivo. | El servidor calcula la diferencia de forma inmutable; el cliente no recibe el total esperado antes del cierre; el acta refleja faltantes o sobrantes reales. | **Pruebas automatizadas y de interfaz:** `TurnoCajaTest` verifica que la diferencia se calcula en el servidor como `monto_declarado - total_esperado` y que un turno cerrado no admite modificaciones ni recalcula totales. | Observación de comportamiento de cajeros bajo presión de entrega de turno. | Mantener el diseño de arqueo ciego (ADR-04) y el acta de cierre con CSS `@media print`. |
 
 * **Puntos Clave para Explicar la Tabla:**
   * Destacar el estricto cumplimiento del Criterio 2 de la rúbrica: se presenta la hipótesis refutable, la evidencia obtenida y se declara con precisión lo aún no validado (piloto de campo para Inc 3).
 
 * **Guión del Expositor (Rodrigo):**
-  > *"Para el Incremento 2, nuestro objetivo no fue sumar pantallas dispersas, sino resolver el dolor financiero central detectado en ENT-01: la pérdida de control del efectivo al delegar la caja. Formulamos tres hipótesis verificables: H-01 sobre delegación y cuadre ciego evaluada mediante role-playing en laboratorio; H-03 sobre velocidad en mostrador con umbral estricto de 60 segundos; y H-04 sobre consistencia contable al cierre de jornada. Dejamos explícito que la validación con comerciantes reales en mostrador físico queda para el piloto del Incremento 3."*
+  > *"La hipótesis H-01 nace de la entrevista inicial a un minimarket cercano (ENT-01) y el mismo dolor apareció en ENT-02: es un problema común de los pequeños comercios. Por eso la validamos con role-playing basado en esos perfiles y con tests de los controles; la confianza en uso real queda como piloto del Incremento 3 (RSK-17). Formulamos además H-03 sobre velocidad en mostrador bajo 60 segundos y H-04 sobre consistencia contable al cierre."*
 
 ---
 
@@ -219,15 +219,15 @@
 ### SLIDE 08: Flujo Operativo de Caja y Arqueo Ciego
 * **Expositor:** Rodrigo Bertolini (Product Owner)
 * **Criterio de la Rúbrica S14:** **Criterio 5 y 6** (Corte vertical funcional e integridad de estados).
-* **Documento Fuente Oficial:** [guia-semana14.md](./guia-semana14.md) Sección 5 ("Corte vertical de caja y arqueo ciego (C5)").
+* **Documento Fuente Oficial:** [guia-semana14.md](./guia-semana14.md) Sección 5: "Corte vertical del Incremento 2 (C5)" y Sección 6 (C6).
 * **Elementos Visuales:** Diagrama de estados de la caja (Cerrada → Abierta → Cuadrada/Descuadrada) y capturas del modal de arqueo ciego.
 
 #### 📊 Tabla Exacta para la Diapositiva:
 | Fase del Flujo Operativo | Operación en Mostrador | Control y Seguridad en Backend | Invariantes de Estado Garantizadas |
 | :--- | :--- | :--- | :--- |
-| **1. Apertura de Caja** | Cajero ingresa monto inicial de sencillo en modal (`POST /cajas`, atajo `[F2]`). | Valida monto →\ge 0→, asocia `user_id` y `negocio_id` y verifica que no exista turno abierto previo. | Caja pasa a estado `abierta`; habilitación atómica del Punto de Venta (`AC-CAJA-01`). |
+| **1. Apertura de Caja** | Cajero ingresa monto inicial de sencillo en modal (`POST /cajas`, atajo `[F2]` abre el modal). | Valida monto →\ge 0→, asocia `user_id` y `negocio_id` y verifica que no exista turno abierto previo. | Caja pasa a estado `abierta`; habilitación atómica del Punto de Venta (`AC-CAJA-01`). |
 | **2. Operación de Mostrador** | Venta con ítems por código/SKU, cálculo tributario en servidor y venta registrada (`POST /pos/checkout`, atajos `[F4]` buscar, `[F8]` cobro). | Recalcula total desde BD ignorando frontend, aplica `lockForUpdate` en stock y vincula `turno_caja_id`. | Stock decrementado en Kardex (`AC-KARDEX-02`), venta registrada vinculada al turno (`AC-07-REV`). |
-| **3. Arqueo Ciego de Cierre** | Cajero cuenta efectivo físico y digita total en modal sin saldo visible (`POST /cajas/{id}/cerrar`, atajo `[F9]`). | Backend calcula en privado: →	ext{Diferencia} = 	ext{Declarado} - (	ext{Inicial} + 	ext{Ventas})→. | Turno pasa a `cerrado` permanentemente; totales se congelan y no admiten recálculo (`AC-CAJA-05`). |
+| **3. Arqueo Ciego de Cierre** | Cajero cuenta efectivo físico y digita total en modal sin saldo visible (`POST /cajas/{id}/cerrar`, atajo `[F9]`). | Backend calcula en privado: →Diferencia} = Declarado} - (Inicial} + Ventas})→. | Turno pasa a `cerrado` permanentemente; totales se congelan y no admiten recálculo (`AC-CAJA-05`). |
 | **4. Acta y Auditoría** | Generación inmediata de acta oficial de cierre con desglose por canal de pago (`GET /cajas/{id}`). | Emisión de vista imprimible estandarizada (`@media print`) con resumen para el administrador. | Trazabilidad inmutable; auditoría muestra sólo turnos del mes por defecto (`AC-CAJA-06`). |
 
 * **Puntos Clave para Explicar la Tabla:**
@@ -331,8 +331,8 @@
 #### 📊 Tabla Exacta para la Diapositiva:
 | Contenedor C4 | Tecnología y Versión | Responsabilidad en GestiSoft | Mecanismo de Integridad / Seguridad |
 | :--- | :--- | :--- | :--- |
-| **Single Page App** | React 18 + Inertia.js | Renderizado de interfaz reactiva, atajos de teclado y modales sin recarga de página (estado local en carrito). | Sin almacenamiento local de secretos; props filtradas por `HandleInertiaRequests`. |
-| **Web Application** | Laravel 11 (PHP ≥ 8.3 / CI PHP 8.4) | Lógica de negocio de turnos, arqueos, autorización RBAC y transacciones de venta. | Middleware `RoleMiddleware` (HTTP 403) y validación en controladores con errores de sesión. |
+| **Single Page App** | React 18 + Inertia.js | Renderizado de interfaz reactiva, atajos de teclado y modales; estado local (`useState`) persistido en `localStorage` por usuario y negocio (necesidad de ENT-03). | Sin almacenamiento local de secretos; props filtradas por `HandleInertiaRequests`. |
+| **Web Application** | Laravel 11 (PHP ≥ 8.3 / CI PHP 8.4) | Lógica de negocio de turnos, arqueos, autorización RBAC y transacciones de venta. | `RoleMiddleware`, Global Scope `HasNegocio` y validación en controladores. |
 | **Base de Datos** | MySQL 8.0 (InnoDB) / SQLite | Persistencia relacional, historial inmutable de Kardex y soporte transaccional ACID. | `lockForUpdate()` en checkout, llaves foráneas y borrado lógico vía `SoftDeletes`. |
 
 * **Puntos Clave para Explicar la Tabla:**
@@ -340,7 +340,7 @@
   * Enfatizar la integridad transaccional ACID en la base de datos: las operaciones de dinero e inventario corren dentro de `DB::transaction()`.
 
 * **Guión del Expositor (Leonel):**
-  > *"Nuestra arquitectura sigue el estándar C4 Contenedores. En el frontend tenemos una Single Page Application con React e Inertia.js que gestiona el mostrador de forma ágil sin recargas. En el backend, Laravel 11 ejecuta la lógica de negocio y aplica las políticas de seguridad. Toda operación que comprometa dinero o stock se ejecuta dentro de transacciones de base de datos con bloqueos pesimistas, garantizando persistencia ACID y previniendo inconsistencias incluso bajo alta demanda."*
+  > *"Nuestra arquitectura sigue el estándar C4 Contenedores. En el frontend tenemos una Single Page Application con React e Inertia.js que gestiona el mostrador de forma ágil sin recargas. En el backend, Laravel 11 ejecuta la lógica de negocio y aplica las políticas de seguridad. Toda operación que comprometa dinero o stock se ejecuta dentro de transacciones de base de datos con bloqueos pesimistas, asegurando persistencia ACID y previniendo inconsistencias incluso bajo alta demanda."*
 
 ---
 
@@ -404,7 +404,7 @@
 #### 📊 Tabla Exacta para la Diapositiva:
 | Componente (`README.md`) | Versión Oficial | Función en GestiSoft | Comando Reproducible de Instalación |
 | :--- | :---: | :--- | :--- |
-| **Lenguaje Backend** | PHP 8.4 / 8.5 | Lógica de negocio, controladores y reglas contables. | `php -v` |
+| **Lenguaje Backend** | PHP ≥ 8.3 (CI 8.4) | Lógica de negocio, controladores y reglas contables. | `php -v` |
 | **Framework Backend** | Laravel 13 | Enrutamiento, ORM Eloquent, middlewares y testing. | `composer install` |
 | **Librería Frontend** | React 18 + Inertia.js | Componentes interactivos SPA y comunicación por props. | `npm ci` |
 | **Framework CSS** | Tailwind CSS | Estilos visuales, badges de estado y `@media print`. | `npm run build` |
@@ -426,16 +426,16 @@
 * **Elementos Visuales:** Organigrama técnico con roles, responsabilidades y evidencias trazables en git.
 
 #### 📊 Tabla Exacta para la Diapositiva:
-| Integrante | Rol Oficial en el Equipo | Área Técnica Asignada | Artefactos Principales a Cargo | Evidencia Propia en el Repositorio (PRs / tests / archivos) |
+| Integrante | Rol Oficial en el Equipo | Área Técnica Asignada | Artefactos Principales a Cargo | Evidencia propia para C17–C20 |
 | :--- | :--- | :--- | :--- | :--- |
-| **Rodrigo Bertolini** | Product Owner / Backend Lead | Backlog, entrevistas de usuario, validación H-01, lógica TurnoCaja y matriz de riesgos. | `PBI-03`, `TurnoCaja.php`, `validacion-h01.md`, `registro-riesgos-v1.md` | FASE 1 (Alcance, Backlog, Hipótesis), `entrevista-01-minimarket-abarrotes.md`, PR #18–#20. |
-| **Luis Barrios** | Frontend Lead / UI-UX Lead | Ergonomía de mostrador, componentes React, atajos de teclado, arqueo ciego y actas. | `POS/Index.jsx`, `Caja/Index.jsx`, `@media print`, `RNF-ACC-01` | FASE 2 (UI/UX mostrador, modal arqueo ciego, acta `@media print`, atajos F2/F4/F8/F9, selector auditoría). |
-| **Leonel Ayala** | Full Stack / Base de Datos Lead | Persistencia transaccional, recálculo C1, migraciones SoftDeletes C3, ADR-06 y concurrencia. | `POSController.php`, `Product.php`, migraciones BD, `docs/adr/` | FASE 2 (Backend, C4, `TurnoCaja.php`, `CajaController.php`, recálculo C1, `SoftDeletes` C3, `RoleMiddleware`, PR #15–#20). |
-| **Alan Troncoso** | Scrum Master / QA & CI Lead | Suite 76 tests, suite regresión (24 tests), mediciones p95, seguridad RBAC/IDOR y CI. | `.github/workflows/tests.yml`, `mediciones-calidad.md`, `trazabilidad.csv` | FASE 4 (QA, CI `.github/workflows/tests.yml`, 76 tests / 306 aserciones, regresión 24 tests, `trazabilidad.csv`, p95 y H-03). |
+| **Rodrigo Bertolini** | Product Owner / Backend Lead | Backlog, entrevistas de usuario, validación H-01, lógica TurnoCaja y matriz de riesgos. | `PBI-03`, `TurnoCaja.php`, `validacion-h01.md`, `registro-riesgos-v1.md` | `TurnoCaja.php`, `validacion-h01.md`, `registro-v1.csv` |
+| **Luis Barrios** | Frontend Lead / UI-UX Lead | Ergonomía de mostrador, componentes React, atajos de teclado, arqueo ciego y actas. | `POS/Index.jsx`, `Caja/Index.jsx`, `@media print`, `RNF-ACC-01` | `POS/Index.jsx`, `Caja/Index.jsx` |
+| **Leonel Ayala** | Full Stack / Base de Datos Lead | Persistencia transaccional, recálculo C1, migraciones SoftDeletes C3, ADR-06 y concurrencia. | `POSController.php`, `Product.php`, migraciones BD, `docs/adr/` | `POSController.php`, `docs/adr/`, migraciones |
+| **Alan Troncoso** | Scrum Master / QA & CI Lead | Suite 76 tests, suite regresión (24 tests), mediciones p95, seguridad RBAC/IDOR y CI. | `.github/workflows/tests.yml`, `mediciones-calidad.md`, `trazabilidad.csv` | `tests.yml`, `trazabilidad.csv`, `H03TiemposCajaTest.php` |
 
 * **Puntos Clave para Explicar la Tabla:**
   * Demostrar que el equipo operó con titularidad técnica especializada, garantizando que cada integrante domina su área y respalda su contribución con evidencias físicas en el repositorio.
-  * Recordar que los 4 criterios de defensa individual (C17, C18, C19 y C20) se evalúan a cada integrante de manera integral durante la defensa.
+  * Los 4 criterios individuales (C17 contribución, C18 dominio del flujo y pruebas, C19 decisiones de calidad y riesgo, C20 defensa autónoma) se evalúan a cada integrante.
 
 * **Guión del Expositor (Rodrigo):**
   > *"Como Product Owner, organicé el trabajo del equipo bajo Scrum dividiendo la entrega en cortes verticales completos. Cada integrante asumió la titularidad técnica de su área, asegurando que ninguna funcionalidad se diera por cerrada sin pasar por desarrollo, pruebas automatizadas y revisión en equipo."*
@@ -444,7 +444,7 @@
 
 ### SLIDE 17: Separador FASE 3: Demostración en Vivo del Software
 * **Expositor:** Conducida de forma distribuida por los 4 Integrantes
-* **Criterio de la Rúbrica S14:** **Criterios 17 al 20** (Evaluación individual en vivo).
+* **Criterio de la Rúbrica S14:** **Criterio 16** (demostración coordinada) y evidencia para los **criterios 17–20**.
 * **Documento Fuente Oficial:** [guia-semana14.md](./guia-semana14.md) Sección 16.1 ("Guion Repartido de la Demostración en Vivo").
 * **Elementos Visuales:** Cronograma y pauta de la demostración funcional en vivo (8 minutos).
 
@@ -580,10 +580,10 @@
 #### 📊 Tabla Exacta para la Diapositiva (Fuente: `producto/semana-14/trazabilidad.csv`):
 | ID_fila | Evidencia/Observación | Necesidad | Decisión(DEC/ADR) | Requisito(RF/RNF) | Criterio(AC) | Prueba(archivo::método) | PR | Estado |
 | :---: | :--- | :---: | :---: | :---: | :---: | :--- | :---: | :---: |
-| **FILA-01** | `OBS-18` (Falta control caja) | **N-01** | `ADR-04` (Arqueo ciego) | `RF-06` (Apertura caja) | `AC-CAJA-01` | `CajaTurnoSecurityTest::test_cajero_puede_abrir_turno_con_monto_inicial_valido` | #15–#17 | Verificado |
-| **FILA-02** | `OBS-18` (Operación sin caja) | **N-01** | `ADR-04` (Arqueo ciego) | `RF-06` (Bloqueo POS) | `AC-CAJA-02` | `CajaTurnoSecurityTest::test_checkout_del_pos_bloqueado_si_no_hay_turno_abierto` | #15–#17 | Verificado |
-| **FILA-03** | `OBS-18` (Arqueo transparente) | **N-01** | `ADR-04` (Arqueo ciego) | `RF-07` (Cierre ciego) | `AC-CAJA-03` | `TurnoCajaTest::test_cierre_de_caja_calcula_diferencia_correctamente_sin_descuadre` | #15–#17 | Verificado |
-| **FILA-10** | `REV-07` (Conciliación canales)| **N-01** | `ADR-04` (Totales canal) | `RF-07` (Sincronización)| `AC-07-REV` | `TurnoCajaTest::test_se_vincula_una_venta_al_turno_y_sincroniza_totales_por_metodo_de_pago` | #15–#17 | Verificado |
+| **FILA-01** | `OBS-18` (Falta control caja) | **N-01** | `ADR-04` (Arqueo ciego) | `RF-06` (Apertura caja) | `AC-CAJA-01` | `CajaTurnoSecurityTest::test_cajero_puede_abrir_turno_con_monto_inicial_valido` | #17 | Verificado |
+| **FILA-02** | `OBS-18` (Operación sin caja) | **N-01** | `ADR-04` (Arqueo ciego) | `RF-06` (Bloqueo POS) | `AC-CAJA-02` | `CajaTurnoSecurityTest::test_checkout_del_pos_bloqueado_si_no_hay_turno_abierto` | #17 | Verificado |
+| **FILA-03** | `OBS-18` (Arqueo transparente) | **N-01** | `ADR-04` (Arqueo ciego) | `RF-07` (Cierre ciego) | `AC-CAJA-03` | `TurnoCajaTest::test_cierre_de_caja_calcula_diferencia_correctamente_sin_descuadre` | #16 | Verificado |
+| **FILA-10** | `REV-07` (Conciliación canales)| **N-01** | `ADR-04` (Totales canal) | `RF-07` (Sincronización)| `AC-07-REV` | `TurnoCajaTest::test_se_vincula_una_venta_al_turno_y_sincroniza_totales_por_metodo_de_pago` | #16 | Verificado |
 | **FILA-11** | `DEF-11` (Venta sin Kardex) | **N-05** | `ADR-07` (Kardex ventas) | `RF-09` (Kardex integral)| `AC-KARDEX-02` | `POSTest::test_stock_coincide_con_suma_de_kardex_tras_alta_ajuste_y_venta` | #19 | Verificado |
 | **FILA-12** | `OBS-19` (C1 Precios cliente) | **N-02** | `ADR-03` (Precios servidor)| `RF-04` (Recálculo IVA) | `AC-SEC-POS-01`| `POSTest::test_venta_ignora_precio_enviado_por_cliente` | #18 | Verificado |
 | **FILA-13** | `OBS-20` (C3 SoftDeletes) | **N-05** | `ADR-05` (SoftDeletes) | `RF-09` (Auditoría perma)| `AC-SEC-KARDEX-01`| `InventoryTest::test_eliminar_producto_conserva_kardex` | #18 | Verificado |
@@ -631,7 +631,7 @@
 | :--- | :--- | :--- | :---: |
 | **1. Funcionalidad** | Corte vertical completo: apertura, cobro, arqueo ciego, conciliación y acta imprimible. | Demostración en vivo + persistencia en tablas `turnos_caja` y `ventas`. | **Cumplido** |
 | **2. Pruebas Automatizadas** | 100% de tests unitarios y de integración pasando en verde; suite de regresión dedicada. | Salida de CI: 76 tests / 306 aserciones en verde (`.github/workflows/tests.yml`). | **Cumplido** |
-| **3. Calidad y Rendimiento** | Latencias bajo umbrales unificados generadas mediante script reproducible. | [mediciones-calidad.md](../producto/semana-14/mediciones-calidad.md) (→p95 = 10.77	ext{ ms}→ búsqueda, →6.63	ext{ ms}→ checkout). | **Cumplido** |
+| **3. Calidad y Rendimiento** | Latencias bajo umbrales unificados generadas mediante script reproducible. | [mediciones-calidad.md](../producto/semana-14/mediciones-calidad.md) (p95 = 10.77 ms búsqueda, 6.63 ms checkout). | **Cumplido** |
 | **4. Seguridad y Privacidad** | Confianza cero en cliente (C1), inmutabilidad de auditoría (C3), RBAC, props limpias (C4). | [ADR-03](adr/ADR-03-precios-calculados-en-servidor.md), [ADR-05](adr/ADR-05-kardex-inmutable-softdeletes.md), [ADR-06](adr/ADR-06-creacion-administradores.md). | **Cumplido** |
 | **5. Integración Continua** | Pipeline en GitHub Actions que se ejecuta en cada PR y commit a `main`; el equipo no fusiona con el CI en rojo. | Archivo `.github/workflows/tests.yml` y plantilla de PR `.github/pull_request_template.md`. | **Cumplido** |
 | **6. Documentación** | Guía de Semana 14 como fuente única, matriz de trazabilidad y riesgos actualizados. | [trazabilidad.csv](../producto/semana-14/trazabilidad.csv), [registro-riesgos-v1.md](../riesgos/registro-riesgos-v1.md). | **Cumplido** |
@@ -683,8 +683,8 @@
 #### 📊 Tabla Exacta para la Diapositiva (Fuente: `guia-semana14.md` Sección 16.2):
 | Dimensión (`guia-semana14.md` Sec. 16.2) | Logrado en el Incremento 2 | Pendiente para Incremento 3 | Riesgo Vigente Asociado |
 | :--- | :--- | :--- | :--- |
-| **Caja y Ventas** | Apertura, arqueo ciego, conciliación multicanal, acta imprimible y Kardex en ventas. | Retiros parciales de efectivo durante la jornada (gastos menores). | Sin ID; propuesto como RSK-19 para el Incremento 3 |
-| **Reportería** | Auditoría con vista mensual acotada por defecto y filtro histórico consolidado. | Dashboard gráfico de tendencias de ventas y productos populares ([PBI-05](../producto/backlog/PBI-05.md)). | RSK-06 (degradación de búsqueda con catálogos extensos) |
+| **Caja y Ventas** | Apertura, arqueo ciego, conciliación multicanal, acta imprimible y Kardex en ventas. | Retiros parciales de efectivo durante la jornada (gastos menores). | Sin ID en el registro; retiros parciales propuestos para el Incremento 3 |
+| **Reportería** | Auditoría con vista mensual acotada por defecto y filtro histórico consolidado. | Dashboard gráfico de tendencias de ventas y productos populares ([PBI-05](../producto/backlog/PBI-05.md)). | RSK-06 (degradación del buscador ante catálogos grandes) |
 | **Validación** | Role-Playing Testing en laboratorio sobre 3 perfiles de negocio (minimarket, boutique, bazar) y tests automatizados. | Piloto en uso real con comercios. | **RSK-17** (Validación empírica en terreno) |
 
 * **Puntos Clave para Explicar la Tabla:**
@@ -699,7 +699,7 @@
   5. **Alcance de medición de H-03:** El tiempo de sistema fue medido en backend sobre 5 ensayos automatizados; el tiempo del operador humano fue modelado mediante la técnica estándar Keystroke-Level Model (KLM, Card, Moran & Newell, 1980), por lo que no constituye una medición de cronómetro sobre usuarios no entrenados.
 
 * **Guión del Expositor (Rodrigo):**
-  > *"Presentamos la versión candidata `v0.2.0-rc2` (Release formal `v0.2.0-rc3`). Declaramos con total honestidad técnica las limitaciones del incremento detalladas en la Sección 16.3 de la guía: concurrencia de caja mitigada por modelo operacional de 1 cajero por caja, mediciones in-process complementadas con KLM, y pruebas de campo con comerciantes planificadas para el piloto de estabilización en dos comercios reales durante el Incremento 3."*
+  > *"No presentamos un producto final comercial; presentamos la versión candidata `v0.2.0-rc3` y declaramos sus límites con honestidad técnica (Sección 16.3 de la guía): concurrencia de caja mitigada por modelo de 1 cajero por caja, mediciones in-process complementadas con modelo KLM, y validación en terreno planificada para el piloto del Incremento 3."*
 
 ---
 
@@ -715,7 +715,7 @@
 | **1** | ¿Se superaron las observaciones de la Demo 2 (C1 a C4)? | **Sí** | Sección 1 de esta guía; tests `POSTest`, `InventoryTest`, `RoleSecurityTest`. |
 | **2** | ¿La hipótesis H-01 se presenta con honestidad técnica sin exagerar resultados? | **Sí** | [validacion-h01.md](../investigacion/validacion-h01.md) (Secciones 1, 6 y 7). |
 | **3** | ¿El backlog refleja el estado real del producto y los nuevos defectos DEF-11 a DEF-19? | **Sí** | Sección 3 de esta guía y fichas en `producto/backlog/`. |
-| **4** | ¿Existe una versión candidata reproducible con etiqueta y release? | **Sí** | Tag [`v0.2.0-rc2`](https://github.com/Leonel-Ayala/GestiSoft/releases/tag/v0.2.0-rc2) publicado en GitHub con código fuente y Release oficial del incremento. |
+| **4** | ¿Existe una versión candidata reproducible con etiqueta y release? | **Sí** | Tag [`v0.2.0-rc3`](https://github.com/Leonel-Ayala/GestiSoft/releases/tag/v0.2.0-rc3) publicado en GitHub con código fuente y Release oficial del incremento. |
 | **5** | ¿Se cuenta con una suite de regresión del Incremento 1 separada en CI? | **Sí** | Paso dedicado en `.github/workflows/tests.yml` (24 tests verdes). |
 | **6** | ¿La suite completa de pruebas pasa al 100% en verde? | **Sí** | 76 tests / 306 aserciones en verde en CI y entorno local (incluyendo 2 tests automatizados de H-03). |
 | **7** | ¿Las mediciones de calidad fueron generadas por un script reproducible con datos crudos? | **Sí** | [mediciones-calidad.md](../producto/semana-14/mediciones-calidad.md) y `scripts/medir-latencia.php`. |
@@ -832,7 +832,7 @@ sequenceDiagram
 ### C. Luis Barrios (Frontend Lead / UI-UX)
 * **Pregunta probable:** *"¿Por qué aislaron el estado del carrito en la memoria de React en lugar de sincronizarlo en el servidor en cada clic? ¿Y cómo resolvieron la impresión del acta para que no aparezca el menú del sistema?"*
 * **Respuesta técnica recomendada:**
-  > *"Mantener el carrito en el estado local de React mediante `useState` responde al driver DA-10 de latencia en punto de venta. Si por cada producto añadido o removido emitiéramos una petición HTTP al servidor, someteríamos al mostrador a retardos de red y re-renders innecesarios. En la memoria del cliente, la edición del carrito se gestiona de manera inmediata en el estado local sin peticiones al servidor, reservando la comunicación de red únicamente para la transacción atómica de checkout.*  
+  > *"Mantener el carrito en el estado local de React mediante `useState` responde al driver DA-10 de latencia en punto de venta. Si por cada producto añadido o removido emitiéramos una petición HTTP al servidor, someteríamos al mostrador a retardos de red y re-renders innecesarios. En la interfaz de usuario, el carrito se gestiona como estado local (`useState`) persistido en `localStorage` por usuario y negocio (respondiendo a la necesidad de ENT-03), eliminando peticiones al servidor al editar el pedido y reservando la red para el checkout atómico.*  
   > *Para el Acta Oficial de Cierre, implementamos una regla de maquetación CSS con directivas `@media print`. Cuando el navegador dispara `window.print()`, los estilos ocultan dinámicamente la barra de navegación lateral, los botones de acción del sistema y los modales subyacentes, aplicando dimensiones estandarizadas de página, tipografía de alta legibilidad y bordes limpios para emitir un documento legal con casillas de firma física apto para auditoría."*
 
 ---
@@ -840,7 +840,7 @@ sequenceDiagram
 ### D. Rodrigo Bertolini (Product Owner / Backend Lead)
 * **Pregunta probable:** *"¿Por qué decidieron no validar la hipótesis H-01 con comerciantes reales en terreno para esta entrega y qué garantiza la simulación de Role-Playing que presentaron?"*
 * **Respuesta técnica recomendada:**
-  > *"La hipótesis H-01 evalúa si la separación de roles genera confianza subjetiva en el dueño para delegar la caja. Para esta entrega candidata v0.2.0-rc2, ejecutar un piloto superficial sin estabilidad previa en el dinero de caja habría sido irresponsable. Diseñamos un protocolo de Role-Playing Testing en laboratorio donde recreamos fielmente las restricciones y flujos de los comercios de descubrimiento (`ENT-01`, `ENT-02` y `ENT-03`), comprobando de forma empírica que el cajero queda sin acceso a inventario ni precios según los tests automatizados y el role-playing basado en la entrevista inicial.*  
+  > *"La hipótesis H-01 evalúa si la separación de roles genera confianza subjetiva en el dueño para delegar la caja. Para esta entrega candidata v0.2.0-rc3, ejecutar un piloto superficial sin estabilidad previa en el dinero de caja habría sido irresponsable. Diseñamos un protocolo de Role-Playing Testing en laboratorio donde recreamos fielmente las restricciones y flujos de los comercios de descubrimiento (`ENT-01`, `ENT-02` y `ENT-03`), comprobando de forma empírica que el cajero queda sin acceso a inventario ni precios según los tests automatizados y el role-playing basado en la entrevista inicial.*  
   > *La hipótesis nació de la entrevista inicial a un minimarket cercano y representa un dolor compartido por los pequeños comercios. Declaramos con total transparencia en el riesgo RSK-17 que en esta entrega no realizamos sesiones con dueños, validando el flujo mediante role-playing en laboratorio y tests automatizados, dejando la validación en uso real propuesta para el Incremento 3."*
 
 ---
