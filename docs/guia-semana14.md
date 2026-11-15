@@ -53,8 +53,8 @@ A partir de la retroalimentación docente oficial de la segunda defensa (`Grupo 
 
 | ID | Hipótesis Refutable | Señal Observable | Evidencia Obtenida | Qué Falta Validar | Decisión Derivada |
 | :---: | :--- | :--- | :--- | :--- | :--- |
-| **H-01** | Si el sistema restringe al cajero para que no vea ni modifique inventario, precios ni usuarios, el dueño confiará en dejarlo solo operando la terminal de cobro. | El servidor ignora precios enviados por el cliente (verificado por `POSTest::test_venta_ignora_precio_enviado_por_cliente`), con evaluación de viabilidad operativa $\ge 4/5$. | **Evidencia de laboratorio:** Ensayos de role-playing sobre 3 perfiles comerciales (minimarket, boutique, bazar) verificaron bloqueo a `/inventory` (HTTP 403), recálculo de precios en servidor (C1) e inmutabilidad de Kardex. Calificación heurística interna: 4/5 y 5/5. | Medición empírica presencial de la percepción de confianza en comerciantes reales durante jornadas operativas completas. | Mantener RBAC estricto y programar piloto presencial de campo en 2 comercios de Talca (SUS $\ge 75$) para estabilización. |
-| **H-03** | Si el sistema exige declarar fondo inicial al abrir y bloquea el POS sin turno, no se registran ventas sin turno abierto y operará aperturas y cierres en menos de 60 segundos. | Cero ventas con `turno_caja_id = null` en base de datos y tiempos cronometrados $\le 60\text{ s}$ en mostrador. | Cero ventas huérfanas en suite automatizada (`test_checkout_del_pos_bloqueado_si_no_hay_turno_abierto`). Protocolo de cronometraje definido en `investigacion/ensayos-h03.md`. | Registro cronometrado de los 5 ensayos presenciales con comerciantes en mostrador físico. | Mantener flujo de apertura rápida y modal bloqueante en `/pos`. |
+| **H-01** | Si el sistema restringe al cajero para que no vea ni modifique inventario, precios ni usuarios, el dueño confiará en dejarlo solo operando la terminal de cobro. | El servidor ignora precios enviados por el cliente (verificado por `POSTest::test_venta_ignora_precio_enviado_por_cliente`), con evaluación de viabilidad operativa $\ge 4/5$. | **Evidencia de laboratorio:** Ensayos de role-playing sobre 3 perfiles comerciales (minimarket, boutique, bazar) basados en la entrevista inicial y el descubrimiento, más verificación automatizada de controles (tests RBAC HTTP 403, recálculo C1 e inmutabilidad de Kardex). | Confianza real de delegación en uso real (propuesto para el Incremento 3). | Mantener RBAC estricto y proponer piloto en uso real con comercios para el Incremento 3. |
+| **H-03** | Si el sistema exige declarar fondo inicial al abrir y bloquea el POS sin turno, no se registran ventas sin turno abierto y operará aperturas y cierres en menos de 60 segundos. | Cero ventas sin turno en base de datos y tiempos de apertura/cierre $\le 60\text{ s}$. | Tiempo del sistema prom. 0.10 s / máx. 0.49 s (apertura) y prom. 0.01 s / máx. 0.01 s (cierre) + estimado KLM (3.31 s / 4.66 s) = total ≈ 3.41 s a 4.67 s $\le 60\text{ s}$ (5 ensayos automatizados), ver [ensayos-h03.md](../investigacion/ensayos-h03.md). | Observación presencial directa en mostrador con operadores de comercio real (propuesto para Incremento 3). | Mantener flujo de apertura rápida y modal bloqueante en `/pos`. |
 | **H-04** | El **arqueo ciego** (conteo físico sin mostrar saldo teórico) previene el ajuste fraudulento de billetes y asegura la detección inmutable de descuadres. | todo turno cerrado en las pruebas registra `monto_declarado` y `diferencia` inmutables; sin posibilidad de reapertura ni recálculo. | Verificado en pruebas automatizadas: `TurnoCajaTest::test_cierre_de_caja_detecta_descuadre_faltante` y `TurnoCajaTest::test_turno_cerrado_no_recalcula_totales`. | Comprobar en campo que los cajeros no perciban el arqueo ciego como una medida punitiva sino de transparencia. | Confirmar [ADR-04](adr/ADR-04-arqueo-ciego-transaccional.md) (Arqueo ciego en servidor). |
 
 ---
@@ -297,10 +297,10 @@ php artisan test --group=regresion
 
 ## 10. Pruebas automatizadas y evidencia (C10)
 
-* **Total de pruebas en la suite completa:** **74 tests** (100% aprobados en verde).
-* **Total de aserciones ejecutadas:** **281 aserciones**.
-* **Tiempo de ejecución de la suite:** 12,6 segundos.
-* **Trazabilidad:** Verificada automáticamente mediante `scripts/validar-trazabilidad.php` con 38 referencias exactas a métodos de prueba.
+* **Total de pruebas en la suite completa:** **76 tests** (100% aprobados en verde, incluyendo `H03TiemposCajaTest`).
+* **Total de aserciones ejecutadas:** **306 aserciones**.
+* **Tiempo de ejecución de la suite:** ~23,6 segundos.
+* **Trazabilidad:** Verificada automáticamente mediante `scripts/validar-trazabilidad.php` con 40 referencias exactas a métodos de prueba.
 
 ---
 
@@ -309,7 +309,7 @@ php artisan test --group=regresion
 | Dimensión DoD | Condición Comprometida | Evidencia Verificable | Estado |
 | :--- | :--- | :--- | :---: |
 | **1. Funcionalidad** | Corte vertical completo: apertura, cobro, arqueo ciego, conciliación y acta imprimible. | Demostración en vivo + persistencia en tablas `turnos_caja` y `ventas`. | **Cumplido** |
-| **2. Pruebas Automatizadas** | 100% de tests unitarios y de integración pasando en verde; suite de regresión dedicada. | Salida de CI: 74 tests / 281 aserciones en verde (`.github/workflows/tests.yml`). | **Cumplido** |
+| **2. Pruebas Automatizadas** | 100% de tests unitarios y de integración pasando en verde; suite de regresión dedicada. | Salida de CI: 76 tests / 306 aserciones en verde (`.github/workflows/tests.yml`). | **Cumplido** |
 | **3. Calidad y Rendimiento** | Latencias bajo umbrales unificados generadas mediante script reproducible. | [mediciones-calidad.md](../producto/semana-14/mediciones-calidad.md) ($p95 = 10.77\text{ ms}$ búsqueda, $6.63\text{ ms}$ checkout). | **Cumplido** |
 | **4. Seguridad y Privacidad** | Confianza cero en cliente (C1), inmutabilidad de auditoría (C3), RBAC, props limpias (C4). | [ADR-03](adr/ADR-03-precios-calculados-en-servidor.md), [ADR-05](adr/ADR-05-kardex-inmutable-softdeletes.md), [ADR-06](adr/ADR-06-creacion-administradores.md). | **Cumplido** |
 | **5. Integración Continua** | Pipeline en GitHub Actions que se ejecuta en cada PR y commit a `main`; el equipo no fusiona con el CI en rojo. | Archivo `.github/workflows/tests.yml` y plantilla de PR `.github/pull_request_template.md`. | **Cumplido** |
@@ -350,6 +350,7 @@ Resultados oficiales extraídos literalmente del informe generado por `scripts/m
 | **Rendimiento** | Búsqueda reactiva (`/pos/search`) | 50 | 2.28 ms | 4.83 ms | **10.77 ms** | $\le 150.00\text{ ms}$ | **CUMPLE** |
 | **Rendimiento** | Estado de caja (`/caja/estado`) | 50 | 2.20 ms | 2.40 ms | **2.87 ms** | $\le 300.00\text{ ms}$ | **CUMPLE** |
 | **Rendimiento** | Checkout POS (`/pos/checkout`) | 50 | 3.42 ms | 8.94 ms | **6.63 ms** | $\le 500.00\text{ ms}$ | **CUMPLE** |
+| **Eficiencia** | Apertura y cierre de caja (H-03) | 5 ensayos | 3.31 s | 4.04 s | **4.67 s (máx)** | $\le 60.00\text{ s}$ | **CUMPLE** |
 | **Accesibilidad** | Operación completa por teclado | 6 flujos | — | — | — | 100% operable sin ratón | **CUMPLE** |
 
 ---
@@ -419,7 +420,7 @@ La presentación de la defensa se distribuye equitativamente entre los 4 integra
 | :--- | :--- | :--- | :--- |
 | **Caja y Ventas** | Apertura, arqueo ciego, conciliación multicanal, acta imprimible y Kardex en ventas. | Retiros parciales de efectivo durante la jornada (gastos menores). | RSK-15 (Manejo de efectivo en mostrador) |
 | **Reportería** | Auditoría con vista mensual acotada por defecto y filtro histórico consolidado. | Dashboard gráfico de tendencias de ventas y productos populares ([PBI-05](../producto/backlog/PBI-05.md)). | RSK-06 (Volumen de datos históricos) |
-| **Validación** | Role-Playing Testing en laboratorio sobre 3 perfiles de negocio (minimarket, boutique, bazar). | Piloto presencial en terreno con 2 comercios reales de Talca/Curicó (SUS $\ge 75$). | **RSK-17** (Validación empírica en terreno) |
+| **Validación** | Role-Playing Testing en laboratorio sobre 3 perfiles de negocio (minimarket, boutique, bazar) y tests automatizados. | Piloto en uso real con comercios. | **RSK-17** (Validación empírica en terreno) |
 
 ---
 

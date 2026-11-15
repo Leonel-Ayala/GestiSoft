@@ -38,5 +38,5 @@ FILA-36,DEF-17 (Doble apertura deadlock),N-01,ADR-04 (Reintentos deadlock),RF-06
 FILA-37,DEF-18 (restrictOnDelete SQLite),N-05,ADR-05 (Integridad referencial),RF-09 (Protección Kardex),AC-SEC-KARDEX-01,DEF-18,RSK-12,tests/Feature/InventoryTest.php::test_eliminar_producto_conserva_kardex,#18,Verificado
 FILA-38,DEF-19 (monto_apertura fixture),N-01,ADR-04 (Fondo inicial),RF-06 (Apertura caja),AC-CAJA-01,DEF-19,RSK-09,tests/Feature/POSTest.php::test_no_se_puede_vender_producto_sin_stock,#18,Verificado
 FILA-39,H-01 (Delegación y control),N-01,ADR-04 (Arqueo ciego),RF-06 (Turnos y arqueo),AC-CAJA-01 al 06,PBI-03,RSK-17,SIN TEST,#18,Pendiente
-FILA-40,H-03 (Velocidad mostrador <60s),N-02,DEC-02 (Atajos POS),RF-01 al 05,AC-03 al 05,PBI-02,RSK-08,SIN TEST,#18,Pendiente
+FILA-40,H-03 (Velocidad mostrador <60s),N-02,DEC-02 (Atajos POS),RF-01 al 05,AC-03 al 05,PBI-02,RSK-08,"tests/Feature/H03TiemposCajaTest.php::test_apertura_de_turno_bajo_umbral_en_cinco_ensayos, tests/Feature/H03TiemposCajaTest.php::test_cierre_con_arqueo_ciego_bajo_umbral_en_cinco_ensayos",#18,Verificado
 FILA-41,H-04 (Cero discrepancia conteo),N-01,ADR-04 (Arqueo ciego),RF-07 (Cierre caja),AC-CAJA-03 al 05,PBI-03,RSK-08,tests/Feature/TurnoCajaTest.php::test_cierre_de_caja_detecta_descuadre_faltante,#18,Verificado
