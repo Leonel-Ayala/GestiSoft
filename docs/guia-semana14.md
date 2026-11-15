@@ -9,7 +9,7 @@
   * **Alan Troncoso** (Scrum Master / QA, Seguridad y Automatización Lead)
   * **Luis Barrios** (Frontend Lead / UI-UX)
   * **Rodrigo Bertolini** (Product Owner / Backend Lead y Auditoría de Negocio)
-* **Versión del Repositorio:** `v0.2.0-rc2` (Versión Candidata Oficial del Incremento 2)
+* **Versión del Repositorio:** `v0.2.0-rc3` (Versión Candidata Oficial del Incremento 2)
 * **Instancia de Evaluación:** Tercera Demostración y Defensa (Semana 14)
 * **Punto de partida del ciclo:** Merge del PR #18 (`4fddd58`) y estabilización de defectos DEF-11 a DEF-19.
 
@@ -26,7 +26,7 @@ A partir de la retroalimentación docente oficial de la segunda defensa (`Grupo 
 
 | ID | Criterio S12 | Hecho Observable en la Defensa | Decisión y Acción Correctiva en GestiSoft | Artefacto Modificado | Enlace a PR / Commit | Estado |
 | :---: | :---: | :--- | :--- | :--- | :---: | :---: |
-| **OBS-18** | 8 | El POS permitía registrar ventas libres sin turno de caja activo ni cajero responsable. | Diseñar e implementar el módulo de caja con bloqueo estricto del POS ante turnos cerrados. | `PBI-03.md`, `CajaController.php`, `POSController.php` | [PR #18](https://github.com/Leonel-Ayala/GestiSoft/pull/18) | **Cerrado** |
+| **OBS-18** | 10 | **C5:** Ausencia de control de turnos de caja y arqueo ciego en punto de venta. | Implementación completa del módulo de turnos de caja, bloqueo de POS sin caja y arqueo ciego. | `TurnoCaja.php`, `CajaController.php` | [PR #15–#17 y #18](https://github.com/Leonel-Ayala/GestiSoft/pull/18) | **Cerrado** |
 | **OBS-19** | 8 y 12 | **C1:** El método `checkout()` aceptaba importes y precios desde el cliente (vulnerabilidad de manipulación). | Recálculo obligatorio en servidor: `lockForUpdate()`, catálogo de BD, cálculo de neto, IVA y vuelto en backend. | [ADR-03](adr/ADR-03-precios-calculados-en-servidor.md), `POSController.php` | [PR #18](https://github.com/Leonel-Ayala/GestiSoft/pull/18) | **Cerrado** |
 | **OBS-20** | 8 y 9 | **C2:** `required_if:stock,!=X` inoperante; actualización de stock y Kardex no eran atómicos. | Uso de `Rule::requiredIf(fn() => $nuevo != $anterior)` y envoltura en `DB::transaction()` con reversión ante fallos. | `ProductController.php`, `InventoryTest.php` | [PR #18](https://github.com/Leonel-Ayala/GestiSoft/pull/18) | **Cerrado** |
 | **OBS-21** | 12 | **C3:** Clave foránea con `cascadeOnDelete()` borraba el Kardex contable al eliminar productos. | Adopción de `SoftDeletes` en `Product` y cambio de claves foráneas a `restrictOnDelete()`. | [ADR-05](adr/ADR-05-kardex-inmutable-softdeletes.md), migraciones BD | [PR #18](https://github.com/Leonel-Ayala/GestiSoft/pull/18) | **Cerrado** |
@@ -88,13 +88,14 @@ A partir de la retroalimentación docente oficial de la segunda defensa (`Grupo 
 
 ## 4. Versión candidata reproducible (C4)
 
-* **Etiqueta en Git:** `v0.2.0-rc2`
-* **Pre-release oficial:** [GitHub Release v0.2.0-rc2](https://github.com/Leonel-Ayala/GestiSoft/releases/tag/v0.2.0-rc2)
+* **Etiqueta en Git:** `v0.2.0-rc3`
+* **Historial de versiones candidatas:** `v0.2.0-rc3` (2026-11-15, primera candidata) fue reemplazada por `v0.2.0-rc3` solo por alineación documental (guía .docx, guion de defensa y trazabilidad de PR); no hay cambios de código entre ambas.
+* **Pre-release oficial:** [GitHub Release v0.2.0-rc3](https://github.com/Leonel-Ayala/GestiSoft/releases/tag/v0.2.0-rc3)
 * **Procedimiento exacto de clonación y ejecución:**
   ```bash
   git clone https://github.com/Leonel-Ayala/GestiSoft.git
   cd GestiSoft
-  git checkout v0.2.0-rc2
+  git checkout v0.2.0-rc3
   cd gestisoft-app
   composer install
   npm install --legacy-peer-deps
@@ -407,7 +408,7 @@ Resultados oficiales extraídos de scripts de medición y estimación automatiza
 
 ## 16. Demostración, limitaciones y próximos pasos (C16)
 
-> **Declaración explícita:** GestiSoft `v0.2.0-rc2` es una **versión candidata estabilizada para evaluación académica**, no una liberación comercial definitiva en producción.
+> **Declaración explícita:** GestiSoft `v0.2.0-rc3` es una **versión candidata estabilizada para evaluación académica**, no una liberación comercial definitiva en producción.
 
 ### 16.1 Guion Repartido de la Demostración en Vivo
 La presentación de la defensa se distribuye equitativamente entre los 4 integrantes:
@@ -428,7 +429,7 @@ La presentación de la defensa se distribuye equitativamente entre los 4 integra
 
 ### 16.3 Limitaciones técnicas declaradas
 
-En estricto apego al principio de honestidad técnica y académica (Criterio 16 de la rúbrica), el equipo declara explícitamente las siguientes limitaciones del Incremento 2:
+El equipo declara explícitamente las siguientes limitaciones del Incremento 2:
 
 1. **Concurrencia de caja (DEF-14, DEF-17):** Un solo cajero opera una caja a la vez por modelo de negocio; la concurrencia real simultánea entre dos cajeros sobre la misma caja está mitigada por el flujo operacional de turnos exclusivos, pero no cuenta con lock optimista de versión a nivel de interfaz en este incremento (planificado para Incremento 3).
 2. **Base de datos y verificación de integridad (DEF-18):** La suite de pruebas automatizadas corre en SQLite en memoria por rendimiento y portabilidad de CI; la integridad referencial (`restrictOnDelete`) está formalmente declarada en las migraciones y protegida en la capa de aplicación con `SoftDeletes`, pero su enforcement estricto a nivel de motor requiere verificación en base de datos MySQL en entorno de staging.
@@ -455,7 +456,7 @@ Cada integrante documenta su reflexión crítica individual, evidencias de códi
 | 1 | ¿Se superaron las observaciones de la Demo 2 (C1 a C4)? | **Sí** | Sección 1 de esta guía; tests `POSTest`, `InventoryTest`, `RoleSecurityTest`. |
 | 2 | ¿La hipótesis H-01 se presenta con honestidad técnica sin exagerar resultados? | **Sí** | [validacion-h01.md](../investigacion/validacion-h01.md) (Secciones 1, 6 y 7). |
 | 3 | ¿El backlog refleja el estado real del producto y los nuevos defectos DEF-11 a DEF-19? | **Sí** | Sección 3 de esta guía y fichas en `producto/backlog/`. |
-| 4 | ¿Existe una versión candidata reproducible con etiqueta y release? | **Sí** | Tag [`v0.2.0-rc2`](https://github.com/Leonel-Ayala/GestiSoft/releases/tag/v0.2.0-rc2) publicado en GitHub con código fuente y Release oficial del incremento. |
+| 4 | ¿Existe una versión candidata reproducible con etiqueta y release? | **Sí** | Tag [`v0.2.0-rc3`](https://github.com/Leonel-Ayala/GestiSoft/releases/tag/v0.2.0-rc3) publicado en GitHub con código fuente y Release oficial del incremento. |
 | 5 | ¿Se cuenta con una suite de regresión del Incremento 1 separada en CI? | **Sí** | Paso dedicado en `.github/workflows/tests.yml` (24 tests verdes). |
 | 6 | ¿La suite completa de pruebas pasa al 100% en verde? | **Sí** | 76 tests / 306 aserciones en verde en CI y entorno local (incluyendo 2 tests automatizados de H-03). |
 | 7 | ¿Las mediciones de calidad fueron generadas por un script reproducible con datos crudos? | **Sí** | [mediciones-calidad.md](../producto/semana-14/mediciones-calidad.md) y `scripts/medir-latencia.php`. |

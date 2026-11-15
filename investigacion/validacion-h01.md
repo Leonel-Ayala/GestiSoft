@@ -2,7 +2,7 @@
 
 **Fecha de Ejecución:** 10 al 14 de Noviembre de 2026  
 **Responsables Metodológicos:** Rodrigo Bertolini (Product Owner) y Alan Troncoso (Scrum Master / QA Lead)  
-**Versión Evaluada:** GestiSoft v0.2.0-rc2 (Incremento 2: PBI-03 Arqueo y cierre de caja)  
+**Versión Evaluada:** GestiSoft v0.2.0-rc3 (Incremento 2: PBI-03 Arqueo y cierre de caja)  
 **Estado de Validación:** Evidencia de laboratorio (role-playing basado en la entrevista inicial y el descubrimiento) y pruebas automatizadas; sin sesiones con dueños en esta entrega.  
 **Metodología:** *Role-Playing Usability Testing* (Simulación controlada en laboratorio basada en Personas de Descubrimiento) + Protocolo formal de validación en terreno.
 
