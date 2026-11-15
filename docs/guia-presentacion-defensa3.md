@@ -17,32 +17,32 @@
 
 | Slide # | Título en la Presentación | Fase de la Defensa | Expositor Asignado | Artefacto de Respaldo a Mostrar / Proyectar |
 | :---: | :--- | :---: | :---: | :--- |
-| **01** | Portada Corporativa y Versión Candidata | Inicio | **Rodrigo Bertolini** | [README.md](file:///c:/Users/leone/Desktop/GestiSoft/README.md) (Tag `v0.2.0-rc2`) |
+| **01** | Portada Corporativa y Versión Candidata | Inicio | **Rodrigo Bertolini** | [README.md](../README.md) (Tag `v0.2.0-rc2`) |
 | **02** | Contexto del Negocio y Dolor Financiero | Inicio | **Rodrigo Bertolini** | Entrevistas de descubrimiento `ENT-01`, `ENT-02`, `ENT-03` |
-| **03** | Separador FASE 1: Aprendizaje, Valor y Alcance | FASE 1 | **Rodrigo Bertolini** | [guia-semana14.md](file:///c:/Users/leone/Desktop/GestiSoft/docs/guia-semana14.md) |
-| **04** | Retroalimentación 2ª Defensa y Mitigaciones C1-C4 | FASE 1 | **Rodrigo Bertolini** | [guia-semana14.md](file:///c:/Users/leone/Desktop/GestiSoft/docs/guia-semana14.md#c1-a-c4) (Matriz `OBS-18` a `OBS-28`, `DEF-01` a `DEF-19`) |
-| **05** | Retrospectiva del Equipo (Compromisos Verificables) | FASE 1 | **Rodrigo Bertolini** | [guia-semana14.md](file:///c:/Users/leone/Desktop/GestiSoft/docs/guia-semana14.md#retrospectiva) |
-| **06** | Objetivo Incremento 2 e Hipótesis (H-01, H-03, H-04) | FASE 1 | **Rodrigo Bertolini** | [investigacion/validacion-h01.md](file:///c:/Users/leone/Desktop/GestiSoft/investigacion/validacion-h01.md) y [ensayos-h03.md](file:///c:/Users/leone/Desktop/GestiSoft/investigacion/ensayos-h03.md) |
-| **07** | Alcance, Límites (Incluye/Posterga/Excluye) | FASE 1 | **Rodrigo Bertolini** | [guia-semana14.md](file:///c:/Users/leone/Desktop/GestiSoft/docs/guia-semana14.md#alcance) |
-| **08** | Flujo Operativo de Caja y Arqueo Ciego | FASE 1 | **Rodrigo Bertolini** | [guia-semana14.md](file:///c:/Users/leone/Desktop/GestiSoft/docs/guia-semana14.md#flujo-operativo) |
-| **09** | Refinamiento del Product Backlog (PBI-03 y Defectos P0) | FASE 1 | **Rodrigo Bertolini** | [producto/semana-14/trazabilidad.csv](file:///c:/Users/leone/Desktop/GestiSoft/producto/semana-14/trazabilidad.csv) y [PBI-03.md](file:///c:/Users/leone/Desktop/GestiSoft/producto/backlog/PBI-03.md) |
-| **10** | Criterios de Aceptación BDD (Normal, Alternativo y Error) | FASE 1 | **Rodrigo Bertolini** | [guia-semana14.md](file:///c:/Users/leone/Desktop/GestiSoft/docs/guia-semana14.md#criterios-bdd) (`AC-CAJA-01` a `09`, `AC-KARDEX-02`, etc.) |
-| **11** | Separador FASE 2: Arquitectura y Decisiones | FASE 2 | **Leonel Ayala** | [guia-semana14.md](file:///c:/Users/leone/Desktop/GestiSoft/docs/guia-semana14.md#arquitectura) |
+| **03** | Separador FASE 1: Aprendizaje, Valor y Alcance | FASE 1 | **Rodrigo Bertolini** | [guia-semana14.md](./guia-semana14.md) |
+| **04** | Retroalimentación 2ª Defensa y Mitigaciones C1-C4 | FASE 1 | **Rodrigo Bertolini** | [guia-semana14.md](./guia-semana14.md#c1-a-c4) (Matriz `OBS-18` a `OBS-28`, `DEF-01` a `DEF-19`) |
+| **05** | Retrospectiva del Equipo (Compromisos Verificables) | FASE 1 | **Rodrigo Bertolini** | [guia-semana14.md](./guia-semana14.md#retrospectiva) |
+| **06** | Objetivo Incremento 2 e Hipótesis (H-01, H-03, H-04) | FASE 1 | **Rodrigo Bertolini** | [investigacion/validacion-h01.md](../investigacion/validacion-h01.md) y [ensayos-h03.md](../investigacion/ensayos-h03.md) |
+| **07** | Alcance, Límites (Incluye/Posterga/Excluye) | FASE 1 | **Rodrigo Bertolini** | [guia-semana14.md](./guia-semana14.md#alcance) |
+| **08** | Flujo Operativo de Caja y Arqueo Ciego | FASE 1 | **Rodrigo Bertolini** | [guia-semana14.md](./guia-semana14.md#flujo-operativo) |
+| **09** | Refinamiento del Product Backlog (PBI-03 y Defectos P0) | FASE 1 | **Rodrigo Bertolini** | [producto/semana-14/trazabilidad.csv](../producto/semana-14/trazabilidad.csv) y [PBI-03.md](../producto/backlog/PBI-03.md) |
+| **10** | Criterios de Aceptación BDD (Normal, Alternativo y Error) | FASE 1 | **Rodrigo Bertolini** | [guia-semana14.md](./guia-semana14.md#criterios-bdd) (`AC-CAJA-01` a `09`, `AC-KARDEX-02`, etc.) |
+| **11** | Separador FASE 2: Arquitectura y Decisiones | FASE 2 | **Leonel Ayala** | [guia-semana14.md](./guia-semana14.md#arquitectura) |
 | **12** | Modelo C4 Contenedores y Persistencia de Datos | FASE 2 | **Leonel Ayala** | Diagrama C4 Contenedores + MySQL InnoDB / SQLite |
-| **13** | Drivers Arquitectónicos y Arquitectura Visual / UX | FASE 2 | **Luis Barrios** | [guia-semana14.md](file:///c:/Users/leone/Desktop/GestiSoft/docs/guia-semana14.md#drivers-arquitectonicos) (DA-10, DA-11 y Componentes React) |
-| **14** | Registros de Decisión Arquitectónica (ADR-01 a ADR-07) | FASE 2 | **Leonel Ayala & Luis Barrios** | Carpeta [docs/adr/](file:///c:/Users/leone/Desktop/GestiSoft/docs/adr/) (ADR-01 al ADR-07) |
-| **15** | Pila Tecnológica, Reproducibilidad y Configuración | FASE 2 | **Leonel Ayala** | [README.md](file:///c:/Users/leone/Desktop/GestiSoft/README.md) y seeder temático de prueba |
-| **16** | Organización del Equipo, Responsabilidades y Sprints | FASE 2 | **Rodrigo Bertolini** | [guia-semana14.md](file:///c:/Users/leone/Desktop/GestiSoft/docs/guia-semana14.md#organizacion) |
+| **13** | Drivers Arquitectónicos y Arquitectura Visual / UX | FASE 2 | **Luis Barrios** | [guia-semana14.md](./guia-semana14.md#drivers-arquitectonicos) (DA-10, DA-11 y Componentes React) |
+| **14** | Registros de Decisión Arquitectónica (ADR-01 a ADR-07) | FASE 2 | **Leonel Ayala & Luis Barrios** | Carpeta [docs/adr/](./adr/) (ADR-01 al ADR-07) |
+| **15** | Pila Tecnológica, Reproducibilidad y Configuración | FASE 2 | **Leonel Ayala** | [README.md](../README.md) y seeder temático de prueba |
+| **16** | Organización del Equipo, Responsabilidades y Sprints | FASE 2 | **Rodrigo Bertolini** | [guia-semana14.md](./guia-semana14.md#organizacion) |
 | **17** | Separador FASE 3: Demostración en Vivo del Software | FASE 3 | **Los 4 Integrantes** | Entorno local en ejecución (`http://127.0.0.1:8000`) |
 | **18** | Separador FASE 4: QA, Mediciones y Trazabilidad | FASE 4 | **Alan Troncoso** | Carpeta `producto/semana-14/` |
 | **19** | Batería de Pruebas Automatizadas y Regresión (74 Tests) | FASE 4 | **Alan Troncoso** | Terminal: `php artisan test` (74 tests, 281 aserciones) y `--group=regresion` (24 tests) |
-| **20** | Atributos de Calidad con Mediciones Reales (p95) | FASE 4 | **Alan Troncoso** | [mediciones-calidad.md](file:///c:/Users/leone/Desktop/GestiSoft/producto/semana-14/mediciones-calidad.md) (Script php: p95 búsqueda 10.77 ms, checkout 6.63 ms) |
-| **21** | Seguridad y Privacidad Verificables (RBAC, C1, C4, IDOR, ADR-06) | FASE 4 | **Alan Troncoso** | [RoleSecurityTest.php](file:///c:/Users/leone/Desktop/GestiSoft/gestisoft-app/tests/Feature/RoleSecurityTest.php) y [CajaTurnoSecurityTest.php](file:///c:/Users/leone/Desktop/GestiSoft/gestisoft-app/tests/Feature/CajaTurnoSecurityTest.php) |
-| **22** | Matriz de Trazabilidad Bidireccional (CSV) | FASE 4 | **Alan Troncoso** | [producto/semana-14/trazabilidad.csv](file:///c:/Users/leone/Desktop/GestiSoft/producto/semana-14/trazabilidad.csv) (41 filas, 38 tests verificados) |
-| **23** | Repositorio, CI en GitHub Actions y Plantilla PR | FASE 4 | **Alan Troncoso** | [.github/workflows/tests.yml](file:///c:/Users/leone/Desktop/GestiSoft/.github/workflows/tests.yml) y [.github/pull_request_template.md](file:///c:/Users/leone/Desktop/GestiSoft/.github/pull_request_template.md) |
-| **24** | Definition of Done (6 Dimensiones) y Estabilización | FASE 4 | **Alan Troncoso** | [guia-semana14.md](file:///c:/Users/leone/Desktop/GestiSoft/docs/guia-semana14.md#dod) |
-| **25** | Gestión de Riesgos Actualizados (RSK-01 al RSK-18) | FASE 4 | **Rodrigo Bertolini** | [riesgos/registro-riesgos-v1.md](file:///c:/Users/leone/Desktop/GestiSoft/riesgos/registro-riesgos-v1.md) (18 riesgos, RSK-17 abierto) |
-| **26** | Versión Candidata, Limitaciones Honestas y Próximos Pasos | Cierre | **Rodrigo Bertolini** | [guia-semana14.md](file:///c:/Users/leone/Desktop/GestiSoft/docs/guia-semana14.md#version-candidata) |
+| **20** | Atributos de Calidad con Mediciones Reales (p95) | FASE 4 | **Alan Troncoso** | [mediciones-calidad.md](../producto/semana-14/mediciones-calidad.md) (Script php: p95 búsqueda 10.77 ms, checkout 6.63 ms) |
+| **21** | Seguridad y Privacidad Verificables (RBAC, C1, C4, IDOR, ADR-06) | FASE 4 | **Alan Troncoso** | [RoleSecurityTest.php](../gestisoft-app/tests/Feature/RoleSecurityTest.php) y [CajaTurnoSecurityTest.php](../gestisoft-app/tests/Feature/CajaTurnoSecurityTest.php) |
+| **22** | Matriz de Trazabilidad Bidireccional (CSV) | FASE 4 | **Alan Troncoso** | [producto/semana-14/trazabilidad.csv](../producto/semana-14/trazabilidad.csv) (41 filas, 38 tests verificados) |
+| **23** | Repositorio, CI en GitHub Actions y Plantilla PR | FASE 4 | **Alan Troncoso** | [.github/workflows/tests.yml](../.github/workflows/tests.yml) y [.github/pull_request_template.md](../.github/pull_request_template.md) |
+| **24** | Definition of Done (6 Dimensiones) y Estabilización | FASE 4 | **Alan Troncoso** | [guia-semana14.md](./guia-semana14.md#dod) |
+| **25** | Gestión de Riesgos Actualizados (RSK-01 al RSK-18) | FASE 4 | **Rodrigo Bertolini** | [riesgos/registro-riesgos-v1.md](../riesgos/registro-riesgos-v1.md) (18 riesgos, RSK-17 abierto) |
+| **26** | Versión Candidata, Limitaciones Honestas y Próximos Pasos | Cierre | **Rodrigo Bertolini** | [guia-semana14.md](./guia-semana14.md#version-candidata) |
 | **27** | Portada de Cierre y Ronda de Preguntas Técnicas | Cierre | **Rodrigo Bertolini (Apertura)** | Todo el equipo disponible para responder (Evaluación Individual) |
 
 ---
@@ -54,7 +54,7 @@
 ### SLIDE 01: Portada Corporativa y Versión Candidata
 * **Expositor:** Rodrigo Bertolini (Product Owner)
 * **Elementos Visuales:** Logo de GestiSoft, versión oficial destacada: **`v0.2.0-rc2 (Versión Candidata Demo 3)`**, nombres y roles técnicos de los 4 integrantes, fecha y escudo de la Universidad Católica del Maule.
-* **Documento a Citar:** [README.md](file:///c:/Users/leone/Desktop/GestiSoft/README.md).
+* **Documento a Citar:** [README.md](../README.md).
 * **Guión del Expositor (Rodrigo):**
   > *"Estimados profesores Héctor Tejo y Jerman Espíndola. Como Grupo 6, presentamos la Tercera Demostración y Defensa de GestiSoft, nuestro sistema web de gestión comercial, inventario y punto de venta diseñado para PYMEs del retail local. Hoy defendemos el cierre del Incremento Funcional 2 bajo nuestra versión candidata `v0.2.0-rc2`. A lo largo de esta presentación y en la demostración en vivo, evidenciamos cómo convertimos cada una de las observaciones de la segunda defensa en soluciones de ingeniería verificables: integridad financiera en servidor, arqueo ciego de caja, inmutabilidad de Kardex, trazabilidad automática de ventas a movimientos de inventario y una batería de 74 pruebas automatizadas con suite de regresión integradas en GitHub Actions."*
 
@@ -84,7 +84,7 @@
   2. **C2 (Defecto):** Fallo de motivo en ajuste de stock $\rightarrow$ Mitigada: `Rule::requiredIf` y transacciones atómicas `DB::transaction`.
   3. **C3 (Riesgo Legal):** Borrado en cascada en Kardex $\rightarrow$ Mitigada: `SoftDeletes` en productos y `restrictOnDelete`.
   4. **C4 (Privacidad):** Exposición de datos de usuario en React $\rightarrow$ Mitigada: minimización selectiva de props en Inertia (`id, name, email, role, negocio_id`).
-* **Documento a Citar:** [guia-semana14.md](file:///c:/Users/leone/Desktop/GestiSoft/docs/guia-semana14.md) y catálogo `DEF-01` a `DEF-19`.
+* **Documento a Citar:** [guia-semana14.md](./guia-semana14.md) y catálogo `DEF-01` a `DEF-19`.
 * **Guión del Expositor (Rodrigo):**
   > *"En la segunda defensa se detectaron vulnerabilidades y defectos relevantes en el Incremento 1. Diseñamos un plan de correcciones riguroso: en C1 eliminamos la confianza en el cliente para precios y totales; en C2 corregimos el validador de motivo en inventario asegurando transaccionalidad; en C3 incorporamos SoftDeletes para que el borrado de un producto no destruya el historial del Kardex contable; y en C4 minimizamos las props de Inertia para proteger atributos sensibles. Cada corrección cuenta con su prueba de integración específica."*
 
@@ -97,7 +97,7 @@
   * **Corregir:** Desalineación entre nombres de tablas y documentación (eliminación estricta de términos fantasma).
   * **Detener:** Confiar en cálculos de importes realizados por JavaScript en el frontend o permitir venta sin turno.
   * **Comenzar:** Integración Continua obligatoria en GitHub Actions, plantilla obligatoria de Pull Request y pruebas de regresión automáticas separadas.
-* **Documento a Citar:** [guia-semana14.md](file:///c:/Users/leone/Desktop/GestiSoft/docs/guia-semana14.md).
+* **Documento a Citar:** [guia-semana14.md](./guia-semana14.md).
 * **Guión del Expositor (Rodrigo):**
   > *"Nuestra retrospectiva formalizó cuatro acciones concretas: mantuvimos el desarrollo guiado por pruebas expandiendo la suite a 74 tests; alineamos rigurosamente el glosario a las columnas reales del código (`negocio_id`, `motivo`); detuvimos radicalmente los cálculos financieros en el cliente; y comenzamos la automatización en la nube mediante un pipeline de GitHub Actions con suite de regresión y plantilla estándar de Pull Request."*
 
@@ -109,7 +109,7 @@
   * **H-01:** Delegación segura en el cajero sin temor a fraude $\rightarrow$ Origen en la entrevista inicial a negocio cercano representando un dolor común de PYMEs; validado por role-playing y tests, sin sesiones adicionales con dueños en esta entrega (propuestas para Incremento 3).
   * **H-03:** Prevención de ventas huérfanas mediante apertura obligatoria con fondo inicial en gaveta y bloqueo de rutas.
   * **H-04:** Arqueo ciego como mecanismo de prevención de manipulación de dinero al cierre de turno.
-* **Documento a Citar:** [investigacion/validacion-h01.md](file:///c:/Users/leone/Desktop/GestiSoft/investigacion/validacion-h01.md) y [investigacion/ensayos-h03.md](file:///c:/Users/leone/Desktop/GestiSoft/investigacion/ensayos-h03.md).
+* **Documento a Citar:** [investigacion/validacion-h01.md](../investigacion/validacion-h01.md) y [investigacion/ensayos-h03.md](../investigacion/ensayos-h03.md).
 * **Guión del Expositor (Rodrigo):**
   > *"El Criterio 2 de la rúbrica premia la honestidad intelectual: 'declara con precisión lo aún no validado... sin exagerar resultados'. En estricto apego a este principio, para H-01 diseñamos un protocolo riguroso de Role-Playing Testing en laboratorio recreando operativamente los perfiles de los tres negocios de descubrimiento. Comprobamos de manera reproducible que el cajero queda bloqueado por RBAC (HTTP 403) para alterar inventario o precios. La hipótesis nació de la entrevista inicial al minimarket cercano y representa un dolor recurrente del comercio; en esta entrega no realizamos sesiones con dueños, validando el aislamiento mediante role-playing y pruebas automatizadas, dejando la medición en uso comercial real propuesta para el Incremento 3. Para H-03 y H-04, validamos que no existen ventas huérfanas y que el arqueo ciego impide al cajero ajustar billetes según el saldo teórico del sistema."*
 
@@ -121,7 +121,7 @@
   * **Incluye:** Apertura con fondo inicial (`monto_inicial`), bloqueo del POS sin turno, recálculo seguro C1, sincronización multicanal (Efectivo, Débito, Crédito, Transferencia), trazabilidad atómica a Kardex por venta, modal de Arqueo Ciego, conciliación automática de diferencias, panel de auditoría de cajas con **vista por defecto del mes actual e histórico completo**, y **Acta Oficial de Cierre y Arqueo** imprimible en PDF con firmas.
   * **Posterga:** Retiros parciales de efectivo durante el turno (sangrías) y Dashboard analítico con gráficos (PBI-05), postergados para el Incremento 3.
   * **Excluye:** Integración bancaria directa vía API Transbank y periféricos automáticos de efectivo.
-* **Documento a Citar:** [guia-semana14.md](file:///c:/Users/leone/Desktop/GestiSoft/docs/guia-semana14.md).
+* **Documento a Citar:** [guia-semana14.md](./guia-semana14.md).
 * **Guión del Expositor (Rodrigo):**
   > *"Establecimos los límites del Incremento 2 con estricto criterio de valor. Priorizamos PBI-03 (cierre de caja, arqueo ciego y acta formal) y postergamos el dashboard analítico (PBI-05). La justificación es directa: los comerciantes no necesitan gráficos de tendencias si al final de la jornada no tienen certeza de cuánto dinero en billetes físicos hay en su gaveta. Excluimos integraciones bancarias externas para no incorporar dependencias de hardware ajenas al alcance pedagógico y técnico del MVP."*
 
@@ -135,7 +135,7 @@
   3. Operación de ventas por teclado (`F2`, `F8`) $\rightarrow$ Sincronización de acumuladores por medio de pago + registro atómico en Kardex.
   4. Cierre de turno (`F9`) $\rightarrow$ Modal de Arqueo Ciego (conteo físico sin mostrar total del sistema).
   5. Conciliación en servidor de diferencia $\rightarrow$ Generación de Acta Oficial con constancia de firma.
-* **Documento a Citar:** [guia-semana14.md](file:///c:/Users/leone/Desktop/GestiSoft/docs/guia-semana14.md).
+* **Documento a Citar:** [guia-semana14.md](./guia-semana14.md).
 * **Guión del Expositor (Rodrigo):**
   > *"El flujo operativo del Incremento 2 está diseñado como un ciclo cerrado. El cajero no puede operar si no declara el fondo inicial de sencillo. Cada venta acumula importes clasificados por canal de cobro y genera un movimiento en Kardex con motivo trazable. Al terminar la jornada, el sistema exige un arqueo ciego: el operador cuenta el dinero físico sin ver el saldo teórico del software. El servidor concilia la diferencia y emite el acta oficial para entrega de valores."*
 
@@ -153,7 +153,7 @@
   * `DEF-12 / DEF-13`: Validación estricta de métodos de pago y productos duplicados en checkout (P1, 1 hr, Listo).
   * `DEF-14`: Bloqueo pesimista de turno de caja cerrado en checkout (P0, 1 hr, Listo).
   * `PBI-05`: Dashboard gerencial con analítica histórica (Postergado para Incremento 3).
-* **Documento a Citar:** [producto/semana-14/trazabilidad.csv](file:///c:/Users/leone/Desktop/GestiSoft/producto/semana-14/trazabilidad.csv).
+* **Documento a Citar:** [producto/semana-14/trazabilidad.csv](../producto/semana-14/trazabilidad.csv).
 * **Guión del Expositor (Rodrigo):**
   > *"El refinamiento del backlog combinó entrega de valor con estabilización técnica. Las correcciones de integridad fueron tratadas como defectos P0 no negociables que debían quedar resueltos antes de dar por completado el módulo de cajas PBI-03. La capacidad del equipo se volcó a blindar la base de datos y la consistencia transaccional antes de dar paso a la versión candidata."*
 
@@ -168,7 +168,7 @@
   * **Borde / Error (`AC-CAJA-05`):** Intento de venta sin turno activo $\rightarrow$ Rechazo con HTTP 422 `"Debe abrir un turno de caja antes de procesar ventas"`.
   * **Borde / Error (`AC-SEC-POS-01`):** Payload alterado con precio manipulado $\rightarrow$ Servidor sobreescribe con valor de BD.
   * **Borde / Error (`AC-CAJA-06`):** Efectivo insuficiente $\rightarrow$ Rechazo con HTTP 422.
-* **Documento a Citar:** [guia-semana14.md](file:///c:/Users/leone/Desktop/GestiSoft/docs/guia-semana14.md#criterios-bdd).
+* **Documento a Citar:** [guia-semana14.md](./guia-semana14.md#criterios-bdd).
 * **Guión del Expositor (Rodrigo):**
   > *"Formalizamos criterios BDD verificables tanto para el camino feliz como para escenarios de error y desvíos prioritarios. Definimos precondiciones, acciones y resultados observables en respuestas HTTP y persistencia en base de datos. Cada uno de estos criterios se encuentra respaldado por una prueba automatizada en PHPUnit."*
 
@@ -188,7 +188,7 @@
   * **Navegador Web:** React 19 + Inertia.js (SPA sin API REST pública expuesta).
   * **Servidor Laravel 13:** Middlewares de autenticación, verificación de rol (`admin`, `cajero`) y Global Scope Multi-Tenant `HasNegocio`.
   * **Base de Datos:** MySQL / SQLite transaccional (InnoDB con soporte ACID, claves foráneas y SoftDeletes).
-* **Documento a Citar:** [guia-semana14.md](file:///c:/Users/leone/Desktop/GestiSoft/docs/guia-semana14.md#arquitectura).
+* **Documento a Citar:** [guia-semana14.md](./guia-semana14.md#arquitectura).
 * **Guión del Expositor (Leonel):**
   > *"Mantenemos el patrón monolítico híbrido con Inertia.js. Esta arquitectura es óptima para retail: entrega la velocidad de una Single Page Application en el mostrador sin el riesgo de exponer una API REST pública a internet. El servidor Laravel gobierna las reglas de negocio y aplica el trait `HasNegocio` en cada consulta Eloquent, inyectando automáticamente la cláusula `WHERE negocio_id = ?` para garantizar aislamiento estricto entre comercios."*
 
@@ -201,7 +201,7 @@
   * **DA-11 (Minimización de Props Inertia):** Desacoplamiento de datos sensibles entre backend y frontend.
   * **Arquitectura de Componentes:** Modales bloqueantes de apertura y arqueo ciego, tarjetas métricas y selector de períodos `[🗓️ Este Mes]` vs `[📚 Histórico Completo]`.
   * **Ergonomía Operativa:** Navegación 100% por atajos de teclado (`F2`, `F8`, `F9`, `Enter`, `Barra Espaciadora`).
-* **Documento a Citar:** [guia-semana14.md](file:///c:/Users/leone/Desktop/GestiSoft/docs/guia-semana14.md) y [mediciones-calidad.md](file:///c:/Users/leone/Desktop/GestiSoft/producto/semana-14/mediciones-calidad.md).
+* **Documento a Citar:** [guia-semana14.md](./guia-semana14.md) y [mediciones-calidad.md](../producto/semana-14/mediciones-calidad.md).
 * **Guión del Expositor (Luis):**
   > *"Desde el punto de vista arquitectónico del frontend y UX, el driver DA-10 exigía eliminar la fricción en el mostrador. Decidimos aislar el estado del carrito exclusivamente en memoria local de React (`useState`): esto permite añadir o quitar productos a 60 cuadros por segundo sin emitir peticiones AJAX innecesarias. Diseñamos modales con bloqueo de interacción para la apertura y el arqueo ciego, y dotamos al sistema de navegación completa por teclado para que el cajero opere sin tocar el mouse."*
 
@@ -217,7 +217,7 @@
   * **ADR-05:** Inmutabilidad del Kardex mediante SoftDeletes y claves restrictivas.
   * **ADR-06:** Creación de usuarios restringida a rol cajero por principio de mínimo privilegio.
   * **ADR-07:** Registro atómico de movimientos de inventario en ventas POS.
-* **Documento a Citar:** Carpeta [docs/adr/](file:///c:/Users/leone/Desktop/GestiSoft/docs/adr/).
+* **Documento a Citar:** Carpeta [docs/adr/](./adr/).
 * **Guión del Expositor (Leonel & Luis):**
   > *(Leonel):* *"Formalizamos 7 registros de decisión arquitectónica. En ADR-03 resolvimos C1 blindando el recálculo en backend; en ADR-05 protegimos el Kardex con SoftDeletes; en ADR-06 implementamos la opción de mínimo privilegio: la UI solo permite crear cajeros, reservando la creación de administradores a seeders controlados; y en ADR-07 garantizamos que cada venta impacte atómicamente el Kardex contable."*  
   > *(Luis):* *"En ADR-04 aseguramos la integridad del arqueo ciego impidiendo que el cliente conozca el monto esperado antes de contar los billetes. Además, diseñamos el comprobante del Acta Oficial de Cierre utilizando CSS `@media print` para que al imprimir en PDF se omitan menús y botones, emitiendo un documento legal formal con firmas de responsabilidad."*
@@ -231,7 +231,7 @@
   * Node.js 22 + React 19 + Tailwind CSS
   * SQLite `:memory:` para CI ultrarrápido (6s) y MySQL InnoDB para entorno productivo
   * Cuadro de reproducibilidad: 5 comandos secuenciales documentados en `README.md`.
-* **Documento a Citar:** [README.md](file:///c:/Users/leone/Desktop/GestiSoft/README.md).
+* **Documento a Citar:** [README.md](../README.md).
 * **Guión del Expositor (Leonel):**
   > *"Corregimos integralmente el README del proyecto para permitir reproducir la instalación paso a paso. Cualquier evaluador puede clonar el repositorio y levantar el entorno ejecutando cinco comandos estándar: `composer install`, `npm ci`, copia del `.env`, migración con seeders temáticos y compilación de Vite. Los seeders generan tres empresas listas con credenciales operativas de administrador y cajero."*
 
@@ -244,7 +244,7 @@
   * **Leonel Ayala (Full Stack / BD):** Persistencia transaccional, recálculo C1, migraciones SoftDeletes C3, ADR-06 y demo concurrencia.
   * **Luis Barrios (Frontend / UX):** Interfaces React, navegación por teclado POS, arqueo ciego y maquetación de actas.
   * **Alan Troncoso (Scrum Master / QA):** Arquitectura de pruebas (74 tests), pipeline GitHub Actions, seguridad RBAC/IDOR y trazabilidad.
-* **Documento a Citar:** [guia-semana14.md](file:///c:/Users/leone/Desktop/GestiSoft/docs/guia-semana14.md).
+* **Documento a Citar:** [guia-semana14.md](./guia-semana14.md).
 * **Guión del Expositor (Rodrigo):**
   > *"Como Product Owner, organicé el trabajo del equipo bajo Scrum dividiendo la entrega en cortes verticales completos. Cada integrante asumió la titularidad técnica de su área, asegurando que ninguna funcionalidad se diera por cerrada sin pasar por desarrollo, pruebas automatizadas y revisión en equipo."*
 
@@ -270,7 +270,7 @@
 * **Expositor:** Alan Troncoso (Scrum Master / QA Lead)
 * **Elementos Visuales:** Captura y ejecución en vivo de la terminal: `{"tool":"phpunit","result":"passed","tests":74,"passed":74,"assertions":281,"duration_ms":6200}` y suite de regresión (`--group=regresion`: 24 tests, 92 aserciones).
   * Desglose de las 7 suites: Multi-Tenant (4), RBAC (11), Inventario y Kardex (5), POS y Checkout (10), Lógica de Turnos (18), Seguridad de Caja e IDOR (20), Autenticación (6).
-* **Documento a Citar:** [mediciones-calidad.md](file:///c:/Users/leone/Desktop/GestiSoft/producto/semana-14/mediciones-calidad.md) y carpeta `tests/Feature/`.
+* **Documento a Citar:** [mediciones-calidad.md](../producto/semana-14/mediciones-calidad.md) y carpeta `tests/Feature/`.
 * **Guión del Expositor (Alan):**
   > *"Hoy acreditamos una batería de 74 pruebas automatizadas con 281 aserciones ejecutándose al 100% verde en 6 segundos. Además, creamos un grupo formal de regresión con 24 pruebas etiquetadas que verifican que ninguna de las correcciones previas sufra regresión. Corregimos el test histórico de POS reemplazando el payload 'cart' por 'items', corregimos 'monto_apertura' por 'monto_inicial', y añadimos pruebas de inmutabilidad de Kardex, bloqueo de efectivo insuficiente y protección contra IDOR en turnos."*
 
@@ -283,7 +283,7 @@
   * **Estado de Caja:** Media $1.34\text{ ms}$, $p95 = 2.87\text{ ms}$ (Umbral comprometido: $\le 100\text{ ms}$ - CUMPLE).
   * **Checkout Atómico:** Media $4.29\text{ ms}$, $p95 = 6.63\text{ ms}$ (Umbral comprometido: $\le 300\text{ ms}$ - CUMPLE).
   * **Operaciones de Carrito:** Estado local React (`useState`), latencia $< 12\text{ ms}$ (60 FPS estables).
-* **Documento a Citar:** [producto/semana-14/mediciones-calidad.md](file:///c:/Users/leone/Desktop/GestiSoft/producto/semana-14/mediciones-calidad.md).
+* **Documento a Citar:** [producto/semana-14/mediciones-calidad.md](../producto/semana-14/mediciones-calidad.md).
 * **Guión del Expositor (Alan):**
   > *"Reemplazamos cualquier dato sintético por mediciones crudas obtenidas mediante un script formal de cronometraje en backend con 50 ejecuciones reales. La búsqueda por catálogo arrojó un percentil p95 de 10.77 milisegundos, la consulta de estado de caja cerró en 2.87 milisegundos y el checkout atómico transaccional en 6.63 milisegundos. Todos los resultados cumplen con holgura los umbrales de rendimiento para retail local."*
 
@@ -298,7 +298,7 @@
   4. **Minimización de Privacidad (C4):** Props de Inertia filtradas a 5 atributos no sensibles.
   5. **Protección IDOR (C5):** Un cajero no puede consultar el resumen de turno de otro cajero.
   6. **Principio de Mínimo Privilegio (ADR-06):** UI de creación de usuarios fuerza rol `cajero`.
-* **Documento a Citar:** [RoleSecurityTest.php](file:///c:/Users/leone/Desktop/GestiSoft/gestisoft-app/tests/Feature/RoleSecurityTest.php) y [CajaTurnoSecurityTest.php](file:///c:/Users/leone/Desktop/GestiSoft/gestisoft-app/tests/Feature/CajaTurnoSecurityTest.php).
+* **Documento a Citar:** [RoleSecurityTest.php](../gestisoft-app/tests/Feature/RoleSecurityTest.php) y [CajaTurnoSecurityTest.php](../gestisoft-app/tests/Feature/CajaTurnoSecurityTest.php).
 * **Guión del Expositor (Alan):**
   > *"Acreditamos seguridad en profundidad verificable. Bloqueamos las rutas administrativas a cajeros con código 403; eliminamos la sobreexposición en Inertia protegiendo los hashes de contraseña en el DOM; blindamos los turnos contra vulnerabilidades IDOR entre cajeros; aplicamos el principio de mínimo privilegio en usuarios mediante ADR-06; y prevenimos condiciones de carrera con bloqueos pesimistas en base de datos."*
 
@@ -308,7 +308,7 @@
 * **Expositor:** Alan Troncoso (Scrum Master / QA Lead)
 * **Elementos Visuales:** Extracto de la matriz CSV validada por `scripts/validar-trazabilidad.php` (41 filas, 38 tests verificados):
   * `Dolor de Negocio` $\rightarrow$ `Necesidad` $\rightarrow$ `Decisión Arquitectónica (ADR)` $\rightarrow$ `Requisito (RF)` $\rightarrow$ `PBI` $\rightarrow$ `Pruebas Automatizadas` $\rightarrow$ `Código en Producción`.
-* **Documento a Citar:** [producto/semana-14/trazabilidad.csv](file:///c:/Users/leone/Desktop/GestiSoft/producto/semana-14/trazabilidad.csv).
+* **Documento a Citar:** [producto/semana-14/trazabilidad.csv](../producto/semana-14/trazabilidad.csv).
 * **Guión del Expositor (Alan):**
   > *"Como responsable de QA, mantengo actualizada nuestra matriz de trazabilidad bidireccional en `producto/semana-14/trazabilidad.csv`. Cada una de las 41 filas está auditada automáticamente por un script linter que verifica que los métodos de prueba referenciados existan físicamente en el código fuente. Contamos con 38 tests verificados y cero errores de consistencia."*
 
@@ -317,7 +317,7 @@
 ### SLIDE 23: Repositorio, CI en GitHub Actions y Plantilla PR
 * **Expositor:** Alan Troncoso (Scrum Master / QA Lead)
 * **Elementos Visuales:** Captura del pipeline de GitHub Actions (`tests.yml`) en verde ejecutando regresión y suite completa, y captura de `.github/pull_request_template.md`.
-* **Documento a Citar:** [.github/workflows/tests.yml](file:///c:/Users/leone/Desktop/GestiSoft/.github/workflows/tests.yml) y [.github/pull_request_template.md](file:///c:/Users/leone/Desktop/GestiSoft/.github/pull_request_template.md).
+* **Documento a Citar:** [.github/workflows/tests.yml](../.github/workflows/tests.yml) y [.github/pull_request_template.md](../.github/pull_request_template.md).
 * **Guión del Expositor (Alan):**
   > *"Acreditamos integración continua activa: configuramos el pipeline de GitHub Actions que ejecuta el build de Vite, la suite de regresión con `--group=regresion` y la suite completa de 74 pruebas en SQLite en memoria en cada commit y Pull Request. Además, estandarizamos la plantilla obligatoria de PR exigiendo justificación, checklist y evidencia de pruebas verdes."*
 
@@ -332,7 +332,7 @@
   4. **Calidad y Seguridad:** Transacciones atómicas, recálculo en servidor y $p95 \le 120\text{ ms}$.
   5. **CI y Revisión:** Pipeline de GitHub Actions en verde y cambios revisados en equipo antes de integrar.
   6. **Reproducibilidad:** Instalación desde cero documentada y verificada en equipo limpio.
-* **Documento a Citar:** [guia-semana14.md](file:///c:/Users/leone/Desktop/GestiSoft/docs/guia-semana14.md).
+* **Documento a Citar:** [guia-semana14.md](./guia-semana14.md).
 * **Guión del Expositor (Alan):**
   > *"Nuestra Definition of Done no se limita a que el código compile; exige el cumplimiento estricto de seis dimensiones de ingeniería de software. Un ítem solo se considera 'Done' cuando cuenta con valor validado, pruebas de regresión verdes, verificación de seguridad y reproducibilidad documentada."*
 
@@ -346,7 +346,7 @@
   * `RSK-12`: Pérdida de auditoría en Kardex $\rightarrow$ Mitigado con ADR-05 (SoftDeletes).
   * `RSK-17`: Validación subjetiva de hipótesis H-01 en comercios físicos $\rightarrow$ **Abierto y planificado formalmente para el piloto de campo de estabilización**.
   * `RSK-18`: Inconsistencia en validación de medios de pago $\rightarrow$ Mitigado con constante unificada `METODOS_PAGO`.
-* **Documento a Citar:** [riesgos/registro-riesgos-v1.md](file:///c:/Users/leone/Desktop/GestiSoft/riesgos/registro-riesgos-v1.md).
+* **Documento a Citar:** [riesgos/registro-riesgos-v1.md](../riesgos/registro-riesgos-v1.md).
 * **Guión del Expositor (Rodrigo):**
   > *"Actualizamos la matriz de riesgos a 18 registros. 17 riesgos se encuentran mitigados con evidencia de código y tests. Mantenemos abierto con total honestidad el riesgo RSK-17 referido a la validación de campo en comercios físicos, el cual cuenta con cronograma definido para la fase de estabilización."*
 
@@ -358,7 +358,7 @@
   * **Versión Candidata `v0.2.0-rc2`:** Entregable cerrado, estable y congelado para evaluación.
   * **Limitaciones declaradas honestamente:** Sin soporte de sangrías/retiros parciales durante la jornada y validación empírica en terreno pendiente.
   * **Próximos Pasos (Fase de Estabilización):** Piloto en 2 locales físicos de la Región del Maule durante 5 jornadas, soporte de retiros de efectivo y desarrollo del Dashboard gerencial (PBI-05).
-* **Documento a Citar:** [guia-semana14.md](file:///c:/Users/leone/Desktop/GestiSoft/docs/guia-semana14.md).
+* **Documento a Citar:** [guia-semana14.md](./guia-semana14.md).
 * **Guión del Expositor (Rodrigo):**
   > *"Cumpliendo con el Criterio 16 de la rúbrica, no afirmamos haber concluido un producto final comercial; presentamos una versión candidata estable `v0.2.0-rc2`. Nuestros próximos pasos son transparentes y fundados: iniciar el piloto de campo en dos comercios de Talca para recolectar métricas de usabilidad en terreno y construir el módulo de retiros y reportes analíticos sobre una base financiera ya estabilizada."*
 
