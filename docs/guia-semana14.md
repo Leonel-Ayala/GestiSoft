@@ -453,10 +453,10 @@ Cada integrante documenta su reflexión crítica individual, evidencias de códi
 | 1 | ¿Se superaron las observaciones de la Demo 2 (C1 a C4)? | **Sí** | Sección 1 de esta guía; tests `POSTest`, `InventoryTest`, `RoleSecurityTest`. |
 | 2 | ¿La hipótesis H-01 se presenta con honestidad técnica sin exagerar resultados? | **Sí** | [validacion-h01.md](../investigacion/validacion-h01.md) (Secciones 1, 6 y 7). |
 | 3 | ¿El backlog refleja el estado real del producto y los nuevos defectos DEF-11 a DEF-19? | **Sí** | Sección 3 de esta guía y fichas en `producto/backlog/`. |
-| 4 | ¿Existe una versión candidata reproducible con etiqueta y release? | **Sí** | Tag `v0.2.0-rc2` y [Release en GitHub](https://github.com/Leonel-Ayala/GestiSoft/releases/tag/v0.2.0-rc2). |
+| 4 | ¿Existe una versión candidata reproducible con etiqueta y release? | **Sí (tras publicar el Release, ver paso M-5)** | El código fuente está preparado en la rama para el tag `v0.2.0-rc2` y se publicará el tarball empaquetado en [GitHub Releases](https://github.com/Leonel-Ayala/GestiSoft/releases). |
 | 5 | ¿Se cuenta con una suite de regresión del Incremento 1 separada en CI? | **Sí** | Paso dedicado en `.github/workflows/tests.yml` (24 tests verdes). |
-| 6 | ¿La suite completa de pruebas pasa al 100% en verde? | **Sí** | 74 tests / 281 aserciones en verde en CI y entorno local. |
+| 6 | ¿La suite completa de pruebas pasa al 100% en verde? | **Sí** | 76 tests / 306 aserciones en verde en CI y entorno local (incluyendo 2 tests automatizados de H-03). |
 | 7 | ¿Las mediciones de calidad fueron generadas por un script reproducible con datos crudos? | **Sí** | [mediciones-calidad.md](../producto/semana-14/mediciones-calidad.md) y `scripts/medir-latencia.php`. |
-| 8 | ¿La matriz de trazabilidad bidireccional fue validada por script? | **Sí** | `scripts/validar-trazabilidad.php` ejecutado con 38 referencias verificadas. |
+| 8 | ¿La matriz de trazabilidad bidireccional fue validada por script? | **Sí** | `scripts/validar-trazabilidad.php` ejecutado con 40 referencias verificadas (41 filas en total, 0 errores). |
 | 9 | ¿El registro de riesgos cubre RSK-01 a RSK-18 con estado real y evidencia? | **Sí** | [registro-riesgos-v1.md](../riesgos/registro-riesgos-v1.md) y `registro-v1.csv`. |
 | 10 | ¿El guion de la defensa reparte el protagonismo en vivo entre los 4 integrantes? | **Sí** | Sección 16 de esta guía y `docs/guia-presentacion-defensa3.md`. |

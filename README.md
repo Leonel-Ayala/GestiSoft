@@ -120,7 +120,7 @@ GestiSoft/
      ```bash
      php artisan test --group=regresion
      ```
-   * **Suite Completa de Integración y Seguridad (74 tests / 281 aserciones):**
+   * **Suite Completa de Integración y Seguridad (76 tests / 306 aserciones):**
      ```bash
      php artisan test
      ```

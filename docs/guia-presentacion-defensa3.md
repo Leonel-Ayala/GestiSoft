@@ -35,7 +35,7 @@
 | **16** | Organización del Equipo, Responsabilidades y Sprints | FASE 2 | **Rodrigo Bertolini** | [guia-semana14.md](./guia-semana14.md#organizacion) |
 | **17** | Separador FASE 3: Demostración en Vivo del Software | FASE 3 | **Los 4 Integrantes** | Entorno local en ejecución (`http://127.0.0.1:8000`) |
 | **18** | Separador FASE 4: QA, Mediciones y Trazabilidad | FASE 4 | **Alan Troncoso** | Carpeta `producto/semana-14/` |
-| **19** | Batería de Pruebas Automatizadas y Regresión (74 Tests) | FASE 4 | **Alan Troncoso** | Terminal: `php artisan test` (74 tests, 281 aserciones) y `--group=regresion` (24 tests) |
+| **19** | Batería de Pruebas Automatizadas y Regresión (76 Tests) | FASE 4 | **Alan Troncoso** | Terminal: `php artisan test` (74 tests, 281 aserciones) y `--group=regresion` (24 tests) |
 | **20** | Atributos de Calidad con Mediciones Reales (p95) | FASE 4 | **Alan Troncoso** | [mediciones-calidad.md](../producto/semana-14/mediciones-calidad.md) (Script php: p95 búsqueda 10.77 ms, checkout 6.63 ms) |
 | **21** | Seguridad y Privacidad Verificables (RBAC, C1, C4, IDOR, ADR-06) | FASE 4 | **Alan Troncoso** | [RoleSecurityTest.php](../gestisoft-app/tests/Feature/RoleSecurityTest.php) y [CajaTurnoSecurityTest.php](../gestisoft-app/tests/Feature/CajaTurnoSecurityTest.php) |
 | **22** | Matriz de Trazabilidad Bidireccional (CSV) | FASE 4 | **Alan Troncoso** | [producto/semana-14/trazabilidad.csv](../producto/semana-14/trazabilidad.csv) (41 filas, 38 tests verificados) |
@@ -243,7 +243,7 @@
   * **Rodrigo Bertolini (PO):** Gestión de backlog, entrevistas de usuario, validación H-01 y alineación de negocio.
   * **Leonel Ayala (Full Stack / BD):** Persistencia transaccional, recálculo C1, migraciones SoftDeletes C3, ADR-06 y demo concurrencia.
   * **Luis Barrios (Frontend / UX):** Interfaces React, navegación por teclado POS, arqueo ciego y maquetación de actas.
-  * **Alan Troncoso (Scrum Master / QA):** Arquitectura de pruebas (74 tests), pipeline GitHub Actions, seguridad RBAC/IDOR y trazabilidad.
+  * **Alan Troncoso (Scrum Master / QA):** Arquitectura de pruebas (76 tests), pipeline GitHub Actions, seguridad RBAC/IDOR y trazabilidad.
 * **Documento a Citar:** [guia-semana14.md](./guia-semana14.md).
 * **Guión del Expositor (Rodrigo):**
   > *"Como Product Owner, organicé el trabajo del equipo bajo Scrum dividiendo la entrega en cortes verticales completos. Cada integrante asumió la titularidad técnica de su área, asegurando que ninguna funcionalidad se diera por cerrada sin pasar por desarrollo, pruebas automatizadas y revisión en equipo."*
@@ -266,13 +266,13 @@
 
 ---
 
-### SLIDE 19: Batería de Pruebas Automatizadas y Regresión (74 Tests)
+### SLIDE 19: Batería de Pruebas Automatizadas y Regresión (76 Tests)
 * **Expositor:** Alan Troncoso (Scrum Master / QA Lead)
-* **Elementos Visuales:** Captura y ejecución en vivo de la terminal: `{"tool":"phpunit","result":"passed","tests":74,"passed":74,"assertions":281,"duration_ms":6200}` y suite de regresión (`--group=regresion`: 24 tests, 92 aserciones).
+* **Elementos Visuales:** Captura y ejecución en vivo de la terminal: `{"tool":"phpunit","result":"passed","tests":76,"passed":76,"assertions":306,"duration_ms":6200}` y suite de regresión (`--group=regresion`: 24 tests, 92 aserciones).
   * Desglose de las 7 suites: Multi-Tenant (4), RBAC (11), Inventario y Kardex (5), POS y Checkout (10), Lógica de Turnos (18), Seguridad de Caja e IDOR (20), Autenticación (6).
 * **Documento a Citar:** [mediciones-calidad.md](../producto/semana-14/mediciones-calidad.md) y carpeta `tests/Feature/`.
 * **Guión del Expositor (Alan):**
-  > *"Hoy acreditamos una batería de 74 pruebas automatizadas con 281 aserciones ejecutándose al 100% verde en 6 segundos. Además, creamos un grupo formal de regresión con 24 pruebas etiquetadas que verifican que ninguna de las correcciones previas sufra regresión. Corregimos el test histórico de POS reemplazando el payload 'cart' por 'items', corregimos 'monto_apertura' por 'monto_inicial', y añadimos pruebas de inmutabilidad de Kardex, bloqueo de efectivo insuficiente y protección contra IDOR en turnos."*
+  > *"Hoy acreditamos una batería de 76 pruebas automatizadas con 306 aserciones ejecutándose al 100% verde en 6 segundos. Además, creamos un grupo formal de regresión con 24 pruebas etiquetadas que verifican que ninguna de las correcciones previas sufra regresión. Corregimos el test histórico de POS reemplazando el payload 'cart' por 'items', corregimos 'monto_apertura' por 'monto_inicial', y añadimos pruebas de inmutabilidad de Kardex, bloqueo de efectivo insuficiente y protección contra IDOR en turnos."*
 
 ---
 
