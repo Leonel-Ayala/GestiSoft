@@ -246,7 +246,7 @@
   * **Alan Troncoso (Scrum Master / QA):** Arquitectura de pruebas (74 tests), pipeline GitHub Actions, seguridad RBAC/IDOR y trazabilidad.
 * **Documento a Citar:** [guia-semana14.md](file:///c:/Users/leone/Desktop/GestiSoft/docs/guia-semana14.md).
 * **Guión del Expositor (Rodrigo):**
-  > *"Como Product Owner, organicé el trabajo del equipo bajo Scrum dividiendo la entrega en cortes verticales completos. Cada integrante asumió la titularidad técnica de su área, asegurando que ninguna funcionalidad se diera por cerrada sin pasar por desarrollo, pruebas automatizadas y revisión por pares."*
+  > *"Como Product Owner, organicé el trabajo del equipo bajo Scrum dividiendo la entrega en cortes verticales completos. Cada integrante asumió la titularidad técnica de su área, asegurando que ninguna funcionalidad se diera por cerrada sin pasar por desarrollo, pruebas automatizadas y revisión en equipo."*
 
 ---
 
@@ -330,7 +330,7 @@
   2. **Funcionalidad:** Criterios normales, alternativos y de error verificados.
   3. **Regresión:** 74 pruebas de integración pasando al 100% verde (24 de regresión).
   4. **Calidad y Seguridad:** Transacciones atómicas, recálculo en servidor y $p95 \le 120\text{ ms}$.
-  5. **CI y Revisión:** Pipeline de GitHub Actions en verde y Pull Requests aprobados por pares.
+  5. **CI y Revisión:** Pipeline de GitHub Actions en verde y cambios revisados en equipo antes de integrar.
   6. **Reproducibilidad:** Instalación desde cero documentada y verificada en equipo limpio.
 * **Documento a Citar:** [guia-semana14.md](file:///c:/Users/leone/Desktop/GestiSoft/docs/guia-semana14.md).
 * **Guión del Expositor (Alan):**

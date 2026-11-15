@@ -312,7 +312,7 @@ php artisan test --group=regresion
 | **2. Pruebas Automatizadas** | 100% de tests unitarios y de integración pasando en verde; suite de regresión dedicada. | Salida de CI: 74 tests / 281 aserciones en verde (`.github/workflows/tests.yml`). | **Cumplido** |
 | **3. Calidad y Rendimiento** | Latencias bajo umbrales unificados generadas mediante script reproducible. | [mediciones-calidad.md](../producto/semana-14/mediciones-calidad.md) ($p95 = 10.77\text{ ms}$ búsqueda, $6.63\text{ ms}$ checkout). | **Cumplido** |
 | **4. Seguridad y Privacidad** | Confianza cero en cliente (C1), inmutabilidad de auditoría (C3), RBAC, props limpias (C4). | [ADR-03](adr/ADR-03-precios-calculados-en-servidor.md), [ADR-05](adr/ADR-05-kardex-inmutable-softdeletes.md), [ADR-06](adr/ADR-06-creacion-administradores.md). | **Cumplido** |
-| **5. Integración Continua** | Pipeline en GitHub Actions obligatorio para PR y commits a `main` con PHP 8.4. | Archivo `.github/workflows/tests.yml` y plantilla de PR `.github/pull_request_template.md`. | **Cumplido** |
+| **5. Integración Continua** | Pipeline en GitHub Actions que se ejecuta en cada PR y commit a `main`; el equipo no fusiona con el CI en rojo. | Archivo `.github/workflows/tests.yml` y plantilla de PR `.github/pull_request_template.md`. | **Cumplido** |
 | **6. Documentación** | Guía de Semana 14 como fuente única, matriz de trazabilidad y riesgos actualizados. | [trazabilidad.csv](../producto/semana-14/trazabilidad.csv), [registro-riesgos-v1.md](../riesgos/registro-riesgos-v1.md). | **Cumplido** |
 
 ### Catálogo Consolidado de Defectos (DEF-01 a DEF-19)
@@ -368,15 +368,16 @@ Resultados oficiales extraídos literalmente del informe generado por `scripts/m
 ## 14. Repositorio, CI y revisión por pares (C14)
 
 * **Pipeline de CI:** GitHub Actions (`.github/workflows/tests.yml`) configurado sobre Ubuntu con **PHP 8.4** y Node 22, ejecutando en pasos dedicados la suite de regresión (`php artisan test --group=regresion`) y la suite completa (`php artisan test`).
-* **Plantilla de PR:** Creada en `.github/pull_request_template.md` exigiendo vinculación a defectos DEF/OBS, evidencia de tests y revisor asignado.
-* **Trabajo por Pares (Peer Review):** Matriz de revisiones cruzadas donde ningún integrante aprueba su propio código:
+* **Plantilla de PR:** Creada en `.github/pull_request_template.md` exigiendo vinculación a defectos DEF/OBS, evidencia de tests y verificación en equipo.
+* **Flujo de integración del equipo:** cada cambio se revisa en conjunto en las reuniones de trabajo antes de subirlo. Leonel Ayala, como responsable del repositorio, integra en `main` mediante PR los cambios ya revisados por el equipo. El CI de GitHub Actions debe estar en verde antes de fusionar.
 
-| PR # | Título del Pull Request | Autor | Revisor Asignado | Foco Técnico de la Revisión |
-| :---: | :--- | :--- | :--- | :--- |
-| **#15** | `feat: modelo TurnoCaja y migraciones` | Leonel Ayala | Rodrigo Bertolini | Verificación de tipos de datos enteros para montos y clave foránea indexada. |
-| **#16** | `feat: módulo de caja y endpoints backend` | Alan Troncoso | Luis Barrios | Revisión de transaccionalidad con bloqueo pesimista y cálculo de vuelto. |
-| **#17** | `feat: UI de arqueo ciego y acta de turno` | Luis Barrios | Alan Troncoso | Comprobación de accesibilidad por teclado y estilos `@media print` del acta. |
-| **#18** | `feat: estabilizar Incremento 2 (PBI-03)` | Rodrigo Bertolini | Leonel Ayala | Auditoría de C1-C4, corrección de CI en PHP 8.4 y suite de 64 tests en verde. |
+| PR # | Contenido | Integró | Revisión previa | CI |
+| :---: | :--- | :--- | :--- | :---: |
+| [#15](https://github.com/Leonel-Ayala/GestiSoft/pull/15)–[#17](https://github.com/Leonel-Ayala/GestiSoft/pull/17) | Modelo TurnoCaja, módulo de caja y UI de arqueo ciego | Leonel Ayala | Revisión en equipo | Ver PR |
+| [#18](https://github.com/Leonel-Ayala/GestiSoft/pull/18) | Estabilización del Incremento 2 (C1–C4) | Leonel Ayala | Revisión en equipo | Ver PR |
+| [#19](https://github.com/Leonel-Ayala/GestiSoft/pull/19) | DEF-11 a DEF-19, ADR-01 a ADR-07, documentación S14 | Leonel Ayala | Revisión en equipo | Ver PR |
+
+* **Limitación declarada:** la revisión por pares se hizo de forma presencial y no quedó registrada como aprobación en GitHub. Para el Incremento 3, el equipo evaluará registrar al menos un comentario de revisión por PR.
 
 ---
 
