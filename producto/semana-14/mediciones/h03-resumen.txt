@@ -1,0 +1,42 @@
+================================================================================
+RESUMEN DE TIEMPOS DE OPERACION H-03 (SISTEMA + ESTIMADO KLM)
+================================================================================
+Fecha de generación: 2026-11-15 03:35:13
+Parámetros KLM estándar: K = 0.28 s (tecla), M = 1.35 s (preparación mental)
+Estimado operador Apertura (M + F2 + '50000' + Enter): 3.31 s
+Estimado operador Cierre (M + F9 + M + '53000' + Enter): 4.66 s
+Umbral de éxito comprometido: <= 60.0 s
+
+--------------------------------------------------------------------------------
+1. OPERACION: APERTURA DE TURNO (POST /caja/abrir)
+--------------------------------------------------------------------------------
+Ensayo | Tiempo Sistema (s) | Estimado KLM (s) | Total Estimado (s) | Umbral | Cumple
+-------+--------------------+------------------+--------------------+--------+-------
+  1    |        0.4863      |        3.31      |        3.7963      | <=60s  | CUMPLE
+  2    |        0.0038      |        3.31      |        3.3138      | <=60s  | CUMPLE
+  3    |        0.0028      |        3.31      |        3.3128      | <=60s  | CUMPLE
+  4    |        0.0034      |        3.31      |        3.3134      | <=60s  | CUMPLE
+  5    |        0.0028      |        3.31      |        3.3128      | <=60s  | CUMPLE
+Promedio: Sistema = 0.0998 s | Total estimado = 3.4098 s
+Máximo:   Sistema = 0.4863 s | Total estimado = 3.7963 s
+
+--------------------------------------------------------------------------------
+2. OPERACION: CIERRE CON ARQUEO CIEGO (POST /caja/cerrar)
+--------------------------------------------------------------------------------
+Ensayo | Tiempo Sistema (s) | Estimado KLM (s) | Total Estimado (s) | Umbral | Cumple
+-------+--------------------+------------------+--------------------+--------+-------
+  1    |        0.0111      |        4.66      |        4.6711      | <=60s  | CUMPLE
+  2    |        0.0053      |        4.66      |        4.6653      | <=60s  | CUMPLE
+  3    |        0.0068      |        4.66      |        4.6668      | <=60s  | CUMPLE
+  4    |        0.0054      |        4.66      |        4.6654      | <=60s  | CUMPLE
+  5    |        0.0051      |        4.66      |        4.6651      | <=60s  | CUMPLE
+Promedio: Sistema = 0.0067 s | Total estimado = 4.6667 s
+Máximo:   Sistema = 0.0111 s | Total estimado = 4.6711 s
+
+--------------------------------------------------------------------------------
+3. EVALUACION GLOBAL DE LA HIPOTESIS H-03
+--------------------------------------------------------------------------------
+Aperturas (máx 3.7963 s <= 60 s): CUMPLE
+Cierres   (máx 4.6711 s <= 60 s): CUMPLE
+Resultado global de H-03: VALIDADA
+================================================================================

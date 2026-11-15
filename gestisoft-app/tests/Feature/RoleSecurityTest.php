@@ -265,7 +265,10 @@ class RoleSecurityTest extends TestCase
         ]);
     }
 
-    public function test_rutas_inexistentes_responden_404()
+    /**
+     * DEF-15 / AC-SEC-03: las rutas no implementadas responden 404 (sin ruta) o 405 (verbo no permitido), nunca 500.
+     */
+    public function test_rutas_no_implementadas_no_responden_500()
     {
         $negocio = Negocio::create(['name' => 'Comercial Centro']);
         $admin = User::factory()->create([

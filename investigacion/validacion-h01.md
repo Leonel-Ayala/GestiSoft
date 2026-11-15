@@ -3,7 +3,7 @@
 **Fecha de Ejecución:** 10 al 14 de Noviembre de 2026  
 **Responsables Metodológicos:** Rodrigo Bertolini (Product Owner) y Alan Troncoso (Scrum Master / QA Lead)  
 **Versión Evaluada:** GestiSoft v0.2.0-rc2 (Incremento 2: PBI-03 Arqueo y cierre de caja)  
-**Estado de Validación:** Evidencia de laboratorio (simulación interna del equipo; validación de campo con dueños reales pendiente)  
+**Estado de Validación:** Evidencia de laboratorio (role-playing basado en la entrevista inicial y el descubrimiento) y pruebas automatizadas; sin sesiones con dueños en esta entrega.  
 **Metodología:** *Role-Playing Usability Testing* (Simulación controlada en laboratorio basada en Personas de Descubrimiento) + Protocolo formal de validación en terreno.
 
 ---
@@ -17,7 +17,7 @@ Si bien los bloqueos HTTP 403 acreditan la robustez del mecanismo de control de 
 Frente a este desafío metodológico, y en estricto apego a la honestidad académica exigida por la rúbrica UCM (*"presenta evidencia de la señal o declara con precisión lo aún no validado... sin exagerar resultados"*):
 1. **Evitar falsas atribuciones:** No se declararon pruebas de campo no concluidas ni firmas de terceros fuera de control.
 2. **Adopción de Role-Playing Testing en Laboratorio:** Se implementó una técnica formal de ingeniería de software y UX denominada *Role-Playing Usability Simulation*, en la cual los miembros del equipo asumieron y recrearon los roles, restricciones y flujos de las 3 contrapartes comerciales caracterizadas en la fase de descubrimiento inicial (`ENT-01`, `ENT-02` y `ENT-03`).
-3. **Declaración explícita de límites:** Se formalizan los hallazgos del laboratorio y se establece la programación del ensayo de campo en sitio (*On-site Field Pilot*) para la fase de estabilización final.
+3. **Declaración explícita de límites:** Se formalizan los hallazgos del laboratorio y se propone el ensayo de campo en sitio (*On-site Field Pilot*) para el Incremento 3.
 
 ---
 
@@ -25,12 +25,12 @@ Frente a este desafío metodológico, y en estricto apego a la honestidad acadé
 
 * **Hipótesis H-01 (Refutable):** *Si el sistema restringe estrictamente al cajero para que no pueda visualizar ni modificar inventario, precios ni usuarios, la experiencia operativa mitigará el riesgo de manipulación no autorizada, permitiendo delegar la terminal de cobro sin supervisión continua.*
 * **Señal de Éxito de Laboratorio (Protocolo Heurístico):** 
-  * En los 3 perfiles comerciales evaluados, el operador en rol cajero debe quedar imposibilitado al 100% de modificar precios unitarios, alterar existencias en bodega o ver saldos esperados antes de la declaración física (arqueo ciego).
+  * En los 3 perfiles comerciales evaluados, el operador en rol cajero debe quedar bloqueado (HTTP 403) para modificar precios unitarios, alterar existencias en bodega o ver saldos esperados antes de la declaración física (arqueo ciego).
   * Los tiempos de cobro en el POS simulado deben ser inferiores a 15 segundos por transacción para no degradar la atención a clientes.
   * Los participantes que auditan el flujo como administradores evalúan la viabilidad de delegación con una calificación $\ge 4/5$ en la escala de satisfacción funcional.
 * **Criterio de Decisión Derivada:**
   * **Evidencia Obtenida en Laboratorio:** H-01 cuenta con **evidencia de laboratorio (simulación interna del equipo)** en ambiente controlado; se valida la necesidad crítica de complementar el RBAC con el cierre de turnos y arqueo ciego (PBI-03), justificando haber priorizado el control de caja sobre la reportería avanzada (PBI-05).
-  * **Qué Falta Validar (Campo):** La percepción subjetiva de confianza de comerciantes reales en sus locales físicos queda formalmente consignada como **pendiente de validación en terreno** para el piloto de estabilización.
+  * **Qué Falta Validar (Campo):** La confianza real de delegación en uso comercial real queda propuesta para el Incremento 3.
 
 ---
 
@@ -96,7 +96,7 @@ El ensayo se estructuró en 3 escenarios reproducibles de 25 minutos, ejecutados
 
 | Dimensión Evaluada | Criterio de Calidad | Resultado en Laboratorio | Estado de Validación |
 | :--- | :--- | :---: | :---: |
-| **Aislamiento de Rutas (RBAC)** | Bloqueo absoluto de rutas `/inventory`, `/users` a cajeros | 100% peticiones bloqueadas (`HTTP 403`) | **Validado en Tests y Lab** |
+| **Aislamiento de Rutas (RBAC)** | Bloqueo de rutas `/inventory`, `/users` a cajeros verificado por `RoleSecurityTest` | 100% peticiones bloqueadas (`HTTP 403`) | **Validado en Tests y Lab** |
 | **Integridad de Precios (C1)** | Recálculo forzoso en servidor sin confianza en el cliente | Precios manipulados son sobreescritos | **Validado en Tests y Lab** |
 | **Arqueo Ciego de Gaveta** | Cajero no ve saldo esperado al cerrar turno | Campo oculto en formulario de cierre | **Validado en Lab** |
 | **Trazabilidad de Descuadres** | Diferencia exacta reflejada en auditoría de caja | Indicador en rojo/verde con cálculo exacto | **Validado en Lab** |
@@ -104,27 +104,24 @@ El ensayo se estructuró en 3 escenarios reproducibles de 25 minutos, ejecutados
 
 ---
 
-## 6. Declaración de Limitaciones y Plan de Validación de Campo (Fase de Estabilización)
+## 6. Declaración de Limitaciones y Propuesta de Validación de Campo (Incremento 3)
 
 En cumplimiento de los estándares de honestidad técnica de la Facultad de Ingeniería UCM:
 1. **Límites de la Evidencia Actual:**
    * La evidencia actual sustenta la **efectividad técnica, la usabilidad de laboratorio y la ausencia de vulnerabilidades lógicas** en el flujo de caja y roles.
-   * No se afirma contar con métricas estadísticas de campo en comercios operando en vivo, dado que el producto se encuentra en fase de versión candidata (`v0.2.0-rc2`) previo al despliegue productivo.
-2. **Plan de Validación en Sitio (Fase de Estabilización / Incremento 3):**
-   * **Responsable:** Rodrigo Bertolini (Product Owner) y Luis Barrios (UX Lead).
-   * **Fecha comprometida:** Diciembre 2026.
-   * **Objetivo:** Instalar una instancia de prueba en 2 comercios de Talca/Curicó durante 5 jornadas operativas continuas.
+   * No se afirma contar con métricas estadísticas de campo en comercios operando en vivo ni sesiones con dueños en esta entrega.
+2. **Propuesta de Validación en Sitio para el Incremento 3:**
+   * **Responsable propuesto:** Rodrigo Bertolini (Product Owner) y Luis Barrios (UX Lead).
+   * **Objetivo:** Instalar una instancia de prueba en 2 comercios durante 5 jornadas operativas continuas.
    * **Instrumento:** Encuesta SUS (*System Usability Scale*) y registro de discrepancias en arqueos de caja reales al final de cada jornada.
-   * **Criterio de Aceptación de Campo:** Puntaje SUS $\ge 75$ y reducción a cero de diferencias de inventario no justificadas.
+   * **Criterio propuesto:** Puntaje SUS $\ge 75$ y reducción a cero de diferencias de inventario no justificadas.
 
 ---
 
-## 7. Sesiones con Dueños Reales (Trabajo de Campo)
+### 7. Alcance de la validación y justificación del método
 
-| Comercio (anonimizado) | Fecha | Versión probada | Confianza antes (1–5) | Confianza después (1–5) | ¿Delegaría la caja? | Qué le faltaría |
-| --- | --- | --- | --- | --- | --- | --- |
-| ENT-01 minimarket | [COMPLETAR POR EL EQUIPO] | v0.2.0-rc2 | [ ] | [ ] | [ ] | [ ] |
-| ENT-02 vestuario  | [COMPLETAR POR EL EQUIPO] | v0.2.0-rc2 | [ ] | [ ] | [ ] | [ ] |
-| ENT-03 bazar      | [COMPLETAR POR EL EQUIPO] | v0.2.0-rc2 | [ ] | [ ] | [ ] | [ ] |
-
-> *Nota:* Los marcadores `[COMPLETAR POR EL EQUIPO]` serán registrados por los integrantes al ejecutar las sesiones presenciales comprometidas para el piloto de campo.
+- **Origen de la hipótesis:** H-01 nace de la entrevista inicial a un negocio cercano ([ENT-01](registros-anonimizados/entrevista-01-minimarket-abarrotes.md)), cuyo dueño no podía delegar la caja sin perder control del efectivo y del stock.
+- **Representatividad:** el mismo dolor aparece en los otros registros de descubrimiento (ENT-02, ENT-03) y en la síntesis ([sintesis-v1.md](sintesis-v1.md), dolor P01). Es un problema común de los comercios pequeños, no un caso aislado.
+- **Método elegido:** role-playing en laboratorio (secciones 4 y 5), con perfiles construidos a partir de esas entrevistas, más la verificación automatizada de los controles (tests RBAC, arqueo ciego y Kardex).
+- **Decisión:** en esta entrega no se realizan sesiones adicionales con dueños. La evidencia de H-01 es de laboratorio y de pruebas automatizadas; no es una medición de satisfacción de usuarios reales.
+- **Riesgo asociado:** RSK-17 — la confianza real de delegación queda por confirmar en uso real; se propone como trabajo del Incremento 3.

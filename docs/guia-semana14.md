@@ -53,9 +53,9 @@ A partir de la retroalimentación docente oficial de la segunda defensa (`Grupo 
 
 | ID | Hipótesis Refutable | Señal Observable | Evidencia Obtenida | Qué Falta Validar | Decisión Derivada |
 | :---: | :--- | :--- | :--- | :--- | :--- |
-| **H-01** | Si el sistema restringe al cajero para que no vea ni modifique inventario, precios ni usuarios, el dueño confiará en dejarlo solo operando la terminal de cobro. | Imposibilidad técnica absoluta de adulterar precios o existencias, con evaluación de viabilidad operativa $\ge 4/5$. | **Evidencia de laboratorio:** Ensayos de role-playing sobre 3 perfiles comerciales (minimarket, boutique, bazar) verificaron bloqueo a `/inventory` (HTTP 403), recálculo de precios en servidor (C1) e inmutabilidad de Kardex. Calificación heurística interna: 4/5 y 5/5. | Medición empírica presencial de la percepción de confianza en comerciantes reales durante jornadas operativas completas. | Mantener RBAC estricto y programar piloto presencial de campo en 2 comercios de Talca (SUS $\ge 75$) para estabilización. |
-| **H-03** | Si el sistema exige declarar fondo inicial al abrir y bloquea el POS sin turno, el comercio erradicará el 100% de ventas huérfanas y operará aperturas y cierres en menos de 60 segundos. | Cero ventas con `turno_caja_id = null` en base de datos y tiempos cronometrados $\le 60\text{ s}$ en mostrador. | Cero ventas huérfanas en suite automatizada (`test_checkout_del_pos_bloqueado_si_no_hay_turno_abierto`). Protocolo de cronometraje definido en `investigacion/ensayos-h03.md`. | Registro cronometrado de los 5 ensayos presenciales con comerciantes en mostrador físico. | Mantener flujo de apertura rápida y modal bloqueante en `/pos`. |
-| **H-04** | El **arqueo ciego** (conteo físico sin mostrar saldo teórico) previene el ajuste fraudulento de billetes y asegura la detección inmutable de descuadres. | 100% de turnos cerrados registra `monto_declarado` y `diferencia` inmutables; sin posibilidad de reapertura ni recálculo. | Verificado en pruebas automatizadas: `TurnoCajaTest::test_cierre_de_caja_detecta_descuadre_faltante` y `TurnoCajaTest::test_turno_cerrado_no_recalcula_totales`. | Comprobar en campo que los cajeros no perciban el arqueo ciego como una medida punitiva sino de transparencia. | Confirmar [ADR-04](adr/ADR-04-arqueo-ciego-transaccional.md) (Arqueo ciego en servidor). |
+| **H-01** | Si el sistema restringe al cajero para que no vea ni modifique inventario, precios ni usuarios, el dueño confiará en dejarlo solo operando la terminal de cobro. | El servidor ignora precios enviados por el cliente (verificado por `POSTest::test_venta_ignora_precio_enviado_por_cliente`), con evaluación de viabilidad operativa $\ge 4/5$. | **Evidencia de laboratorio:** Ensayos de role-playing sobre 3 perfiles comerciales (minimarket, boutique, bazar) basados en la entrevista inicial y el descubrimiento, más verificación automatizada de controles (tests RBAC HTTP 403, recálculo C1 e inmutabilidad de Kardex). | Confianza real de delegación en uso real (propuesto para el Incremento 3). | Mantener RBAC estricto y proponer piloto en uso real con comercios para el Incremento 3. |
+| **H-03** | Si el sistema exige declarar fondo inicial al abrir y bloquea el POS sin turno, no se registran ventas sin turno abierto y operará aperturas y cierres en menos de 60 segundos. | Cero ventas sin turno en base de datos y tiempos de apertura/cierre $\le 60\text{ s}$. | Tiempo del sistema prom. 0.10 s / máx. 0.49 s (apertura) y prom. 0.01 s / máx. 0.01 s (cierre) + estimado KLM (3.31 s / 4.66 s) = total ≈ 3.41 s a 4.67 s $\le 60\text{ s}$ (5 ensayos automatizados), ver [ensayos-h03.md](../investigacion/ensayos-h03.md). | Observación presencial directa en mostrador con operadores de comercio real (propuesto para Incremento 3). | Mantener flujo de apertura rápida y modal bloqueante en `/pos`. |
+| **H-04** | El **arqueo ciego** (conteo físico sin mostrar saldo teórico) previene el ajuste fraudulento de billetes y asegura la detección inmutable de descuadres. | todo turno cerrado en las pruebas registra `monto_declarado` y `diferencia` inmutables; sin posibilidad de reapertura ni recálculo. | Verificado en pruebas automatizadas: `TurnoCajaTest::test_cierre_de_caja_detecta_descuadre_faltante` y `TurnoCajaTest::test_turno_cerrado_no_recalcula_totales`. | Comprobar en campo que los cajeros no perciban el arqueo ciego como una medida punitiva sino de transparencia. | Confirmar [ADR-04](adr/ADR-04-arqueo-ciego-transaccional.md) (Arqueo ciego en servidor). |
 
 ---
 
@@ -75,7 +75,7 @@ A partir de la retroalimentación docente oficial de la segunda defensa (`Grupo 
 | **3** | **DEF-12** | Defecto | Validación `distinct` para ítems duplicados en checkout | 1 PH | **Cerrado** | `POSTest::test_items_duplicados_no_permiten_sobreventa` |
 | **4** | **DEF-13** | Defecto | Validación cerrada de `payment_method` con regla canónica | 1 PH | **Cerrado** | `POSTest::test_medio_de_pago_invalido_es_rechazado` |
 | **5** | **DEF-14** | Defecto | Bloqueo pesimista de turno en transacción de checkout | 2 PH | **Cerrado** | `TurnoCajaTest::test_venta_rechazada_si_turno_se_cerro` |
-| **6** | **DEF-15** | Defecto | Limitación de routes resource para evitar error 500 | 1 PH | **Cerrado** | `RoleSecurityTest::test_rutas_inexistentes_responden_404` |
+| **6** | **DEF-15** | Defecto | Limitación de routes resource para evitar error 500 | 1 PH | **Cerrado** | `RoleSecurityTest::test_rutas_no_implementadas_no_responden_500` |
 | **7** | **DEF-16** | Defecto | Política de creación de administradores (mínimo privilegio) | 2 PH | **Cerrado** | [ADR-06](adr/ADR-06-creacion-administradores.md) / `RoleSecurityTest::test_admin_no_puede_crear_otro_admin_desde_formulario` |
 | **8** | **DEF-17** | Defecto | Manejo de doble apertura concurrente con reintentos deadlock | 1 PH | **Cerrado** | `CajaTurnoSecurityTest::test_no_se_puede_abrir_un_segundo_turno_si_ya_hay_uno_abierto` |
 | **9** | **DEF-18** | Defecto | Declaración formal de `restrictOnDelete` en MySQL vs SQLite | 1 PH | **Cerrado** | `InventoryTest::test_eliminar_producto_conserva_kardex` |
@@ -254,8 +254,8 @@ Escenario: AC-CAJA-09 - Venta rechazada si el turno se cerró concurrentemente (
 Escenario: AC-SEC-03 - Rutas no implementadas responden con código controlado (DEF-15)
   Dado un usuario administrador autenticado
   Cuando intenta consultar rutas de recursos inexistentes como "GET /users/{id}/edit"
-  Entonces el servidor responde 404 Not Found o 405 Method Not Allowed, impidiendo errores 500 por métodos ausentes.
-  # Verificado por: tests/Feature/RoleSecurityTest.php::test_rutas_inexistentes_responden_404
+  Entonces responde 404 si la ruta no está registrada o 405 si el verbo no está permitido, y nunca 500.
+  # Verificado por: tests/Feature/RoleSecurityTest.php::test_rutas_no_implementadas_no_responden_500
 
 Escenario: AC-USR-01 - Creación de usuarios bajo mínimo privilegio (ADR-06 / DEF-16)
   Dado un administrador en el formulario "/users/create"
@@ -297,10 +297,10 @@ php artisan test --group=regresion
 
 ## 10. Pruebas automatizadas y evidencia (C10)
 
-* **Total de pruebas en la suite completa:** **74 tests** (100% aprobados en verde).
-* **Total de aserciones ejecutadas:** **281 aserciones**.
-* **Tiempo de ejecución de la suite:** 12,6 segundos.
-* **Trazabilidad:** Verificada automáticamente mediante `scripts/validar-trazabilidad.php` con 38 referencias exactas a métodos de prueba.
+* **Total de pruebas en la suite completa:** **76 tests** (100% aprobados en verde, incluyendo `H03TiemposCajaTest`).
+* **Total de aserciones ejecutadas:** **306 aserciones**.
+* **Tiempo de ejecución de la suite:** ~23,6 segundos.
+* **Trazabilidad:** Verificada automáticamente mediante `scripts/validar-trazabilidad.php` con 40 referencias exactas a métodos de prueba.
 
 ---
 
@@ -309,10 +309,10 @@ php artisan test --group=regresion
 | Dimensión DoD | Condición Comprometida | Evidencia Verificable | Estado |
 | :--- | :--- | :--- | :---: |
 | **1. Funcionalidad** | Corte vertical completo: apertura, cobro, arqueo ciego, conciliación y acta imprimible. | Demostración en vivo + persistencia en tablas `turnos_caja` y `ventas`. | **Cumplido** |
-| **2. Pruebas Automatizadas** | 100% de tests unitarios y de integración pasando en verde; suite de regresión dedicada. | Salida de CI: 74 tests / 281 aserciones en verde (`.github/workflows/tests.yml`). | **Cumplido** |
+| **2. Pruebas Automatizadas** | 100% de tests unitarios y de integración pasando en verde; suite de regresión dedicada. | Salida de CI: 76 tests / 306 aserciones en verde (`.github/workflows/tests.yml`). | **Cumplido** |
 | **3. Calidad y Rendimiento** | Latencias bajo umbrales unificados generadas mediante script reproducible. | [mediciones-calidad.md](../producto/semana-14/mediciones-calidad.md) ($p95 = 10.77\text{ ms}$ búsqueda, $6.63\text{ ms}$ checkout). | **Cumplido** |
 | **4. Seguridad y Privacidad** | Confianza cero en cliente (C1), inmutabilidad de auditoría (C3), RBAC, props limpias (C4). | [ADR-03](adr/ADR-03-precios-calculados-en-servidor.md), [ADR-05](adr/ADR-05-kardex-inmutable-softdeletes.md), [ADR-06](adr/ADR-06-creacion-administradores.md). | **Cumplido** |
-| **5. Integración Continua** | Pipeline en GitHub Actions obligatorio para PR y commits a `main` con PHP 8.4. | Archivo `.github/workflows/tests.yml` y plantilla de PR `.github/pull_request_template.md`. | **Cumplido** |
+| **5. Integración Continua** | Pipeline en GitHub Actions que se ejecuta en cada PR y commit a `main`; el equipo no fusiona con el CI en rojo. | Archivo `.github/workflows/tests.yml` y plantilla de PR `.github/pull_request_template.md`. | **Cumplido** |
 | **6. Documentación** | Guía de Semana 14 como fuente única, matriz de trazabilidad y riesgos actualizados. | [trazabilidad.csv](../producto/semana-14/trazabilidad.csv), [registro-riesgos-v1.md](../riesgos/registro-riesgos-v1.md). | **Cumplido** |
 
 ### Catálogo Consolidado de Defectos (DEF-01 a DEF-19)
@@ -332,11 +332,11 @@ php artisan test --group=regresion
 | **DEF-11** | Venta sin movimiento de Kardex | P0 | Inserción obligatoria de `MovimientoStock` en cada venta ([ADR-07](adr/ADR-07-kardex-en-ventas.md)). | **Cerrado** |
 | **DEF-12** | Sobreventa por ítems duplicados | P0 | Validación `'items.*.product_id' => 'distinct'`. | **Cerrado** |
 | **DEF-13** | payment_method sin lista cerrada | P1 | Validación estricta con `Rule::in(METODOS_PAGO)`. | **Cerrado** |
-| **DEF-14** | Venta en turno cerrado concurrentemente | P1 | Re-lectura pesimista del turno dentro de la transacción de venta. | **Cerrado** |
+| **DEF-14** | Venta en turno cerrado concurrentemente | P1 | Re-lectura pesimista del turno dentro de la transacción de venta (concurrencia poco probable en turnos de 1 cajero por caja; lock optimista planificado para Incremento 3). | **Cerrado (con limitación declarada, ver 16.3)** |
 | **DEF-15** | Rutas resource no implementadas daban 500 | P1 | `Route::resource` acotado con `except(['show'])` y `only(...)`. | **Cerrado** |
 | **DEF-16** | Creación admin sin política documentada | P1 | [ADR-06](adr/ADR-06-creacion-administradores.md): Mínimo privilegio, creación fija en rol cajero. | **Cerrado** |
-| **DEF-17** | Doble apertura con riesgo de deadlock | P2 | `DB::transaction(..., 3)` con 3 reintentos ante deadlock. | **Cerrado** |
-| **DEF-18** | restrictOnDelete no comprobado en SQLite | P2 | Integridad blindada por `SoftDeletes` validada en CI. | **Cerrado** |
+| **DEF-17** | Doble apertura con riesgo de deadlock | P2 | `DB::transaction(..., 3)` con 3 reintentos ante deadlock (ídem, ver 16.3). | **Cerrado (con limitación declarada, ver 16.3)** |
+| **DEF-18** | restrictOnDelete no comprobado en SQLite | P2 | Integridad del Kardex protegida por `SoftDeletes` validada en CI (implementado en migración; validado en SQLite; requiere verificación en MySQL en staging). | **Cerrado (con limitación declarada, ver 16.3)** |
 | **DEF-19** | Fixtures con campo inexistente monto_apertura | P2 | Corrección global a `monto_inicial` en suite de tests. | **Cerrado** |
 
 ---
@@ -350,6 +350,7 @@ Resultados oficiales extraídos literalmente del informe generado por `scripts/m
 | **Rendimiento** | Búsqueda reactiva (`/pos/search`) | 50 | 2.28 ms | 4.83 ms | **10.77 ms** | $\le 150.00\text{ ms}$ | **CUMPLE** |
 | **Rendimiento** | Estado de caja (`/caja/estado`) | 50 | 2.20 ms | 2.40 ms | **2.87 ms** | $\le 300.00\text{ ms}$ | **CUMPLE** |
 | **Rendimiento** | Checkout POS (`/pos/checkout`) | 50 | 3.42 ms | 8.94 ms | **6.63 ms** | $\le 500.00\text{ ms}$ | **CUMPLE** |
+| **Eficiencia** | Apertura y cierre de caja (H-03) | 5 ensayos | 3.31 s | 4.04 s | **4.67 s (máx)** | $\le 60.00\text{ s}$ | **CUMPLE** |
 | **Accesibilidad** | Operación completa por teclado | 6 flujos | — | — | — | 100% operable sin ratón | **CUMPLE** |
 
 ---
@@ -368,15 +369,16 @@ Resultados oficiales extraídos literalmente del informe generado por `scripts/m
 ## 14. Repositorio, CI y revisión por pares (C14)
 
 * **Pipeline de CI:** GitHub Actions (`.github/workflows/tests.yml`) configurado sobre Ubuntu con **PHP 8.4** y Node 22, ejecutando en pasos dedicados la suite de regresión (`php artisan test --group=regresion`) y la suite completa (`php artisan test`).
-* **Plantilla de PR:** Creada en `.github/pull_request_template.md` exigiendo vinculación a defectos DEF/OBS, evidencia de tests y revisor asignado.
-* **Trabajo por Pares (Peer Review):** Matriz de revisiones cruzadas donde ningún integrante aprueba su propio código:
+* **Plantilla de PR:** Creada en `.github/pull_request_template.md` exigiendo vinculación a defectos DEF/OBS, evidencia de tests y verificación en equipo.
+* **Flujo de integración del equipo:** cada cambio se revisa en conjunto en las reuniones de trabajo antes de subirlo. Leonel Ayala, como responsable del repositorio, integra en `main` mediante PR los cambios ya revisados por el equipo. El CI de GitHub Actions debe estar en verde antes de fusionar.
 
-| PR # | Título del Pull Request | Autor | Revisor Asignado | Foco Técnico de la Revisión |
-| :---: | :--- | :--- | :--- | :--- |
-| **#15** | `feat: modelo TurnoCaja y migraciones` | Leonel Ayala | Rodrigo Bertolini | Verificación de tipos de datos enteros para montos y clave foránea indexada. |
-| **#16** | `feat: módulo de caja y endpoints backend` | Alan Troncoso | Luis Barrios | Revisión de transaccionalidad con bloqueo pesimista y cálculo de vuelto. |
-| **#17** | `feat: UI de arqueo ciego y acta de turno` | Luis Barrios | Alan Troncoso | Comprobación de accesibilidad por teclado y estilos `@media print` del acta. |
-| **#18** | `feat: estabilizar Incremento 2 (PBI-03)` | Rodrigo Bertolini | Leonel Ayala | Auditoría de C1-C4, corrección de CI en PHP 8.4 y suite de 64 tests en verde. |
+| PR # | Contenido | Integró | Revisión previa | CI |
+| :---: | :--- | :--- | :--- | :---: |
+| [#15](https://github.com/Leonel-Ayala/GestiSoft/pull/15)–[#17](https://github.com/Leonel-Ayala/GestiSoft/pull/17) | Modelo TurnoCaja, módulo de caja y UI de arqueo ciego | Leonel Ayala | Revisión en equipo | Ver PR |
+| [#18](https://github.com/Leonel-Ayala/GestiSoft/pull/18) | Estabilización del Incremento 2 (C1–C4) | Leonel Ayala | Revisión en equipo | Ver PR |
+| [#19](https://github.com/Leonel-Ayala/GestiSoft/pull/19) | DEF-11 a DEF-19, ADR-01 a ADR-07, documentación S14 | Leonel Ayala | Revisión en equipo | Ver PR |
+
+* **Limitación declarada:** la revisión por pares se hizo de forma presencial y no quedó registrada como aprobación en GitHub. Para el Incremento 3, el equipo evaluará registrar al menos un comentario de revisión por PR.
 
 ---
 
@@ -418,7 +420,19 @@ La presentación de la defensa se distribuye equitativamente entre los 4 integra
 | :--- | :--- | :--- | :--- |
 | **Caja y Ventas** | Apertura, arqueo ciego, conciliación multicanal, acta imprimible y Kardex en ventas. | Retiros parciales de efectivo durante la jornada (gastos menores). | RSK-15 (Manejo de efectivo en mostrador) |
 | **Reportería** | Auditoría con vista mensual acotada por defecto y filtro histórico consolidado. | Dashboard gráfico de tendencias de ventas y productos populares ([PBI-05](../producto/backlog/PBI-05.md)). | RSK-06 (Volumen de datos históricos) |
-| **Validación** | Role-Playing Testing en laboratorio sobre 3 perfiles de negocio (minimarket, boutique, bazar). | Piloto presencial en terreno con 2 comercios reales de Talca/Curicó (SUS $\ge 75$). | **RSK-17** (Validación empírica en terreno) |
+| **Validación** | Role-Playing Testing en laboratorio sobre 3 perfiles de negocio (minimarket, boutique, bazar) y tests automatizados. | Piloto en uso real con comercios. | **RSK-17** (Validación empírica en terreno) |
+
+---
+
+### 16.3 Limitaciones técnicas declaradas
+
+En estricto apego al principio de honestidad técnica y académica (Criterio 16 de la rúbrica), el equipo declara explícitamente las siguientes limitaciones del Incremento 2:
+
+1. **Concurrencia de caja (DEF-14, DEF-17):** Un solo cajero opera una caja a la vez por modelo de negocio; la concurrencia real simultánea entre dos cajeros sobre la misma caja está mitigada por el flujo operacional de turnos exclusivos, pero no cuenta con lock optimista de versión a nivel de interfaz en este incremento (planificado para Incremento 3).
+2. **Base de datos y verificación de integridad (DEF-18):** La suite de pruebas automatizadas corre en SQLite en memoria por rendimiento y portabilidad de CI; la integridad referencial (`restrictOnDelete`) está formalmente declarada en las migraciones y protegida en la capa de aplicación con `SoftDeletes`, pero su enforcement estricto a nivel de motor requiere verificación en base de datos MySQL en entorno de staging.
+3. **Mediciones de latencia y rendimiento:** Las mediciones de tiempo de respuesta (p95 y H-03) se tomaron a nivel de proceso (`hrtime()` / `microtime()`), excluyendo la latencia de ida y vuelta de red (RTT) y el tiempo de renderizado en el navegador cliente.
+4. **Alcance de validación de H-01:** La hipótesis de delegación segura fue validada en entorno de laboratorio mediante un protocolo estructurado de role-playing basado en la entrevista inicial `ENT-01`; no reemplaza las sesiones observadas con comerciantes reales en mostrador físico (programadas para el piloto).
+5. **Alcance de medición de H-03:** El tiempo de sistema fue medido en backend sobre 5 ensayos automatizados; el tiempo del operador humano fue modelado mediante la técnica estándar Keystroke-Level Model (KLM, Card, Moran & Newell, 1980), por lo que no constituye una medición de cronómetro sobre usuarios no entrenados.
 
 ---
 
@@ -439,10 +453,10 @@ Cada integrante documenta su reflexión crítica individual, evidencias de códi
 | 1 | ¿Se superaron las observaciones de la Demo 2 (C1 a C4)? | **Sí** | Sección 1 de esta guía; tests `POSTest`, `InventoryTest`, `RoleSecurityTest`. |
 | 2 | ¿La hipótesis H-01 se presenta con honestidad técnica sin exagerar resultados? | **Sí** | [validacion-h01.md](../investigacion/validacion-h01.md) (Secciones 1, 6 y 7). |
 | 3 | ¿El backlog refleja el estado real del producto y los nuevos defectos DEF-11 a DEF-19? | **Sí** | Sección 3 de esta guía y fichas en `producto/backlog/`. |
-| 4 | ¿Existe una versión candidata reproducible con etiqueta y release? | **Sí** | Tag `v0.2.0-rc2` y [Release en GitHub](https://github.com/Leonel-Ayala/GestiSoft/releases/tag/v0.2.0-rc2). |
+| 4 | ¿Existe una versión candidata reproducible con etiqueta y release? | **Sí (tras publicar el Release, ver paso M-5)** | El código fuente está preparado en la rama para el tag `v0.2.0-rc2` y se publicará el tarball empaquetado en [GitHub Releases](https://github.com/Leonel-Ayala/GestiSoft/releases). |
 | 5 | ¿Se cuenta con una suite de regresión del Incremento 1 separada en CI? | **Sí** | Paso dedicado en `.github/workflows/tests.yml` (24 tests verdes). |
-| 6 | ¿La suite completa de pruebas pasa al 100% en verde? | **Sí** | 74 tests / 281 aserciones en verde en CI y entorno local. |
+| 6 | ¿La suite completa de pruebas pasa al 100% en verde? | **Sí** | 76 tests / 306 aserciones en verde en CI y entorno local (incluyendo 2 tests automatizados de H-03). |
 | 7 | ¿Las mediciones de calidad fueron generadas por un script reproducible con datos crudos? | **Sí** | [mediciones-calidad.md](../producto/semana-14/mediciones-calidad.md) y `scripts/medir-latencia.php`. |
-| 8 | ¿La matriz de trazabilidad bidireccional fue validada por script? | **Sí** | `scripts/validar-trazabilidad.php` ejecutado con 38 referencias verificadas. |
+| 8 | ¿La matriz de trazabilidad bidireccional fue validada por script? | **Sí** | `scripts/validar-trazabilidad.php` ejecutado con 40 referencias verificadas (41 filas en total, 0 errores). |
 | 9 | ¿El registro de riesgos cubre RSK-01 a RSK-18 con estado real y evidencia? | **Sí** | [registro-riesgos-v1.md](../riesgos/registro-riesgos-v1.md) y `registro-v1.csv`. |
 | 10 | ¿El guion de la defensa reparte el protagonismo en vivo entre los 4 integrantes? | **Sí** | Sección 16 de esta guía y `docs/guia-presentacion-defensa3.md`. |
