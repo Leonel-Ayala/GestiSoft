@@ -106,12 +106,12 @@
 ### SLIDE 06: Objetivo del Incremento 2 e Hipótesis Refutables (H-01, H-03, H-04)
 * **Expositor:** Rodrigo Bertolini (Product Owner)
 * **Elementos Visuales:** Tabla de hipótesis con sus señales observables y criterio de decisión:
-  * **H-01:** Delegación segura en el cajero sin temor a fraude $\rightarrow$ **Role-Playing Testing en Laboratorio** sobre los 3 perfiles de descubrimiento (`ENT-01`, `ENT-02`, `ENT-03`) confirmando 100% de aislamiento. Declaración honesta de validación de campo programada para el piloto de estabilización con fechas y responsables asignados.
-  * **H-03:** Erradicación de ventas huérfanas mediante apertura obligatoria con fondo inicial en gaveta y bloqueo de rutas.
+  * **H-01:** Delegación segura en el cajero sin temor a fraude $\rightarrow$ **Role-Playing Testing en Laboratorio** sobre los 3 perfiles de descubrimiento (`ENT-01`, `ENT-02`, `ENT-03`) confirmando aislamiento verificado por tests. Declaración honesta de validación de campo programada para el piloto de estabilización con fechas y responsables asignados.
+  * **H-03:** Prevención de ventas huérfanas mediante apertura obligatoria con fondo inicial en gaveta y bloqueo de rutas.
   * **H-04:** Arqueo ciego como mecanismo de prevención de manipulación de dinero al cierre de turno.
 * **Documento a Citar:** [investigacion/validacion-h01.md](file:///c:/Users/leone/Desktop/GestiSoft/investigacion/validacion-h01.md) y [investigacion/ensayos-h03.md](file:///c:/Users/leone/Desktop/GestiSoft/investigacion/ensayos-h03.md).
 * **Guión del Expositor (Rodrigo):**
-  > *"El Criterio 2 de la rúbrica premia la honestidad intelectual: 'declara con precisión lo aún no validado... sin exagerar resultados'. En estricto apego a este principio, para H-01 diseñamos un protocolo riguroso de Role-Playing Testing en laboratorio recreando operativamente los perfiles de los tres negocios de descubrimiento. Comprobamos de manera reproducible que el cajero queda 100% bloqueado de alterar inventario o precios. Declaramos con total transparencia que la medición subjetiva de campo con usuarios externos en locales físicos está formalmente programada para el piloto de estabilización. Para H-03 y H-04, validamos que no existen ventas huérfanas y que el arqueo ciego impide al cajero ajustar billetes según el saldo teórico del sistema."*
+  > *"El Criterio 2 de la rúbrica premia la honestidad intelectual: 'declara con precisión lo aún no validado... sin exagerar resultados'. En estricto apego a este principio, para H-01 diseñamos un protocolo riguroso de Role-Playing Testing en laboratorio recreando operativamente los perfiles de los tres negocios de descubrimiento. Comprobamos de manera reproducible que el cajero queda bloqueado por RBAC (HTTP 403) para alterar inventario o precios. Declaramos con total transparencia que la medición subjetiva de campo con usuarios externos en locales físicos está formalmente programada para el piloto de estabilización. Para H-03 y H-04, validamos que no existen ventas huérfanas y que el arqueo ciego impide al cajero ajustar billetes según el saldo teórico del sistema."*
 
 ---
 
@@ -233,7 +233,7 @@
   * Cuadro de reproducibilidad: 5 comandos secuenciales documentados en `README.md`.
 * **Documento a Citar:** [README.md](file:///c:/Users/leone/Desktop/GestiSoft/README.md).
 * **Guión del Expositor (Leonel):**
-  > *"Corregimos integralmente el README del proyecto para garantizar reproducibilidad absoluta. Cualquier evaluador puede clonar el repositorio y levantar el entorno ejecutando cinco comandos estándar: `composer install`, `npm ci`, copia del `.env`, migración con seeders temáticos y compilación de Vite. Los seeders generan tres empresas listas con credenciales operativas de administrador y cajero."*
+  > *"Corregimos integralmente el README del proyecto para permitir reproducir la instalación paso a paso. Cualquier evaluador puede clonar el repositorio y levantar el entorno ejecutando cinco comandos estándar: `composer install`, `npm ci`, copia del `.env`, migración con seeders temáticos y compilación de Vite. Los seeders generan tres empresas listas con credenciales operativas de administrador y cajero."*
 
 ---
 
@@ -366,7 +366,7 @@
 
 ### SLIDE 27: Portada de Cierre y Ronda de Preguntas Técnicas
 * **Expositor:** Rodrigo Bertolini (Apertura) y Todo el Equipo
-* **Elementos Visuales:** Logo corporativo de GestiSoft, tabla resumen de métricas clave (74 tests verdes, $p95 = 10.77\text{ ms}$, 100% de integridad financiera) y texto: *Muchas gracias. Quedamos a disposición de la comisión evaluadora para la ronda de preguntas técnicas e individuales.*
+* **Elementos Visuales:** Logo corporativo de GestiSoft, tabla resumen de métricas clave (74 tests verdes, $p95 = 10.77\text{ ms}$, invariantes de caja y Kardex verificadas por tests) y texto: *Muchas gracias. Quedamos a disposición de la comisión evaluadora para la ronda de preguntas técnicas e individuales.*
 * **Guión del Expositor (Rodrigo):**
   > *"Agradecemos a la comisión por su atención. Estamos listos para profundizar en cualquier aspecto del código, la arquitectura o las pruebas en la ronda de preguntas individuales."*
 
@@ -455,7 +455,7 @@ sequenceDiagram
 ### A. Leonel Ayala (Full Stack / Base de Datos Lead)
 * **Pregunta probable:** *"Usted implementó la corrección C1, C3, ADR-06 y ADR-07. Explíqueme a nivel de base de datos cómo garantizó que no existan condiciones de carrera en el stock y por qué no usó un borrado físico en productos ni un rol libre en creación de usuarios."*
 * **Respuesta técnica recomendada:**
-  > *"En C1, el riesgo crítico eran las condiciones de carrera: si dos cajeros cobraban el último producto en el mismo milisegundo, ambos leían el stock disponible antes de descontar. Lo solucioné envolviendo el checkout en `DB::transaction()` y aplicando `Product::where('id', $item['product_id'])->lockForUpdate()->first()`, complementado con un re-bloqueo pesimista del turno activo. Esto genera un bloqueo a nivel de fila en el motor InnoDB hasta el `COMMIT`, garantizando serialización estricta.*  
+  > *"En C1, el riesgo crítico eran las condiciones de carrera: si dos cajeros cobraban el último producto en el mismo milisegundo, ambos leían el stock disponible antes de descontar. Lo solucioné envolviendo el checkout en `DB::transaction()` y aplicando `Product::where('id', $item['product_id'])->lockForUpdate()->first()`, complementado con un re-bloqueo pesimista del turno activo. Esto genera un bloqueo a nivel de fila en el motor InnoDB hasta el `COMMIT`, serializando la apertura; además se reintenta hasta 3 veces ante deadlock (DEF-17). No hay restricción única en la base de datos (limitación declarada).*  
   > *Respecto a C3, la tabla `movimiento_stocks` es nuestro Kardex contable. Si un administrador eliminaba un producto con un `DELETE` tradicional, la foreign key con `cascadeOnDelete` destruía todo el historial de movimientos de inventario, violando la normativa tributaria chilena. Al implementar `SoftDeletes`, el producto simplemente marca `deleted_at = now()`, ocultándolo del catálogo operativo mediante un Global Scope automático, pero preservando intactos sus registros en el Kardex bajo una restricción foránea `restrictOnDelete`.*  
   > *Por último, en ADR-06 aplicamos el principio de mínimo privilegio: la UI solo permite crear cajeros, previniendo que un usuario comprometa credenciales para crear administradores no fiscalizados, mientras que ADR-07 asegura que cada venta genere un movimiento atómico en el Kardex con motivo trazable."*
 
@@ -481,7 +481,7 @@ sequenceDiagram
 ### D. Rodrigo Bertolini (Product Owner / Backend Lead)
 * **Pregunta probable:** *"¿Por qué decidieron no validar la hipótesis H-01 con comerciantes reales en terreno para esta entrega y qué garantiza la simulación de Role-Playing que presentaron?"*
 * **Respuesta técnica recomendada:**
-  > *"Tomamos esa decisión con estricto apego a la honestidad académica y a la rúbrica UCM, que premia 'declarar con precisión lo aún no validado sin exagerar resultados'. La hipótesis H-01 evalúa si la separación de roles genera confianza subjetiva en el dueño para delegar la caja. Para esta entrega candidata v0.2.0-rc2, ejecutar un piloto superficial sin estabilidad previa en el dinero de caja habría sido irresponsable. Diseñamos un protocolo de Role-Playing Testing en laboratorio donde recreamos fielmente las restricciones y flujos de las 3 contrapartes entrevistadas (`Abarrotes Laura`, `Boutique Urbana` y `PokéStore TCG`), comprobando de forma empírica que el cajero queda 100% imposibilitado de cometer fraude con inventario o precios.*  
+  > *"Tomamos esa decisión con estricto apego a la honestidad académica y a la rúbrica UCM, que premia 'declarar con precisión lo aún no validado sin exagerar resultados'. La hipótesis H-01 evalúa si la separación de roles genera confianza subjetiva en el dueño para delegar la caja. Para esta entrega candidata v0.2.0-rc2, ejecutar un piloto superficial sin estabilidad previa en el dinero de caja habría sido irresponsable. Diseñamos un protocolo de Role-Playing Testing en laboratorio donde recreamos fielmente las restricciones y flujos de las 3 contrapartes entrevistadas (`Abarrotes Laura`, `Boutique Urbana` y `PokéStore TCG`), comprobando de forma empírica que el cajero queda sin acceso a inventario ni precios según los tests y el role-playing basado en la entrevista inicial.*  
   > *Declaramos con total transparencia en el riesgo RSK-17 que la validación empírica subjetiva en locales físicos está formalmente programada para el piloto de campo de la fase de estabilización, lo que demuestra madurez en la gestión del ciclo de vida del producto."*
 
 ---

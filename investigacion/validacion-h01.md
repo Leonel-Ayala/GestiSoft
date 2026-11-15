@@ -25,7 +25,7 @@ Frente a este desafío metodológico, y en estricto apego a la honestidad acadé
 
 * **Hipótesis H-01 (Refutable):** *Si el sistema restringe estrictamente al cajero para que no pueda visualizar ni modificar inventario, precios ni usuarios, la experiencia operativa mitigará el riesgo de manipulación no autorizada, permitiendo delegar la terminal de cobro sin supervisión continua.*
 * **Señal de Éxito de Laboratorio (Protocolo Heurístico):** 
-  * En los 3 perfiles comerciales evaluados, el operador en rol cajero debe quedar imposibilitado al 100% de modificar precios unitarios, alterar existencias en bodega o ver saldos esperados antes de la declaración física (arqueo ciego).
+  * En los 3 perfiles comerciales evaluados, el operador en rol cajero debe quedar bloqueado (HTTP 403) para modificar precios unitarios, alterar existencias en bodega o ver saldos esperados antes de la declaración física (arqueo ciego).
   * Los tiempos de cobro en el POS simulado deben ser inferiores a 15 segundos por transacción para no degradar la atención a clientes.
   * Los participantes que auditan el flujo como administradores evalúan la viabilidad de delegación con una calificación $\ge 4/5$ en la escala de satisfacción funcional.
 * **Criterio de Decisión Derivada:**
@@ -96,7 +96,7 @@ El ensayo se estructuró en 3 escenarios reproducibles de 25 minutos, ejecutados
 
 | Dimensión Evaluada | Criterio de Calidad | Resultado en Laboratorio | Estado de Validación |
 | :--- | :--- | :---: | :---: |
-| **Aislamiento de Rutas (RBAC)** | Bloqueo absoluto de rutas `/inventory`, `/users` a cajeros | 100% peticiones bloqueadas (`HTTP 403`) | **Validado en Tests y Lab** |
+| **Aislamiento de Rutas (RBAC)** | Bloqueo de rutas `/inventory`, `/users` a cajeros verificado por `RoleSecurityTest` | 100% peticiones bloqueadas (`HTTP 403`) | **Validado en Tests y Lab** |
 | **Integridad de Precios (C1)** | Recálculo forzoso en servidor sin confianza en el cliente | Precios manipulados son sobreescritos | **Validado en Tests y Lab** |
 | **Arqueo Ciego de Gaveta** | Cajero no ve saldo esperado al cerrar turno | Campo oculto en formulario de cierre | **Validado en Lab** |
 | **Trazabilidad de Descuadres** | Diferencia exacta reflejada en auditoría de caja | Indicador en rojo/verde con cálculo exacto | **Validado en Lab** |
