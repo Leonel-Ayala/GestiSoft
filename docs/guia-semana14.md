@@ -332,11 +332,11 @@ php artisan test --group=regresion
 | **DEF-11** | Venta sin movimiento de Kardex | P0 | Inserción obligatoria de `MovimientoStock` en cada venta ([ADR-07](adr/ADR-07-kardex-en-ventas.md)). | **Cerrado** |
 | **DEF-12** | Sobreventa por ítems duplicados | P0 | Validación `'items.*.product_id' => 'distinct'`. | **Cerrado** |
 | **DEF-13** | payment_method sin lista cerrada | P1 | Validación estricta con `Rule::in(METODOS_PAGO)`. | **Cerrado** |
-| **DEF-14** | Venta en turno cerrado concurrentemente | P1 | Re-lectura pesimista del turno dentro de la transacción de venta. | **Cerrado** |
+| **DEF-14** | Venta en turno cerrado concurrentemente | P1 | Re-lectura pesimista del turno dentro de la transacción de venta (concurrencia poco probable en turnos de 1 cajero por caja; lock optimista planificado para Incremento 3). | **Cerrado (con limitación declarada, ver 16.3)** |
 | **DEF-15** | Rutas resource no implementadas daban 500 | P1 | `Route::resource` acotado con `except(['show'])` y `only(...)`. | **Cerrado** |
 | **DEF-16** | Creación admin sin política documentada | P1 | [ADR-06](adr/ADR-06-creacion-administradores.md): Mínimo privilegio, creación fija en rol cajero. | **Cerrado** |
-| **DEF-17** | Doble apertura con riesgo de deadlock | P2 | `DB::transaction(..., 3)` con 3 reintentos ante deadlock. | **Cerrado** |
-| **DEF-18** | restrictOnDelete no comprobado en SQLite | P2 | Integridad del Kardex protegida por `SoftDeletes` validada en CI. | **Cerrado** |
+| **DEF-17** | Doble apertura con riesgo de deadlock | P2 | `DB::transaction(..., 3)` con 3 reintentos ante deadlock (ídem, ver 16.3). | **Cerrado (con limitación declarada, ver 16.3)** |
+| **DEF-18** | restrictOnDelete no comprobado en SQLite | P2 | Integridad del Kardex protegida por `SoftDeletes` validada en CI (implementado en migración; validado en SQLite; requiere verificación en MySQL en staging). | **Cerrado (con limitación declarada, ver 16.3)** |
 | **DEF-19** | Fixtures con campo inexistente monto_apertura | P2 | Corrección global a `monto_inicial` en suite de tests. | **Cerrado** |
 
 ---
@@ -421,6 +421,18 @@ La presentación de la defensa se distribuye equitativamente entre los 4 integra
 | **Caja y Ventas** | Apertura, arqueo ciego, conciliación multicanal, acta imprimible y Kardex en ventas. | Retiros parciales de efectivo durante la jornada (gastos menores). | RSK-15 (Manejo de efectivo en mostrador) |
 | **Reportería** | Auditoría con vista mensual acotada por defecto y filtro histórico consolidado. | Dashboard gráfico de tendencias de ventas y productos populares ([PBI-05](../producto/backlog/PBI-05.md)). | RSK-06 (Volumen de datos históricos) |
 | **Validación** | Role-Playing Testing en laboratorio sobre 3 perfiles de negocio (minimarket, boutique, bazar) y tests automatizados. | Piloto en uso real con comercios. | **RSK-17** (Validación empírica en terreno) |
+
+---
+
+### 16.3 Limitaciones técnicas declaradas
+
+En estricto apego al principio de honestidad técnica y académica (Criterio 16 de la rúbrica), el equipo declara explícitamente las siguientes limitaciones del Incremento 2:
+
+1. **Concurrencia de caja (DEF-14, DEF-17):** Un solo cajero opera una caja a la vez por modelo de negocio; la concurrencia real simultánea entre dos cajeros sobre la misma caja está mitigada por el flujo operacional de turnos exclusivos, pero no cuenta con lock optimista de versión a nivel de interfaz en este incremento (planificado para Incremento 3).
+2. **Base de datos y verificación de integridad (DEF-18):** La suite de pruebas automatizadas corre en SQLite en memoria por rendimiento y portabilidad de CI; la integridad referencial (`restrictOnDelete`) está formalmente declarada en las migraciones y protegida en la capa de aplicación con `SoftDeletes`, pero su enforcement estricto a nivel de motor requiere verificación en base de datos MySQL en entorno de staging.
+3. **Mediciones de latencia y rendimiento:** Las mediciones de tiempo de respuesta (p95 y H-03) se tomaron a nivel de proceso (`hrtime()` / `microtime()`), excluyendo la latencia de ida y vuelta de red (RTT) y el tiempo de renderizado en el navegador cliente.
+4. **Alcance de validación de H-01:** La hipótesis de delegación segura fue validada en entorno de laboratorio mediante un protocolo estructurado de role-playing basado en la entrevista inicial `ENT-01`; no reemplaza las sesiones observadas con comerciantes reales en mostrador físico (programadas para el piloto).
+5. **Alcance de medición de H-03:** El tiempo de sistema fue medido en backend sobre 5 ensayos automatizados; el tiempo del operador humano fue modelado mediante la técnica estándar Keystroke-Level Model (KLM, Card, Moran & Newell, 1980), por lo que no constituye una medición de cronómetro sobre usuarios no entrenados.
 
 ---
 

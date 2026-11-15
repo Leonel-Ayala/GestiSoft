@@ -356,11 +356,11 @@
 * **Expositor:** Rodrigo Bertolini (Product Owner)
 * **Elementos Visuales:** Hoja de ruta hacia la liberación final:
   * **Versión Candidata `v0.2.0-rc2`:** Entregable cerrado, estable y congelado para evaluación.
-  * **Limitaciones declaradas honestamente:** Sin soporte de sangrías/retiros parciales durante la jornada y validación empírica en terreno pendiente.
+  * **Limitaciones declaradas honestamente (Sección 16.3):** Concurrencia de caja mitigada por modelo operacional de 1 cajero por caja (DEF-14, DEF-17), mediciones de tiempo in-process complementadas con KLM (H-03), integridad referencial probada en SQLite con verificación en MySQL pendiente (DEF-18), y pruebas de campo con comerciantes programadas para el piloto de estabilización (H-01).
   * **Próximos Pasos (Fase de Estabilización):** Piloto en 2 locales físicos de la Región del Maule durante 5 jornadas, soporte de retiros de efectivo y desarrollo del Dashboard gerencial (PBI-05).
 * **Documento a Citar:** [guia-semana14.md](./guia-semana14.md).
 * **Guión del Expositor (Rodrigo):**
-  > *"Cumpliendo con el Criterio 16 de la rúbrica, no afirmamos haber concluido un producto final comercial; presentamos una versión candidata estable `v0.2.0-rc2`. Nuestros próximos pasos son transparentes y fundados: iniciar el piloto de campo en dos comercios de Talca para recolectar métricas de usabilidad en terreno y construir el módulo de retiros y reportes analíticos sobre una base financiera ya estabilizada."*
+  > *"Cumpliendo con el Criterio 16 de la rúbrica, no afirmamos haber concluido un producto final comercial; presentamos una versión candidata estable `v0.2.0-rc2`. Declaramos con total transparencia las limitaciones técnicas del incremento (detalladas en la Sección 16.3 de la guía): concurrencia de caja mitigada por modelo operacional de 1 cajero por caja, mediciones in-process complementadas con KLM, y pruebas de campo con comerciantes planificadas para el piloto de estabilización en dos comercios de Talca."*
 
 ---
 
