@@ -1,6 +1,6 @@
 # Reporte de Mediciones y Atributos de Calidad — Semana 14 (GestiSoft)
 
-- **Versión evaluada:** `v0.2.0-rc2` (Incremento 2)
+- **Versión evaluada:** medido sobre el commit `c08e59e` (código idéntico a `v0.2.0-rc3`, Incremento 2)
 - **Fecha de ejecución:** 2026-11-14 16:48:40
 - **Responsables:** Alan Troncoso (QA Lead / Automatización) y Luis Barrios (UI-UX)
 - **Script de automatización:** `scripts/medir-latencia.php`

@@ -6,13 +6,13 @@ GestiSoft es una plataforma SaaS (*Software as a Service*) multi-inquilino (*mul
 
 ## Versión Candidata Oficial (Semana 14)
 
-* **Etiqueta (Tag):** [`v0.2.0-rc2`](https://github.com/Leonel-Ayala/GestiSoft/releases/tag/v0.2.0-rc2)
-* **Pre-release en GitHub:** [Release v0.2.0-rc2](https://github.com/Leonel-Ayala/GestiSoft/releases/tag/v0.2.0-rc2)
+* **Etiqueta (Tag):** [`v0.2.0-rc3`](https://github.com/Leonel-Ayala/GestiSoft/releases/tag/v0.2.0-rc3)
+* **Pre-release en GitHub:** [Release v0.2.0-rc3](https://github.com/Leonel-Ayala/GestiSoft/releases/tag/v0.2.0-rc3)
 * **Comando para clonar y posicionarse en la versión candidata evaluada:**
   ```bash
   git clone https://github.com/Leonel-Ayala/GestiSoft.git
   cd GestiSoft
-  git checkout v0.2.0-rc2
+  git checkout v0.2.0-rc3
   ```
 * **Pipeline de Integración Continua (CI):** Ejecutado en GitHub Actions con dos pasos independientes: suite de regresión del Incremento 1 y suite completa (ambos 100% verdes).
 
@@ -74,7 +74,7 @@ GestiSoft/
    ```bash
    git clone https://github.com/Leonel-Ayala/GestiSoft.git
    cd GestiSoft
-   git checkout v0.2.0-rc2
+   git checkout v0.2.0-rc3
    cd gestisoft-app
    ```
 
