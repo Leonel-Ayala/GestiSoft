@@ -8,7 +8,7 @@
   * **Rodrigo Bertolini (Product Owner / Backend Lead):** FASE 1 completa (Aprendizaje, Valor de Negocio, Alcance, Backlog y Requisitos), Apertura de la DEMOSTRACIÓN EN VIVO (bloqueo sin turno, apertura de caja y contexto de negocio), Riesgos (RSK-01 a RSK-18), Próximos Pasos y Cierre Institucional.
   * **Luis Barrios (Frontend Lead / UI-UX):** Explicación de la **Arquitectura Frontend y Diseño Visual / UI-UX** (Componentes React, Ergonomía de Mostrador a 60 FPS, Atajos de Teclado, Arqueo Ciego ADR-04, Acta Oficial Imprimible `@media print` y Selector de Períodos) y Conducción en la DEMOSTRACIÓN EN VIVO de la operativa de mostrador por teclado, arqueo ciego y acta.
   * **Leonel Ayala (Full Stack / Base de Datos Lead):** Explicación de la **Arquitectura Backend / Base de Datos** (C4 Contenedores, Persistencia Transaccional, Recálculo Seguro C1, Inmutabilidad Kardex SoftDeletes C3, ADR-06 principio de mínimo privilegio en usuarios y Reproducibilidad) y Conducción en la DEMOSTRACIÓN EN VIVO de concurrencia (`lockForUpdate`), trazabilidad de venta en Kardex y auditoría de cajas (mes vs histórico).
-  * **Alan Troncoso (Scrum Master / QA, Seguridad y Automatización Lead):** FASE 4 completa de **QA y Verificación Cuantitativa** (Batería de 74 pruebas / 281 aserciones, Suite de Regresión con 24 tests, Atributos de Calidad p95 reales con script cronometrado, Seguridad RBAC/IDOR, Matriz de Trazabilidad CSV con 41 filas, Pipeline CI en GitHub Actions y Definition of Done) y Verificación en la DEMOSTRACIÓN EN VIVO de seguridad y suites de tests en terminal.
+  * **Alan Troncoso (Scrum Master / QA, Seguridad y Automatización Lead):** FASE 4 completa de **QA y Verificación Cuantitativa** (Batería de 76 pruebas / 306 aserciones, Suite de Regresión con 24 tests, Atributos de Calidad p95 reales con script cronometrado, Seguridad RBAC/IDOR, Matriz de Trazabilidad CSV con 41 filas, Pipeline CI en GitHub Actions y Definition of Done) y Verificación en la DEMOSTRACIÓN EN VIVO de seguridad y suites de tests en terminal.
 * **Tiempo Total:** 20 minutos (12 min diapositivas + 8 min demostración en vivo) + Ronda de preguntas individuales.
 
 ---
@@ -35,10 +35,10 @@
 | **16** | Organización del Equipo, Responsabilidades y Sprints | FASE 2 | **Rodrigo Bertolini** | [guia-semana14.md](./guia-semana14.md#organizacion) |
 | **17** | Separador FASE 3: Demostración en Vivo del Software | FASE 3 | **Los 4 Integrantes** | Entorno local en ejecución (`http://127.0.0.1:8000`) |
 | **18** | Separador FASE 4: QA, Mediciones y Trazabilidad | FASE 4 | **Alan Troncoso** | Carpeta `producto/semana-14/` |
-| **19** | Batería de Pruebas Automatizadas y Regresión (76 Tests) | FASE 4 | **Alan Troncoso** | Terminal: `php artisan test` (74 tests, 281 aserciones) y `--group=regresion` (24 tests) |
+| **19** | Batería de Pruebas Automatizadas y Regresión (76 Tests) | FASE 4 | **Alan Troncoso** | Terminal: `php artisan test` (76 tests, 306 aserciones) y `--group=regresion` (24 tests) |
 | **20** | Atributos de Calidad con Mediciones Reales (p95) | FASE 4 | **Alan Troncoso** | [mediciones-calidad.md](../producto/semana-14/mediciones-calidad.md) (Script php: p95 búsqueda 10.77 ms, checkout 6.63 ms) |
 | **21** | Seguridad y Privacidad Verificables (RBAC, C1, C4, IDOR, ADR-06) | FASE 4 | **Alan Troncoso** | [RoleSecurityTest.php](../gestisoft-app/tests/Feature/RoleSecurityTest.php) y [CajaTurnoSecurityTest.php](../gestisoft-app/tests/Feature/CajaTurnoSecurityTest.php) |
-| **22** | Matriz de Trazabilidad Bidireccional (CSV) | FASE 4 | **Alan Troncoso** | [producto/semana-14/trazabilidad.csv](../producto/semana-14/trazabilidad.csv) (41 filas, 38 tests verificados) |
+| **22** | Matriz de Trazabilidad Bidireccional (CSV) | FASE 4 | **Alan Troncoso** | [producto/semana-14/trazabilidad.csv](../producto/semana-14/trazabilidad.csv) (41 filas, 40 tests físicos verificados) |
 | **23** | Repositorio, CI en GitHub Actions y Plantilla PR | FASE 4 | **Alan Troncoso** | [.github/workflows/tests.yml](../.github/workflows/tests.yml) y [.github/pull_request_template.md](../.github/pull_request_template.md) |
 | **24** | Definition of Done (6 Dimensiones) y Estabilización | FASE 4 | **Alan Troncoso** | [guia-semana14.md](./guia-semana14.md#dod) |
 | **25** | Gestión de Riesgos Actualizados (RSK-01 al RSK-18) | FASE 4 | **Rodrigo Bertolini** | [riesgos/registro-riesgos-v1.md](../riesgos/registro-riesgos-v1.md) (18 riesgos, RSK-17 abierto) |
@@ -56,7 +56,7 @@
 * **Elementos Visuales:** Logo de GestiSoft, versión oficial destacada: **`v0.2.0-rc2 (Versión Candidata Demo 3)`**, nombres y roles técnicos de los 4 integrantes, fecha y escudo de la Universidad Católica del Maule.
 * **Documento a Citar:** [README.md](../README.md).
 * **Guión del Expositor (Rodrigo):**
-  > *"Estimados profesores Héctor Tejo y Jerman Espíndola. Como Grupo 6, presentamos la Tercera Demostración y Defensa de GestiSoft, nuestro sistema web de gestión comercial, inventario y punto de venta diseñado para PYMEs del retail local. Hoy defendemos el cierre del Incremento Funcional 2 bajo nuestra versión candidata `v0.2.0-rc2`. A lo largo de esta presentación y en la demostración en vivo, evidenciamos cómo convertimos cada una de las observaciones de la segunda defensa en soluciones de ingeniería verificables: integridad financiera en servidor, arqueo ciego de caja, inmutabilidad de Kardex, trazabilidad automática de ventas a movimientos de inventario y una batería de 74 pruebas automatizadas con suite de regresión integradas en GitHub Actions."*
+  > *"Estimados profesores Héctor Tejo y Jerman Espíndola. Como Grupo 6, presentamos la Tercera Demostración y Defensa de GestiSoft, nuestro sistema web de gestión comercial, inventario y punto de venta diseñado para PYMEs del retail local. Hoy defendemos el cierre del Incremento Funcional 2 bajo nuestra versión candidata `v0.2.0-rc2`. A lo largo de esta presentación y en la demostración en vivo, evidenciamos cómo convertimos cada una de las observaciones de la segunda defensa en soluciones de ingeniería verificables: integridad financiera en servidor, arqueo ciego de caja, inmutabilidad de Kardex, trazabilidad automática de ventas a movimientos de inventario y una batería de 76 pruebas automatizadas con suite de regresión integradas en GitHub Actions."*
 
 ---
 
@@ -93,13 +93,13 @@
 ### SLIDE 05: Retrospectiva del Equipo (Compromisos Verificables)
 * **Expositor:** Rodrigo Bertolini (Product Owner)
 * **Elementos Visuales:** Matriz de 4 cuadrantes de la retrospectiva:
-  * **Mantener:** Desarrollo guiado por pruebas (TDD) multi-tenant y reglas financieras (74 tests verdes, 24 de regresión).
+  * **Mantener:** Desarrollo guiado por pruebas (TDD) multi-tenant y reglas financieras (76 tests verdes, 24 de regresión).
   * **Corregir:** Desalineación entre nombres de tablas y documentación (eliminación estricta de términos fantasma).
   * **Detener:** Confiar en cálculos de importes realizados por JavaScript en el frontend o permitir venta sin turno.
   * **Comenzar:** Integración Continua obligatoria en GitHub Actions, plantilla obligatoria de Pull Request y pruebas de regresión automáticas separadas.
 * **Documento a Citar:** [guia-semana14.md](./guia-semana14.md).
 * **Guión del Expositor (Rodrigo):**
-  > *"Nuestra retrospectiva formalizó cuatro acciones concretas: mantuvimos el desarrollo guiado por pruebas expandiendo la suite a 74 tests; alineamos rigurosamente el glosario a las columnas reales del código (`negocio_id`, `motivo`); detuvimos radicalmente los cálculos financieros en el cliente; y comenzamos la automatización en la nube mediante un pipeline de GitHub Actions con suite de regresión y plantilla estándar de Pull Request."*
+  > *"Nuestra retrospectiva formalizó cuatro acciones concretas: mantuvimos el desarrollo guiado por pruebas expandiendo la suite a 76 tests (306 aserciones); alineamos rigurosamente el glosario a las columnas reales del código (`negocio_id`, `motivo`); detuvimos radicalmente los cálculos financieros en el cliente; y comenzamos la automatización en la nube mediante un pipeline de GitHub Actions con suite de regresión y plantilla estándar de Pull Request."*
 
 ---
 
@@ -282,10 +282,11 @@
   * **Búsqueda de Catálogo:** Media $3.01\text{ ms}$, $p95 = 10.77\text{ ms}$ (Umbral comprometido: $\le 120\text{ ms}$ - CUMPLE).
   * **Estado de Caja:** Media $1.34\text{ ms}$, $p95 = 2.87\text{ ms}$ (Umbral comprometido: $\le 100\text{ ms}$ - CUMPLE).
   * **Checkout Atómico:** Media $4.29\text{ ms}$, $p95 = 6.63\text{ ms}$ (Umbral comprometido: $\le 300\text{ ms}$ - CUMPLE).
+  * **Eficiencia Mostrador H-03 (KLM + Tests):** Apertura en 3.41 s prom. (máx. 3.80 s) y Cierre en 4.67 s prom. (máx. 4.67 s), ambos ampliamente bajo el umbral de 60 s comprometido.
   * **Operaciones de Carrito:** Estado local React (`useState`), latencia $< 12\text{ ms}$ (60 FPS estables).
 * **Documento a Citar:** [producto/semana-14/mediciones-calidad.md](../producto/semana-14/mediciones-calidad.md).
 * **Guión del Expositor (Alan):**
-  > *"Reemplazamos cualquier dato sintético por mediciones crudas obtenidas mediante un script formal de cronometraje en backend con 50 ejecuciones reales. La búsqueda por catálogo arrojó un percentil p95 de 10.77 milisegundos, la consulta de estado de caja cerró en 2.87 milisegundos y el checkout atómico transaccional en 6.63 milisegundos. Todos los resultados cumplen con holgura los umbrales de rendimiento para retail local."*
+  > *"Reemplazamos cualquier dato sintético por mediciones crudas obtenidas mediante un script formal de cronometraje en backend con 50 ejecuciones reales. La búsqueda por catálogo arrojó un percentil p95 de 10.77 milisegundos, la consulta de estado de caja cerró en 2.87 milisegundos y el checkout atómico transaccional en 6.63 milisegundos. Asimismo, para la hipótesis H-03 validamos la velocidad de mostrador combinando tests automatizados con el modelo KLM de interacción humana: apertura en 3.80 segundos y cierre en 4.67 segundos, cumpliendo holgadamente el umbral de 60 segundos."*
 
 ---
 
@@ -306,11 +307,11 @@
 
 ### SLIDE 22: Matriz de Trazabilidad Bidireccional (CSV)
 * **Expositor:** Alan Troncoso (Scrum Master / QA Lead)
-* **Elementos Visuales:** Extracto de la matriz CSV validada por `scripts/validar-trazabilidad.php` (41 filas, 38 tests verificados):
+* **Elementos Visuales:** Extracto de la matriz CSV validada por `scripts/validar-trazabilidad.php` (41 filas, 40 tests físicos verificados):
   * `Dolor de Negocio` $\rightarrow$ `Necesidad` $\rightarrow$ `Decisión Arquitectónica (ADR)` $\rightarrow$ `Requisito (RF)` $\rightarrow$ `PBI` $\rightarrow$ `Pruebas Automatizadas` $\rightarrow$ `Código en Producción`.
 * **Documento a Citar:** [producto/semana-14/trazabilidad.csv](../producto/semana-14/trazabilidad.csv).
 * **Guión del Expositor (Alan):**
-  > *"Como responsable de QA, mantengo actualizada nuestra matriz de trazabilidad bidireccional en `producto/semana-14/trazabilidad.csv`. Cada una de las 41 filas está auditada automáticamente por un script linter que verifica que los métodos de prueba referenciados existan físicamente en el código fuente. Contamos con 38 tests verificados y cero errores de consistencia."*
+  > *"Como responsable de QA, mantengo actualizada nuestra matriz de trazabilidad bidireccional en `producto/semana-14/trazabilidad.csv`. Cada una de las 41 filas está auditada automáticamente por un script linter que verifica que los métodos de prueba referenciados existan físicamente en el código fuente. Contamos con 40 tests físicos verificados y cero errores de consistencia."*
 
 ---
 
@@ -319,7 +320,7 @@
 * **Elementos Visuales:** Captura del pipeline de GitHub Actions (`tests.yml`) en verde ejecutando regresión y suite completa, y captura de `.github/pull_request_template.md`.
 * **Documento a Citar:** [.github/workflows/tests.yml](../.github/workflows/tests.yml) y [.github/pull_request_template.md](../.github/pull_request_template.md).
 * **Guión del Expositor (Alan):**
-  > *"Acreditamos integración continua activa: configuramos el pipeline de GitHub Actions que ejecuta el build de Vite, la suite de regresión con `--group=regresion` y la suite completa de 74 pruebas en SQLite en memoria en cada commit y Pull Request. Además, estandarizamos la plantilla obligatoria de PR exigiendo justificación, checklist y evidencia de pruebas verdes."*
+  > *"Acreditamos integración continua activa: configuramos el pipeline de GitHub Actions que ejecuta el build de Vite, la suite de regresión con `--group=regresion` y la suite completa de 76 pruebas en SQLite en memoria en cada commit y Pull Request. Además, estandarizamos la plantilla obligatoria de PR exigiendo justificación, checklist y evidencia de pruebas verdes."*
 
 ---
 
@@ -328,7 +329,7 @@
 * **Elementos Visuales:** Matriz de 6 dimensiones de la Definition of Done:
   1. **Valor:** Objetivo de negocio resuelto y validado en laboratorio.
   2. **Funcionalidad:** Criterios normales, alternativos y de error verificados.
-  3. **Regresión:** 74 pruebas de integración pasando al 100% verde (24 de regresión).
+  3. **Regresión:** 76 pruebas de integración pasando al 100% verde (24 de regresión).
   4. **Calidad y Seguridad:** Transacciones atómicas, recálculo en servidor y $p95 \le 120\text{ ms}$.
   5. **CI y Revisión:** Pipeline de GitHub Actions en verde y cambios revisados en equipo antes de integrar.
   6. **Reproducibilidad:** Instalación desde cero documentada y verificada en equipo limpio.
@@ -366,7 +367,7 @@
 
 ### SLIDE 27: Portada de Cierre y Ronda de Preguntas Técnicas
 * **Expositor:** Rodrigo Bertolini (Apertura) y Todo el Equipo
-* **Elementos Visuales:** Logo corporativo de GestiSoft, tabla resumen de métricas clave (74 tests verdes, $p95 = 10.77\text{ ms}$, invariantes de caja y Kardex verificadas por tests) y texto: *Muchas gracias. Quedamos a disposición de la comisión evaluadora para la ronda de preguntas técnicas e individuales.*
+* **Elementos Visuales:** Logo corporativo de GestiSoft, tabla resumen de métricas clave (76 tests verdes / 306 aserciones, $p95 = 10.77\text{ ms}$, invariantes de caja y Kardex verificadas por tests) y texto: *Muchas gracias. Quedamos a disposición de la comisión evaluadora para la ronda de preguntas técnicas e individuales.*
 * **Guión del Expositor (Rodrigo):**
   > *"Agradecemos a la comisión por su atención. Estamos listos para profundizar en cualquier aspecto del código, la arquitectura o las pruebas en la ronda de preguntas individuales."*
 
@@ -417,7 +418,7 @@ sequenceDiagram
     AT->>Srv: Intento de acceso a /inventory como cajero -> HTTP 403 Forbidden
     AT->>Srv: Intento de consulta IDOR de turno ajeno -> HTTP 403 Forbidden
     AT->>Srv: Consola: php artisan test --group=regresion (24 passed)
-    AT->>Srv: Consola: php artisan test (74 passed, 281 assertions)
+    AT->>Srv: Consola: php artisan test (76 passed, 306 assertions)
 ```
 
 ### Guión de Ejecución Distribuido en la Demo:
@@ -444,7 +445,7 @@ sequenceDiagram
 * **Expositor en pantalla:** Alan Troncoso (Scrum Master / QA Lead)
 * **Acción en pantalla:** Intenta acceder con la sesión de cajero a `/inventory` y `/users` (recibiendo `HTTP 403 Forbidden`). Abre la consola en `gestisoft-app/` y corre `php artisan test --group=regresion` y `php artisan test`.
 * **Speech de Alan:**
-  > *"Para verificar la seguridad en profundidad, demostramos en vivo que el cajero recibe 403 Forbidden inmediato si intenta ingresar a inventario o administración de usuarios, y queda aislado contra IDOR en turnos ajenos. En la consola, ejecuto en primer lugar nuestra suite de regresión: 24 tests pasando al 100% verde en 2 segundos. Y a continuación, ejecuto la suite completa: 74 pruebas con 281 aserciones al 100% verde en 6 segundos. Con esto demostramos la total estabilidad y cobertura de nuestra versión candidata."*
+  > *"Para verificar la seguridad en profundidad, demostramos en vivo que el cajero recibe 403 Forbidden inmediato si intenta ingresar a inventario o administración de usuarios, y queda aislado contra IDOR en turnos ajenos. En la consola, ejecuto en primer lugar nuestra suite de regresión: 24 tests pasando al 100% verde en 2 segundos. Y a continuación, ejecuto la suite completa: 76 pruebas con 306 aserciones al 100% verde en 6 segundos. Con esto demostramos la total estabilidad y cobertura de nuestra versión candidata."*
 
 ---
 
@@ -465,7 +466,7 @@ sequenceDiagram
 * **Pregunta probable:** *"En la defensa anterior su prueba de POS aprobaba por un error genérico. ¿Cómo reestructuró la suite de pruebas, qué valor aporta la suite de regresión y cómo midieron los atributos de calidad?"*
 * **Respuesta técnica recomendada:**
   > *"El defecto radicaba en que el payload de `POSTest.php` enviaba una clave `'cart'`, la cual era rechazada por la regla de validación de Laravel sin llegar a ejecutar el descuento de stock. Reestructuré la prueba enviando la estructura real `'items'`, corrigiendo la referencia de columna de 'monto_apertura' a 'monto_inicial', inicializando previamente un turno de caja abierto y comprobando la aserción semántica sobre el mensaje de error `'Stock insuficiente'`.*  
-  > *Para blindar el software contra regresiones, creamos un grupo formal `#[Group('regresion')]` con 24 pruebas críticas que cubren integridad C1-C4, validaciones de checkout, turnos y seguridad RBAC. En el pipeline de CI en GitHub Actions, la suite de regresión corre como primer paso mandatorio antes de la suite completa de 74 tests con 281 aserciones.*  
+  > *Para blindar el software contra regresiones, creamos un grupo formal `#[Group('regresion')]` con 24 pruebas críticas que cubren integridad C1-C4, validaciones de checkout, turnos y seguridad RBAC. En el pipeline de CI en GitHub Actions, la suite de regresión corre como primer paso mandatorio antes de la suite completa de 76 tests con 306 aserciones.*  
   > *Finalmente, para los atributos de calidad implementamos `scripts/medir-latencia.php` ejecutando 50 peticiones reales contra el backend: la búsqueda arrojó un p95 de 10.77 ms, el estado de caja 2.87 ms y el checkout atómico 6.63 ms, todas holgadamente inferiores a los umbrales comprometidos."*
 
 ---
